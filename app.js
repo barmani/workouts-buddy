@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mogoose');
+var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
+var customWorkoutRoutes = require('./routes/custom-workout');
+var dashRoutes = require('./routes/dash');
+var newWorkoutRoutes = require('./routes/new-workout');
 
 var app = express();
 mongoose.connect('localhost:27017/workouts-buddy');
@@ -30,6 +33,9 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/custom-workout', customWorkoutRoutes);
+app.use('/dash', dashRoutes);
+app.use('/new-workout', newWorkoutRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
