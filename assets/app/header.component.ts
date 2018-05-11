@@ -6,9 +6,9 @@ import { Component } from "@angular/core";
       <header class="row">
         <nav class="col-md-8 col-md-offset-2">
           <ul class="nav nav-pills">
-            <li><a>Dashboard</a></li>
-            <li><a>New Workout</a></li>
-            <li><a>Custom Workout</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/dash']">Dashboard</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/new-workout']">New Workout</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/custom-workout']">Custom Workout</a></li>
           </ul>
         </nav>
       </header>
