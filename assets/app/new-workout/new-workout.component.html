@@ -1,1 +1,46 @@
-<h1>New workout</h1>
+<div class="col-md-8">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <div class="difficulty">
+        <h3>Choose a diffulty</h3>
+        <label for="beginner-difficulty">Beginner</label>
+        <input type="radio" id="beginner-difficulty" name="difficulty-radio" value="beginner">
+
+        <label for="intermediate-difficulty">Intermediate</label>
+        <input type="radio" id="intermediate-difficulty" name="difficulty-radio" value="intermediate">
+
+        <label for="advanced-difficulty">Advanced</label>
+        <input type="radio" id="advanced-difficulty" name="difficulty-radio" value="advanced">
+      </div>
+      <h3>Choose a large muscle group</h3>
+      <div class="large-muscle-group">
+        <label for="chest">Chest</label>
+        <input type="checkbox" id="chest">
+
+        <label for="back">Back</label>
+        <input type="checkbox" id="back">
+
+        <label for="legs">Legs</label>
+        <input type="checkbox" id="legs">
+      </div>
+      <h3>Choose a small muscle group</h3>
+      <div class="small-muscle-group">
+        <label for="biceps">Biceps</label>
+        <input type="checkbox" id="biceps">
+
+        <label for="triceps">Triceps</label>
+        <input type="checkbox" id="triceps">
+
+        <label for="Shoulders">Shoulders</label>
+        <input type="checkbox" id="shoulders">
+      </div>
+      <h3>Add abs</h3>
+      <div class="abs">
+        <label for="abs">Abs</label>
+        <input type="checkbox" id="abs">
+      </div>
+
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>

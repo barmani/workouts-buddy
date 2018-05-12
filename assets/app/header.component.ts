@@ -4,7 +4,7 @@ import { Component } from "@angular/core";
   selector: 'app-header',
   template: `
       <header class="row">
-        <nav class="col-md-8 col-md-offset-2">
+        <nav class="col-md-8">
           <ul class="nav nav-pills">
             <li routerLinkActive="active"><a [routerLink]="['/dash']">Dashboard</a></li>
             <li routerLinkActive="active"><a [routerLink]="['/new-workout']">New Workout</a></li>
