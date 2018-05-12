@@ -14,6 +14,11 @@ var schema = new Schema({
     type: String,
     enum: ['BICEPS', 'BACK', 'TRICEPS', 'CHEST', 'LEGS', 'SHOULDERS', 'ABS', 'FULL_BODY'],
     default: ['FULL_BODY']
+  },
+  equipment: {
+    type: String,
+    enum: ['BARBELL', 'DUMBBELL', 'FREEWEIGHT', 'BODYWEIGHT', 'CABLE', 'MACHINE'],
+    default: ['FREEWEIGHT']
   }
 
 });
