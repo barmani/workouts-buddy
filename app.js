@@ -105,9 +105,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/custom-workout', customWorkoutRoutes);
-app.use('/dash', dashRoutes);
-app.use('/new-workout', newWorkoutRoutes);
+app.use('/custom-workout', appRoutes);
+app.use('/dash', appRoutes);
+app.use('/new-workout', appRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

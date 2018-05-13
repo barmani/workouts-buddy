@@ -1,46 +1,120 @@
 <div class="col-md-8">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
-      <div class="difficulty">
-        <h3>Choose a diffulty</h3>
-        <label for="beginner-difficulty">Beginner</label>
-        <input type="radio" id="beginner-difficulty" name="difficulty-radio" value="beginner">
+      <div class="difficulty" [hidden]="currentQuestion != question.Difficulty">
+        <h3>Choose a difficulty</h3>
+
+        <div class="form-check">
+          <label for="beginner-difficulty">Beginner</label>
+          <input type="radio"
+                 class="form-control with-gap"
+                 id="beginner-difficulty"
+                 name="difficulty-radio"
+                 value="beginner"
+                 required
+                 ngModel
+                 (click)="onInputSelected($event)">
+        </div>
+
 
         <label for="intermediate-difficulty">Intermediate</label>
-        <input type="radio" id="intermediate-difficulty" name="difficulty-radio" value="intermediate">
+        <input type="radio"
+               class="form-control"
+               id="intermediate-difficulty"
+               name="difficulty-radio"
+               value="intermediate"
+               ngModel
+               (click)="onInputSelected($event)">
 
         <label for="advanced-difficulty">Advanced</label>
-        <input type="radio" id="advanced-difficulty" name="difficulty-radio" value="advanced">
+        <input type="radio"
+               class="form-control"
+               id="advanced-difficulty"
+               name="difficulty-radio"
+               value="advanced"
+               ngModel
+               (click)="onInputSelected($event)">
       </div>
-      <h3>Choose a large muscle group</h3>
-      <div class="large-muscle-group">
+      <div class="large-muscle-group" [hidden]="currentQuestion != question.LargeMuscle">
+        <h3>Choose a large muscle group</h3>
+
         <label for="chest">Chest</label>
-        <input type="checkbox" id="chest">
+        <input type="radio"
+               class="form-control"
+               id="chest"
+               name="large-muscle-radio"
+               value="chest"
+               required
+               ngModel
+               (click)="onInputSelected($event)">
 
         <label for="back">Back</label>
-        <input type="checkbox" id="back">
+        <input type="radio"
+               class="form-control"
+               id="back"
+               name="large-muscle-radio"
+               value="back"
+               ngModel
+               (click)="onInputSelected($event)">
 
         <label for="legs">Legs</label>
-        <input type="checkbox" id="legs">
+        <input type="radio"
+               class="form-control"
+               id="legs"
+               name="large-muscle-radio"
+               value="legs"
+               ngModel
+               (click)="onInputSelected($event)">
       </div>
-      <h3>Choose a small muscle group</h3>
-      <div class="small-muscle-group">
-        <label for="biceps">Biceps</label>
-        <input type="checkbox" id="biceps">
+      <div class="small-muscle-group" [hidden]="currentQuestion != question.SmallMuscle">
+        <h3>Choose a small muscle group</h3>
 
         <label for="triceps">Triceps</label>
-        <input type="checkbox" id="triceps">
+        <input type="radio"
+               class="form-control"
+               id="triceps"
+               name="small-muscle-radio"
+               value="triceps"
+               required
+               ngModel
+               (click)="onInputSelected($event)">
+
+        <label for="biceps">Biceps</label>
+        <input type="radio"
+               class="form-control"
+               id="biceps"
+               name="small-muscle-radio"
+               value="biceps"
+               ngModel
+               (click)="onInputSelected($event)">
 
         <label for="Shoulders">Shoulders</label>
-        <input type="checkbox" id="shoulders">
+        <input type="radio"
+               class="form-control"
+               id="shoulders"
+               name="small-muscle-radio"
+               value="shoulders"
+               ngModel
+               (click)="onInputSelected($event)">
       </div>
-      <h3>Add abs</h3>
-      <div class="abs">
+      <div class="abs" [hidden]="currentQuestion != question.Abs">
+        <h3>Add abs</h3>
+
         <label for="abs">Abs</label>
-        <input type="checkbox" id="abs">
+        <input type="checkbox"
+               class="form-control"
+               id="abs"
+               name="abs-checkbox"
+               ngModel>
       </div>
 
     </div>
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary"
+            [disabled]="currentQuestion === question.Difficulty"
+            (click)="previous()"
+            type="button">
+          Previous
+    </button>
+    <button class="btn btn-success" [disabled]="f.form.invalid" type="submit">Create My Workout</button>
   </form>
 </div>
