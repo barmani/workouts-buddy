@@ -5,7 +5,7 @@ import { DashboardComponent } from "./dash/dashboard.component";
 import { NewWorkoutComponent } from "./new-workout/new-workout.component";
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: '/dash', pathMatch: 'full' },
+  { path: '', redirectTo: '/new-workout', pathMatch: 'full' },
   { path: 'dash', component: DashboardComponent },
   { path: 'new-workout', component: NewWorkoutComponent },
   { path: 'custom-workout', component: CustomWorkoutComponent },

@@ -5,7 +5,7 @@
         <h3>Choose a difficulty</h3>
 
           <div class="radio">
-            <label for="beginner-difficulty">
+            <h2><span class="label label-default" for="beginner-difficulty">
             <input type="radio"
                    class="form-control"
                    id="beginner-difficulty"
@@ -14,11 +14,11 @@
                    required
                    ngModel
                    (click)="onInputSelected($event)">
-           Beginner</label>
+           Beginner</span></h2>
          </div>
 
         <div class="radio">
-          <label for="intermediate-difficulty">
+          <h2><span class="label label-default" for="intermediate-difficulty">
           <input type="radio"
                  class="form-control"
                  id="intermediate-difficulty"
@@ -26,11 +26,11 @@
                  value="intermediate"
                  ngModel
                  (click)="onInputSelected($event)">
-         Intermediate</label>
+         Intermediate</span></h2>
        </div>
 
         <div class="radio">
-          <label for="advanced-difficulty">
+          <h2><span class="label label-default" for="advanced-difficulty">
           <input type="radio"
                  class="form-control"
                  id="advanced-difficulty"
@@ -38,14 +38,14 @@
                  value="advanced"
                  ngModel
                  (click)="onInputSelected($event)">
-           Advanced</label>
+           Advanced</span></h2>
          </div>
       </div>
       <div class="large-muscle-group row" [hidden]="currentQuestion != question.LargeMuscle">
         <h3>Choose a large muscle group</h3>
 
         <div class="radio">
-          <label for="chest">
+          <h2><span class="label label-default" for="chest">
             <input type="radio"
                    class="form-control"
                    id="chest"
@@ -54,11 +54,11 @@
                    required
                    ngModel
                    (click)="onInputSelected($event)">
-         Chest</label>
+         Chest</span></h2>
         </div>
 
         <div class="radio">
-        <label for="back">
+        <h2><span class="label label-default" for="back">
         <input type="radio"
                class="form-control"
                id="back"
@@ -66,11 +66,11 @@
                value="back"
                ngModel
                (click)="onInputSelected($event)">
-         Back</label>
+         Back</span></h2>
          </div>
 
         <div class="radio">
-          <label for="legs">
+          <h2><span class="label label-default" for="legs">
           <input type="radio"
                  class="form-control"
                  id="legs"
@@ -78,14 +78,14 @@
                  value="legs"
                  ngModel
                  (click)="onInputSelected($event)">
-           Legs</label>
+           Legs</span></h2>
          </div>
       </div>
       <div class="small-muscle-group row" [hidden]="currentQuestion != question.SmallMuscle">
         <h3>Choose a small muscle group</h3>
 
         <div class="radio">
-          <label for="triceps">
+          <h2><span class="label label-default" for="triceps">
           <input type="radio"
                  class="form-control"
                  id="triceps"
@@ -94,11 +94,11 @@
                  required
                  ngModel
                  (click)="onInputSelected($event)">
-          Triceps</label>
+          Triceps</span></h2>
         </div>
 
         <div class="radio">
-          <label for="biceps">
+          <h2><span class="label label-default" for="biceps">
           <input type="radio"
                  class="form-control"
                  id="biceps"
@@ -106,11 +106,11 @@
                  value="biceps"
                  ngModel
                  (click)="onInputSelected($event)">
-          Biceps</label>
+          Biceps</span></h2>
         </div>
 
         <div class="radio">
-          <label for="Shoulders">
+          <h2><span class="label label-default" for="Shoulders">
           <input type="radio"
                  class="form-control"
                  id="shoulders"
@@ -118,20 +118,19 @@
                  value="shoulders"
                  ngModel
                  (click)="onInputSelected($event)">
-           Shoulders</label>
+           Shoulders</span></h2>
          </div>
       </div>
 
       <div class="abs row" [hidden]="currentQuestion != question.Abs">
         <h3>Add abs</h3>
 
-        <label for="abs">
+        <h2><span class="label label-default" for="abs">Abs</span></h2>
         <input type="checkbox"
                class="form-control"
                id="abs"
                name="abs-checkbox"
                ngModel>
-        Abs</label>
       </div>
 
     </div>
