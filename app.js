@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var appRoutes = require('./routes/app');
 var customWorkoutRoutes = require('./routes/custom-workout');
 var dashRoutes = require('./routes/dash');
-var newWorkoutRoutes = require('./routes/new-workout');
+var myWorkoutRoutes = require('./routes/my-workout');
 
 var Exercise = require('./models/exercise');
 
@@ -22,13 +22,51 @@ Exercise.remove({}, function(err) {
     console.log(err);
   }
 });
+
+// bicep exercises
 var exercise = new Exercise({
   name: 'Bicep Curls',
-  description: 'Grab dumbells and curl away!',
+  description: 'Grab dumbells, stand with legs shoulder width apart and arms resting by side,'
+                  + 'and curl moving only the elbow upwards then back down.',
   muscle: 'BICEPS',
   equipment: 'DUMBBELL'
 });
 exercise.save();
+var exercise = new Exercise({
+  name: 'Cable Curls',
+  description: 'Move cable to bottom, attach bar, and curl.',
+  muscle: 'BICEPS',
+  equipment: 'CABLE'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Barbell Curls',
+  description: 'Put weights on side of barbell and curl.',
+  muscle: 'BICEPS',
+  equipment: 'BARBELL'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Concentration Curls',
+  description: 'Sit on a bench with a dumbell between your feet. With your legs'
+                + 'shoulder width apart, reach down for the dumbell with your dominant'
+                + 'arm, resting your elbow on your knee with your arm straight.'
+                + 'Using your knee as leverage, curl the dumbbell toward you using'
+                + 'nothing but your bicep. Do both arms.',
+  muscle: 'BICEPS',
+  equipment: 'DUMBBELL'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Hammer Curls',
+  description: 'Hold a pair of dumbbells at your side so that they are pointing'
+                + 'forward. Curl at the same time toward your shoulders.',
+  muscle: 'BICEPS',
+  equipment: 'DUMBBELL'
+});
+exercise.save();
+
+//back exercises
 var exercise = new Exercise({
   name: 'Pull up',
   description: 'Grab bar, pull chin up over the bar',
@@ -37,8 +75,58 @@ var exercise = new Exercise({
 });
 exercise.save();
 var exercise = new Exercise({
+  name: 'Cable Row',
+  description: 'Back straight, pull cable toward you',
+  muscle: 'BACK',
+  equipment: 'CABLE'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Lat Pulldown',
+  description: 'Adjust chair properly, grab either side of the bar, and pull bar'
+                  + 'toward chest.',
+  muscle: 'BACK',
+  equipment: 'CABLE'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Dumbbell Row',
+  description: 'Put hand and knee on flat bench with a straight back and let dumbbell hang. Pull'
+                + 'dumbell staight up to just below your armpit.',
+  muscle: 'BACK',
+  equipment: 'DUMBBELL'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Barbell Row',
+  description: 'Put weight on either side of barbell, bend knees, and lean forward'
+                  + 'so your body is close to parallel to the ground. Grab barbell at'
+                  + 'shoulder width, look up, and lift toward your upper stomach area.',
+  muscle: 'BACK',
+  equipment: 'BARBELL'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'T-Bar Row',
+  description: 'Put barbell in corner with weight on the top end. Squat over the bar'
+                + 'so your back becomes close to parallel with the ground, look up,'
+                + 'grab the bar a few inches down from the weights with both hands'
+                + 'and lift toward your chest.',
+  muscle: 'BACK',
+  equipment: 'BARBELL'
+});
+exercise.save();
+
+// chest exercises
+var exercise = new Exercise({
   name: 'Bench Press',
   description: 'Press weighted bar off your chest.',
+  muscle: 'CHEST',
+  equipment: 'BARBELL'
+});
+var exercise = new Exercise({
+  name: 'Incline Bench Press',
+  description: 'Bench on an incline',
   muscle: 'CHEST',
   equipment: 'BARBELL'
 });
@@ -71,20 +159,6 @@ var exercise = new Exercise({
   equipment: 'BODYWEIGHT'
 });
 exercise.save();
-var exercise = new Exercise({
-  name: 'Incline Bench Press',
-  description: 'Bench on an incline',
-  muscle: 'CHEST',
-  equipment: 'BARBELL'
-});
-exercise.save();
-var exercise = new Exercise({
-  name: 'Cable Row',
-  description: 'Back straight, pull cable toward you',
-  muscle: 'BACK',
-  equipment: 'CABLE'
-});
-exercise.save();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -107,7 +181,7 @@ app.use(function(req, res, next) {
 
 app.use('/custom-workout', appRoutes);
 app.use('/dash', appRoutes);
-app.use('/new-workout', appRoutes);
+app.use('/my-workout', myWorkoutRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

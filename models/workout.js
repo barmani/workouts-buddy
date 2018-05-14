@@ -6,8 +6,13 @@ var schema = new Schema({
     type: String,
     required: true
   },
-  exercises: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }],
-  length: Number
+  difficulty: {
+    type: String,
+    enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'],
+    default: ['BEGINNER'],
+    required: true
+  },
+  exercises: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }]
 });
 
 module.exports = mongoose.model('Workout', schema);

@@ -38,11 +38,11 @@ export class NewWorkoutComponent {
   }
   onSubmit(form: NgForm) {
     let absChecked: boolean = form.value['abs-checkbox']  ? true : false;
-    console.log(form);
     this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
                                             form.value['large-muscle-radio'],
                                             form.value['small-muscle-radio'],
                                             absChecked);
-    this.myWorkoutService.createNewWorkout(this.requestedWorkout);
+    this.myWorkoutService.createNewWorkout(this.requestedWorkout)
+      .subscribe();
   }
 }
