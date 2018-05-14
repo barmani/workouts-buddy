@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgForm } from "@angular/forms";
 import { MyWorkoutService } from "./my-workout.service";
+import { RequestedWorkout } from "./requested-workout.model";
 
 enum Question {
   Difficulty,
@@ -18,6 +19,7 @@ export class NewWorkoutComponent {
 
   question = Question;
   currentQuestion = this.question.Difficulty;
+  requestedWorkout: RequestedWorkout;
 
   constructor(private myWorkoutService: MyWorkoutService) {
 
@@ -35,11 +37,12 @@ export class NewWorkoutComponent {
     }
   }
   onSubmit(form: NgForm) {
-    console.log(form);
     let absChecked: boolean = form.value['abs-checkbox']  ? true : false;
-    this.myWorkoutService.createNewWorkout(form.value['difficulty-radio'],
-                                           form.value['large-muscle-radio'],
-                                           form.value['small-muscle-radio'],
-                                           absChecked);
+    console.log(form);
+    this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
+                                            form.value['large-muscle-radio'],
+                                            form.value['small-muscle-radio'],
+                                            absChecked);
+    this.myWorkoutService.createNewWorkout(this.requestedWorkout);
   }
 }
