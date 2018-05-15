@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgForm } from "@angular/forms";
 import { MyWorkoutService } from "./my-workout.service";
-import { RequestedWorkout } from "./requested-workout.model";
+import { RequestedWorkout } from "../models/requested-workout.model";
 
 enum Question {
   Difficulty,

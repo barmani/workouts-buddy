@@ -22,13 +22,14 @@ export class MyWorkoutService {
         const name = result.obj.name;
         const difficulty = result.obj.difficulty;
         let exercises: Exercise[] = [];
-        result.exercises.forEach((exercise) => {
+        result.obj.exercises.forEach((exercise) => {
           const newExercise: Exercise = new Exercise(exercise.name,
                                                      exercise.description,
                                                      exercise.muscle,
                                                      exercise.equipment);
           exercises.push(newExercise);
         });
+        this.currentWorkout = new Workout(name, difficulty, exercises);
       });
   }
 
