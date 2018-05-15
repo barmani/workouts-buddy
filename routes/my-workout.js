@@ -5,7 +5,7 @@ var Exercise = require('../models/exercise');
 var Workout = require('../models/workout');
 
 /* POST to current workout page. Create a workout from input to load to custom workout */
-router.post('/current-workout', function(req, res, next) {
+router.post('/new-workout', function(req, res, next) {
   var exerciseRequest = req.body;
   // equipment in workout is based on difficulty selected
   var equipmentOptions = [];
@@ -107,7 +107,10 @@ router.post('/current-workout', function(req, res, next) {
       difficulty: difficulty,
       exercises: workoutExercises
     });
-    console.log(workout);
+    res.status(201).json({
+      message: 'Created workout successfully',
+      obj: workout
+    });
   }
 
   // get ab exercises
