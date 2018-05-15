@@ -34,64 +34,93 @@ router.post('/current-workout', function(req, res, next) {
   var largeMuscleOptions = [];
   var smallMuscleOptions = [];
   var abExercises = [];
+  var workoutExercises = [];
+  var abWorkoutExercises = [];
   // get large muscle exercises
   Exercise.find({
     muscle: exerciseRequest.largeMuscleGroup.toUpperCase(),
     equipment: { $in: equipmentOptions }
-  }).exec((err, exercises) => {
-    exercises.forEach((exercise) => {
-      console.log(exercise);
-      largeMuscleOptions.push(exercise);
-    });
-    console.log(largeMuscleOptions);
-  });
-  // get small muscle exercises
-  Exercise.find({
-    muscle: exerciseRequest.smallMuscleGroup.toUpperCase(),
-    equipment: { $in: equipmentOptions }
-  }).exec((err, exercises) => {
-    exercises.forEach((exercise) => {
-      smallMuscleOptions.push(exercise);
+  }).count((err, count) => {
+    // have to do this to get the number of records returned
+    Exercise.find({
+      muscle: exerciseRequest.largeMuscleGroup.toUpperCase(),
+      equipment: { $in: equipmentOptions }
+    }).exec((err, exercises) => {
+      exercises.forEach((exercise) => {
+        largeMuscleOptions.push(exercise);
+        if (largeMuscleOptions.length === count) {
+          getSmallMuscles();
+        }
+      });
     });
   });
 
-  // get ab exercises
-  if (exerciseRequest.abs) {
+  // get small muscle exercises. Declare in function to run synchronously
+  function getSmallMuscles() {
     Exercise.find({
-      muscle: 'ABS',
-    }).exec((err, exercises) => {
-      exercises.forEach((exercise) => {
-        abExercises.push(exercise);
+      muscle: exerciseRequest.smallMuscleGroup.toUpperCase(),
+      equipment: { $in: equipmentOptions }
+    }).count((err, count) => {
+      Exercise.find({
+        muscle: exerciseRequest.smallMuscleGroup.toUpperCase(),
+        equipment: { $in: equipmentOptions }
+      }).exec((err, exercises) => {
+        exercises.forEach((exercise) => {
+          smallMuscleOptions.push(exercise);
+          if (smallMuscleOptions.length === count) {
+            buildWorkoutExerciseArray();
+          }
+        });
       });
     });
   }
 
   // get exercises for the workout
-  // TODO: put in callback so it runs after arrays are filled
-  var workoutExercises = [];
-  var abWorkoutExercises = [];
-
-  for (var i = 0; i < numberOfLargeExercises; i++) {
-    var randomIndex = Math.floor(Math.random() * largeMuscleOptions.length);
-    var exercise = largeMuscleOptions.splice(1, randomIndex);
-    workoutExercises.push(exercise[0]);
+  function buildWorkoutExerciseArray() {
+    for (var i = 0; i < numberOfLargeExercises; i++) {
+      var randomIndex = Math.floor(Math.random() * largeMuscleOptions.length);
+      var exercise = largeMuscleOptions.splice(randomIndex, 1);
+      workoutExercises.push(exercise[0]);
+      if (workoutExercises.length === numberOfLargeExercises) {
+        // add small muscles after large muscles are complete
+        addSmallMuscleToWorkoutArray();
+      }
+    }
   }
 
-  for (var i = 0; i < numberOfSmallExercises; i++) {
-    var randomIndex = Math.floor(Math.random() * smallMuscleOptions.length);
-    var exercise = smallMuscleOptions.splice(1, randomIndex);
-    workoutExercises.push(exercise[0]);
+  function addSmallMuscleToWorkoutArray() {
+    for (var j = 0; j < numberOfSmallExercises; j++) {
+      var randomIndex = Math.floor(Math.random() * smallMuscleOptions.length);
+      var exercise = smallMuscleOptions.splice(randomIndex, 1);
+      workoutExercises.push(exercise[0]);
+      if (workoutExercises.length === numberOfLargeExercises + numberOfSmallExercises) {
+        // synchronous call to create the workout after workoutExercises array is filled
+        createWorkout();
+      }
+    }
   }
 
-  if (exerciseRequest.abs) {
-    // TODO: implement ab workout logic
+  // create workout after all arrays are filled
+  function createWorkout() {
+    const workout = new Workout({
+      name: 'Auto-generated workout',
+      difficulty: difficulty,
+      exercises: workoutExercises
+    });
+    console.log(workout);
   }
 
-  var workout = new Workout({
-    name: 'Auto-generated workout',
-    difficulty: difficulty,
-    exercises: workoutExercises
-  });
+  // get ab exercises
+  // TODO: Implement this
+  // if (exerciseRequest.abs) {
+  //   Exercise.find({
+  //     muscle: 'ABS',
+  //   }).exec((err, exercises) => {
+  //     exercises.forEach((exercise) => {
+  //       abExercises.push(exercise);
+  //     });
+  //   });
+  // }
 
 });
 
