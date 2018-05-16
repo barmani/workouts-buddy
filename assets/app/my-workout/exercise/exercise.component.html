@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>{{ exercise.name }}</h3>
+    <h5>Muscle: {{ exercise.muscle }}</h5>
+    <h5>Equipment: {{ exercise.equipment }}</h5>
+    <p>{{ exercise.description }}</p>
+  </div>
+  <div class="col-md-8">
+    <iframe width="560"
+            height="315"
+            [src]="sanitizeUrl(exercise.videoLink)"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+    </iframe>
+  </div>
+</div>

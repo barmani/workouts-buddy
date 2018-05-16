@@ -26,7 +26,8 @@ export class MyWorkoutService {
           const newExercise: Exercise = new Exercise(exercise.name,
                                                      exercise.description,
                                                      exercise.muscle,
-                                                     exercise.equipment);
+                                                     exercise.equipment,
+                                                     exercise.video);
           exercises.push(newExercise);
         });
         this.currentWorkout = new Workout(name, difficulty, exercises);

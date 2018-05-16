@@ -29,21 +29,24 @@ var exercise = new Exercise({
   description: 'Grab dumbells, stand with legs shoulder width apart and arms resting by side,'
                   + 'and curl moving only the elbow upwards then back down.',
   muscle: 'BICEPS',
-  equipment: 'DUMBBELL'
+  equipment: 'DUMBBELL',
+  video: 'https://www.youtube.com/embed/ykJmrZ5v0Oo'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Cable Curls',
   description: 'Move cable to bottom, attach bar, and curl.',
   muscle: 'BICEPS',
-  equipment: 'CABLE'
+  equipment: 'CABLE',
+  video: 'https://www.youtube.com/embed/AsAVbj7puKo'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Barbell Curls',
   description: 'Put weights on side of barbell and curl.',
   muscle: 'BICEPS',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/LY1V6UbRHFM'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -54,7 +57,8 @@ var exercise = new Exercise({
                 + 'Using your knee as leverage, curl the dumbbell toward you using'
                 + 'nothing but your bicep. Do both arms.',
   muscle: 'BICEPS',
-  equipment: 'DUMBBELL'
+  equipment: 'DUMBBELL',
+  video: 'https://www.youtube.com/embed/Jvj2wV0vOYU'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -62,23 +66,26 @@ var exercise = new Exercise({
   description: 'Hold a pair of dumbbells at your side so that they are pointing'
                 + 'forward. Curl at the same time toward your shoulders.',
   muscle: 'BICEPS',
-  equipment: 'DUMBBELL'
+  equipment: 'DUMBBELL',
+  video: 'https://www.youtube.com/embed/zC3nLlEvin4'
 });
 exercise.save();
 
 //back exercises
 var exercise = new Exercise({
-  name: 'Pull up',
+  name: 'Chin up',
   description: 'Grab bar, pull chin up over the bar',
   muscle: 'BACK',
-  equipment: 'BODYWEIGHT'
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/_71FpEaq-fQ'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Cable Row',
   description: 'Back straight, pull cable toward you',
   muscle: 'BACK',
-  equipment: 'CABLE'
+  equipment: 'CABLE',
+  video: 'https://www.youtube.com/embed/GZbfZ033f74'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -86,7 +93,8 @@ var exercise = new Exercise({
   description: 'Adjust chair properly, grab either side of the bar, and pull bar'
                   + 'toward chest.',
   muscle: 'BACK',
-  equipment: 'CABLE'
+  equipment: 'CABLE',
+  video: 'https://www.youtube.com/embed/JEb-dwU3VF4'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -94,7 +102,8 @@ var exercise = new Exercise({
   description: 'Put hand and knee on flat bench with a straight back and let dumbbell hang. Pull'
                 + 'dumbell staight up to just below your armpit.',
   muscle: 'BACK',
-  equipment: 'DUMBBELL'
+  equipment: 'DUMBBELL',
+  video: 'https://www.youtube.com/embed/-koP10y1qZI'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -103,7 +112,8 @@ var exercise = new Exercise({
                   + 'so your body is close to parallel to the ground. Grab barbell at'
                   + 'shoulder width, look up, and lift toward your upper stomach area.',
   muscle: 'BACK',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/9efgcAjQe7E'
 });
 exercise.save();
 var exercise = new Exercise({
@@ -113,7 +123,8 @@ var exercise = new Exercise({
                 + 'grab the bar a few inches down from the weights with both hands'
                 + 'and lift toward your chest.',
   muscle: 'BACK',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/j3Igk5nyZE4'
 });
 exercise.save();
 
