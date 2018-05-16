@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NgForm } from "@angular/forms";
-import { MyWorkoutService } from "./my-workout.service";
-import { RequestedWorkout } from "../models/requested-workout.model";
+import { MyWorkoutService } from "../my-workout.service";
+import { RequestedWorkout } from "../../models/requested-workout.model";
 
 enum Question {
   Difficulty,
@@ -21,7 +22,7 @@ export class NewWorkoutComponent {
   currentQuestion = this.question.Difficulty;
   requestedWorkout: RequestedWorkout;
 
-  constructor(private myWorkoutService: MyWorkoutService) {
+  constructor(private myWorkoutService: MyWorkoutService, private router: Router) {
 
   }
   onInputSelected(event) {
@@ -43,6 +44,9 @@ export class NewWorkoutComponent {
                                             form.value['small-muscle-radio'],
                                             absChecked);
     this.myWorkoutService.createNewWorkout(this.requestedWorkout)
-      .subscribe();
+      .subscribe(() => {
+        this.router.navigate(['/my-workout/current-workout']);
+      });
+    form.resetForm();
   }
 }
