@@ -37,4 +37,8 @@ export class MyWorkoutService {
   getCurrentWorkout() {
     return this.currentWorkout;
   }
+
+  clearCurrentWorkout() {
+    this.currentWorkout = null;
+  }
 }

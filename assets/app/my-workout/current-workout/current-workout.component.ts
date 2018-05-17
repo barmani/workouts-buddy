@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MyWorkoutService } from '../my-workout.service';
 import { Workout } from '../../models/workout.model';
@@ -10,9 +11,14 @@ import { Workout } from '../../models/workout.model';
 export class CurrentWorkoutComponent implements OnInit {
   workout: Workout;
 
-  constructor(private myWorkoutService: MyWorkoutService) {}
+  constructor(private myWorkoutService: MyWorkoutService, private router: Router) {}
 
   ngOnInit() {
     this.workout = this.myWorkoutService.getCurrentWorkout();
+  }
+
+  resetWorkout() {
+    this.myWorkoutService.clearCurrentWorkout();
+    this.router.navigate(['/my-workout/new-workout']);
   }
 }

@@ -1,11 +1,14 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <h3>{{ exercise.name }}</h3>
+    <div *ngIf="difficulty">
+      <h3>({{ numberOfSets }} sets)</h3>
+    </div>
     <h5>Muscle: {{ exercise.muscle }}</h5>
     <h5>Equipment: {{ exercise.equipment }}</h5>
     <p>{{ exercise.description }}</p>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-6">
     <iframe width="560"
             height="315"
             [src]="sanitizeUrl(exercise.videoLink)"

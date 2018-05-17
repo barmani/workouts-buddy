@@ -1,5 +1,12 @@
-<h1>Current Workout</h1>
+<div class="row">
+  <div class="col-md-10">
+    <h3>Current Workout</h3>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" (click)="resetWorkout()">New Workout</button>
+  </div>
+</div>
 <div class="row" *ngFor="let exercise of workout.exercises">
   <hr>
-  <app-exercise [exercise]="exercise"></app-exercise>
+  <app-exercise [exercise]="exercise" [difficulty]="workout.difficulty"></app-exercise>
 </div>
