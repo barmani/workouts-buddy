@@ -8,5 +8,8 @@
 </div>
 <div class="row" *ngFor="let exercise of workout.exercises">
   <hr>
-  <app-exercise [exercise]="exercise" [difficulty]="workout.difficulty"></app-exercise>
+  <app-exercise [exercise]="exercise"
+                [difficulty]="workout.difficulty"
+                (exerciseSwap)="swapExercise($event)">
+  </app-exercise>
 </div>

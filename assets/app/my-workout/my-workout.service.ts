@@ -41,4 +41,14 @@ export class MyWorkoutService {
   clearCurrentWorkout() {
     this.currentWorkout = null;
   }
+
+  replaceExercise(exercise: Exercise) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const body = JSON.stringify({exercise: exercise, workout: this.currentWorkout});
+    return this.http.patch('http://localhost:3000/my-workout/current-workout', body, {headers: headers})
+      .map((response: Response) => {
+        const result = response.json();
+        console.log(result);
+      });
+  }
 }

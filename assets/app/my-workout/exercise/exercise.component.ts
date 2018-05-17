@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Exercise } from '../../models/exercise.model';
@@ -12,6 +12,7 @@ export class ExerciseComponent implements OnInit {
 
   @Input() exercise: Exercise;
   @Input() difficulty?: string;
+  @Output() exerciseSwap = new EventEmitter<Exercise>();
 
   numberOfSets: string = '';
   largeMuscles = ['CHEST', 'BACK', 'LEGS'];
@@ -37,5 +38,9 @@ export class ExerciseComponent implements OnInit {
 
   sanitizeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  swapExercise() {
+    this.exerciseSwap.emit(this.exercise);
   }
 }

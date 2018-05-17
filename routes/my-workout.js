@@ -4,6 +4,18 @@ var router = express.Router();
 var Exercise = require('../models/exercise');
 var Workout = require('../models/workout');
 
+/* PATCH request to replace an exercise in the current workout */
+router.patch('/current-workout', function(req, res, next) {
+  // remove exercise from workout exercises array
+  req.body.workout.exercises.forEach((exercise) => {
+    if (exercise.name === req.body.exercise.name) {
+      req.body.workout.exercises.splice(req.body.workout.exercises.indexOf(exercise), 1);
+    }
+  });
+
+  // TODO: Got the exercise out of the array, replace with exercise that was not in the original array
+});
+
 /* POST to current workout page. Create a workout from input to load to custom workout */
 router.post('/new-workout', function(req, res, next) {
   var exerciseRequest = req.body;

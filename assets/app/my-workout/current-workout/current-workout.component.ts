@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MyWorkoutService } from '../my-workout.service';
+import { Exercise } from '../../models/exercise.model';
 import { Workout } from '../../models/workout.model';
 
 @Component({
@@ -20,5 +21,10 @@ export class CurrentWorkoutComponent implements OnInit {
   resetWorkout() {
     this.myWorkoutService.clearCurrentWorkout();
     this.router.navigate(['/my-workout/new-workout']);
+  }
+
+  swapExercise(event: Exercise) {
+    this.myWorkoutService.replaceExercise(event).subscribe();
+    //this.workout.exercises.splice(this.workout.exercises.indexOf(event), 1);
   }
 }
