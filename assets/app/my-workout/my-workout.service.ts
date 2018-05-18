@@ -42,13 +42,16 @@ export class MyWorkoutService {
     this.currentWorkout = null;
   }
 
-  replaceExercise(exercise: Exercise) {
+  replaceExercise(exercise: Exercise, exerciseIndex: number) {
     const headers = new Headers({'Content-Type': 'application/json'});
     const body = JSON.stringify({exercise: exercise, workout: this.currentWorkout});
     return this.http.patch('http://localhost:3000/my-workout/current-workout', body, {headers: headers})
       .map((response: Response) => {
         const result = response.json();
-        console.log(result);
+        const newExercise = new Exercise(result.newExercise.name, result.newExercise.description,
+                                         result.newExercise.muscle, result.newExercise.equipment,
+                                         result.newExercise.video);
+        this.currentWorkout.exercises.splice(exerciseIndex, 1, newExercise);
       });
   }
 }

@@ -24,7 +24,6 @@ export class CurrentWorkoutComponent implements OnInit {
   }
 
   swapExercise(event: Exercise) {
-    this.myWorkoutService.replaceExercise(event).subscribe();
-    //this.workout.exercises.splice(this.workout.exercises.indexOf(event), 1);
+    this.myWorkoutService.replaceExercise(event, this.workout.exercises.indexOf(event)).subscribe();
   }
 }
