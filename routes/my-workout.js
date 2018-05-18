@@ -7,13 +7,42 @@ var Workout = require('../models/workout');
 /* PATCH request to replace an exercise in the current workout */
 router.patch('/current-workout', function(req, res, next) {
   // remove exercise from workout exercises array
+  var currentExerciseNames = [];
+  var exerciseOptions = [];
+  var removeExerciseIndex;
   req.body.workout.exercises.forEach((exercise) => {
+    if (exercise.muscle === req.body.exercise.muscle) {
+      currentExerciseNames.push(exercise.name);
+    }
     if (exercise.name === req.body.exercise.name) {
-      req.body.workout.exercises.splice(req.body.workout.exercises.indexOf(exercise), 1);
+      removeExerciseIndex = req.body.workout.exercises.indexOf(exercise); // replace so that new exercise is in the same spot
     }
   });
+  Exercise.find({
+    muscle: req.body.exercise.muscle,
+    name: { $nin: currentExerciseNames }
+  }).count((err, count) => {
+    Exercise.find({
+      muscle: req.body.exercise.muscle,
+      name: { $nin: currentExerciseNames }
+    }).exec((err, exercises) => {
+      exercises.forEach((exercise) => {
+        exerciseOptions.push(exercise);
+        if (exerciseOptions.length === count) {
+          getExercise();
+        }
+      });
+    });
+  });
 
-  // TODO: Got the exercise out of the array, replace with exercise that was not in the original array
+  function getExercise() {
+    var randomIndex = Math.floor(Math.random() * exerciseOptions.length);
+    var replacementExercise = exerciseOptions[randomIndex];
+    req.body.workout.exercises.splice(removeExerciseIndex, 1, replacementExercise);
+    res.status(200).json({
+      newExercise: replacementExercise
+    });
+  }
 });
 
 /* POST to current workout page. Create a workout from input to load to custom workout */
