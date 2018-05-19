@@ -4,6 +4,7 @@ var router = express.Router();
 var Exercise = require('../models/exercise');
 var Workout = require('../models/workout');
 
+
 /* PATCH request to replace an exercise in the current workout */
 router.patch('/current-workout', function(req, res, next) {
   // remove exercise from workout exercises array

@@ -3,16 +3,16 @@ export class Exercise {
   description: string;
   muscle: string;
   equipment: string;
-  videoLink?: string;
+  video?: string;
 
   constructor(name: string, description: string,
               muscle: string, equipment: string,
-              videoLink?: string) {
+              video?: string) {
     this.name = name;
     this.description = description;
     this.muscle = muscle;
     this.equipment = equipment;
-    this.videoLink = videoLink;
+    this.video = video;
   }
 
 }

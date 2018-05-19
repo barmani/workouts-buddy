@@ -133,41 +133,47 @@ var exercise = new Exercise({
   name: 'Bench Press',
   description: 'Press weighted bar off your chest.',
   muscle: 'CHEST',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/rT7DgCr-3pg'
 });
 var exercise = new Exercise({
   name: 'Incline Bench Press',
   description: 'Bench on an incline',
   muscle: 'CHEST',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/DbFgADa2PL8'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Squat',
   description: 'Put bar over shoulders, squat down, press up.',
   muscle: 'LEGS',
-  equipment: 'BARBELL'
+  equipment: 'BARBELL',
+  video: 'https://www.youtube.com/embed/SW_C1A-rejs'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Cable Pushdown',
   description: 'Place something on cable, press down.',
   muscle: 'TRICEPS',
-  equipment: 'CABLE'
+  equipment: 'CABLE',
+  video: 'https://www.youtube.com/embed/2-LAMcpzODU'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Shoulder Press',
   description: 'Put dumbells over head, press up, go down.',
   muscle: 'SHOULDERS',
-  equipment: 'DUMBBELL'
+  equipment: 'DUMBBELL',
+  video: 'https://www.youtube.com/embed/qEwKCR5JCog'
 });
 exercise.save();
 var exercise = new Exercise({
   name: 'Crunch',
   description: 'Lie on back, lift chin toward stomach',
   muscle: 'ABS',
-  equipment: 'BODYWEIGHT'
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/MKmrqcoCZ-M'
 });
 exercise.save();
 

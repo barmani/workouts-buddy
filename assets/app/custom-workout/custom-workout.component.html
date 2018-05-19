@@ -1,14 +1,25 @@
 <h1>Create Custom Workout</h1>
-<label for="muscle-group">Muscle Group
-<select name="muscle-groups" id="muscle-group">
-  <option value=""></option>
-</select>
-<label for="equipment-options">Equipment
-<select name="equipment-options" id="equipment-options">
-  <option value=""></option>
-</select>
-</label>
-<label for="name-search">Name
-<input type="text" id="name-search">
-</label>
-<button class="btn btn-primary">Search</button>
+<div class="row">
+  <form (ngSubmit)="search(f)" #f="ngForm">
+    <label for="muscle-group">Muscle Group
+      <select name="muscle-groups" class="form-control" id="muscle-group" ngModel>
+        <option *ngFor="let field of muscleFields" [ngValue]="field">{{ field }}</option>
+      </select>
+    </label>
+    <label for="equipment-options">Equipment
+      <select name="equipment-options" class="form-control" id="equipment-options" ngModel>
+        <option *ngFor="let field of equipmentFields" [ngValue]="field">{{ field }}</option>
+      </select>
+    </label>
+    <label for="name-search">Name
+      <input type="text" id="name-search" class="form-control" name="name-search" ngModel>
+    </label>
+    <button class="btn btn-primary" [disabled]="f.form.invalid" type="submit">Search</button>
+  </form>
+</div>
+<div class="row" *ngIf="searchResults">
+  <div class="row" *ngFor="let exercise of searchResults">
+    <hr>
+    <app-exercise [exercise]="exercise"></app-exercise>
+  </div>
+</div>

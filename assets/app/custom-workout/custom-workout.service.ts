@@ -11,12 +11,13 @@ export class CustomWorkoutService {
 
   constructor(private http: Http) {}
 
-  getFields() {
-    return this.http.get('http://localhost:3000/custom-workout')
+  exerciseSearch(searchParams: { muscle: string, equipment: string, name: string }) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const body = JSON.stringify(searchParams);
+    return this.http.post('http://localhost:3000/custom-workout', body, { headers: headers })
       .map((response: Response) => {
-        const result = response.json().obj;
-        console.log(result);
-        return result;
+        const exercises: Exercise[] = response.json().exercises;
+        return exercises;
       });
   }
 }

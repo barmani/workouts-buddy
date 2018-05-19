@@ -7,7 +7,7 @@ import { MyWorkoutComponent } from "./my-workout/my-workout.component";
 import { MY_WORKOUT_ROUTES } from "./my-workout/my-workout.routes";
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: '/my-workout', pathMatch: 'full' },
+  { path: '', redirectTo: '/my-workout/current-workout', pathMatch: 'full' },
   { path: 'dash', component: DashboardComponent },
   { path: 'my-workout', component: MyWorkoutComponent, children: MY_WORKOUT_ROUTES },
   { path: 'custom-workout', component: CustomWorkoutComponent },
