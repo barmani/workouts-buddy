@@ -6,6 +6,7 @@ import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
+import { CustomWorkoutService } from "./custom-workout/custom-workout.service";
 import { DashboardComponent } from "./dash/dashboard.component";
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
 import { HeaderComponent } from "./header.component";
@@ -27,7 +28,7 @@ import { routing } from "./app.routing";
       NewWorkoutComponent
     ],
     imports: [BrowserModule, routing, FormsModule, ReactiveFormsModule, HttpModule],
-    providers: [MyWorkoutGuard, MyWorkoutService],
+    providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

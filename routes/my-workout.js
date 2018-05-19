@@ -45,7 +45,7 @@ router.patch('/current-workout', function(req, res, next) {
   }
 });
 
-/* POST to current workout page. Create a workout from input to load to custom workout */
+/* POST to new workout page. Create a workout from input to load to custom workout */
 router.post('/new-workout', function(req, res, next) {
   var exerciseRequest = req.body;
   // equipment in workout is based on difficulty selected

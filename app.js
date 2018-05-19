@@ -190,7 +190,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/custom-workout', appRoutes);
+app.use('/custom-workout', customWorkoutRoutes);
 app.use('/dash', appRoutes);
 app.use('/my-workout', myWorkoutRoutes);
 app.use('/', appRoutes);
