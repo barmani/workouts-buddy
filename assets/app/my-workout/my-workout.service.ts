@@ -54,4 +54,9 @@ export class MyWorkoutService {
         this.currentWorkout.exercises.splice(exerciseIndex, 1, newExercise);
       });
   }
+
+  setCurrentWorkout(workout: Workout) {
+    this.currentWorkout = workout;
+  }
+
 }

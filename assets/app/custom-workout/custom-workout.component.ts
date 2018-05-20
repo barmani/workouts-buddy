@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
 import { CustomWorkoutService } from './custom-workout.service';
-import { Exercise } from "../models/exercise.model";
-import { Workout } from "../models/workout.model";
+import { Exercise } from '../models/exercise.model';
+import { MyWorkoutService } from '../my-workout/my-workout.service';
+import { Router } from '@angular/router';
+import { Workout } from '../models/workout.model';
 
-import { NgForm } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-custom-workout',
@@ -16,7 +18,26 @@ export class CustomWorkoutComponent {
   searchResults: Exercise[];
   customWorkout: Workout = new Workout('custom workout', 'CUSTOM', []);
 
-  constructor(private customWorkoutService: CustomWorkoutService) {}
+  constructor(private customWorkoutService: CustomWorkoutService, private myWorkoutService: MyWorkoutService,
+              private router: Router) {}
+
+  addToWorkout(exercise: Exercise) {
+    this.customWorkout.exercises.push(exercise);
+    this.searchResults.forEach((result) => {
+      if (exercise.name === result.name && exercise.muscle === result.muscle) {
+        this.searchResults.splice(this.searchResults.indexOf(result), 1);
+      }
+    });
+  }
+
+  remove(exercise: Exercise) {
+    this.customWorkout.exercises.splice(this.customWorkout.exercises.indexOf(exercise), 1);
+  }
+
+  saveWorkout() {
+    this.myWorkoutService.setCurrentWorkout(this.customWorkout);
+    this.router.navigate(['/my-workout/current-workout']);
+  }
 
   search(form: NgForm) {
     let usedExerciseNames = [];
@@ -34,13 +55,4 @@ export class CustomWorkoutComponent {
       });
   }
 
-  addToWorkout(exercise: Exercise) {
-    this.customWorkout.exercises.push(exercise);
-    this.searchResults.forEach((result) => {
-      if (exercise.name === result.name && exercise.muscle === result.muscle) {
-        this.searchResults.splice(this.searchResults.indexOf(result), 1);
-      }
-    })
-    console.log(this.customWorkout);
-  }
 }

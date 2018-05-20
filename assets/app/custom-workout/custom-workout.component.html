@@ -1,7 +1,7 @@
-<h1>Create Custom Workout</h1>
 <div class="row">
   <div class="col-md-8">
     <form (ngSubmit)="search(f)" #f="ngForm">
+      <h1>Create Custom Workout</h1>
       <label for="muscle-group">Muscle Group
         <select name="muscle-groups" class="form-control" id="muscle-group" ngModel>
           <option *ngFor="let field of muscleFields" [ngValue]="field">{{ field }}</option>
@@ -26,8 +26,16 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" *ngIf="customWorkout.exercises.length > 0">
     <h6>Current Workout</h6>
-    <p *ngFor="let exercise of customWorkout.exercises">{{ exercise.name }}</p>
+    <div class="row" *ngFor="let exercise of customWorkout.exercises">
+      <div class="col-md-4">
+        <p>{{ exercise.name }} ({{ exercise.muscle }})</p>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-primary" (click)="remove(exercise)">Remove</button>
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="saveWorkout()">Save Workout</button>
   </div>
 </div>
