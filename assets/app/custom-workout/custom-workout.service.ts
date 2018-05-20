@@ -11,7 +11,10 @@ export class CustomWorkoutService {
 
   constructor(private http: Http) {}
 
-  exerciseSearch(searchParams: { muscle: string, equipment: string, name: string }) {
+  exerciseSearch(searchParams: { muscle: string,
+                                 equipment: string,
+                                 name: string,
+                                 usedExerciseNames: string[] }) {
     const headers = new Headers({'Content-Type': 'application/json'});
     const body = JSON.stringify(searchParams);
     return this.http.post('http://localhost:3000/custom-workout', body, { headers: headers })

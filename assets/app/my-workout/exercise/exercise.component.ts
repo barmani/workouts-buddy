@@ -12,7 +12,8 @@ export class ExerciseComponent implements OnInit {
 
   @Input() exercise: Exercise;
   @Input() difficulty?: string;
-  @Output() exerciseSwap = new EventEmitter<Exercise>();
+  @Input() location: string;
+  @Output() exerciseSelected = new EventEmitter<Exercise>();
 
   numberOfSets: string = '';
   largeMuscles = ['CHEST', 'BACK', 'LEGS'];
@@ -40,7 +41,8 @@ export class ExerciseComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  swapExercise() {
-    this.exerciseSwap.emit(this.exercise);
+  outputExercise() {
+    this.exerciseSelected.emit(this.exercise);
   }
+
 }

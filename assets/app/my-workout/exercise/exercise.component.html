@@ -1,19 +1,22 @@
 <div class="row">
   <div class="col-md-6">
     <h3>{{ exercise.name }}</h3>
-    <div *ngIf="difficulty">
+    <div *ngIf="location === 'current-workout'">
       <h3>({{ numberOfSets }} sets)</h3>
     </div>
     <h5>Muscle: {{ exercise.muscle }}</h5>
     <h5>Equipment: {{ exercise.equipment }}</h5>
     <p>{{ exercise.description }}</p>
-    <button class="btn btn-primary" (click)="swapExercise()">
+    <button class="btn btn-primary" (click)="outputExercise()" *ngIf="location === 'current-workout'">
       Swap out
+    </button>
+    <button class="btn btn-primary" (click)="outputExercise()" *ngIf="location === 'custom-workout'">
+      Add to Workout
     </button>
   </div>
   <div class="col-md-6">
-    <iframe width="560"
-            height="315"
+    <iframe width="300"
+            height="200"
             [src]="sanitizeUrl(exercise.video)"
             frameborder="0"
             allow="autoplay; encrypted-media"

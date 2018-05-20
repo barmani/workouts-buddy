@@ -8,7 +8,7 @@ var schema = new Schema({
   },
   difficulty: {
     type: String,
-    enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'],
+    enum: ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'CUSTOM'],
     default: ['BEGINNER'],
     required: true
   },

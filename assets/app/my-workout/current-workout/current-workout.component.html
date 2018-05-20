@@ -10,6 +10,7 @@
   <hr>
   <app-exercise [exercise]="exercise"
                 [difficulty]="workout.difficulty"
-                (exerciseSwap)="swapExercise($event)">
+                [location]="'current-workout'"
+                (exerciseSelected)="swapExercise($event)">
   </app-exercise>
 </div>
