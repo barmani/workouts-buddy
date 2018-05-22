@@ -31,6 +31,7 @@ export class MyWorkoutService {
           exercises.push(newExercise);
         });
         this.currentWorkout = new Workout(name, difficulty, exercises);
+        this.updateSessionWorkout();
       });
   }
 
@@ -40,6 +41,7 @@ export class MyWorkoutService {
 
   clearCurrentWorkout() {
     this.currentWorkout = null;
+    this.clearSessionWorkout();
   }
 
   replaceExercise(exercise: Exercise, exerciseIndex: number) {
@@ -52,11 +54,21 @@ export class MyWorkoutService {
                                          result.newExercise.muscle, result.newExercise.equipment,
                                          result.newExercise.video);
         this.currentWorkout.exercises.splice(exerciseIndex, 1, newExercise);
+        this.updateSessionWorkout();
       });
   }
 
   setCurrentWorkout(workout: Workout) {
     this.currentWorkout = workout;
+    this.updateSessionWorkout();
+  }
+
+  clearSessionWorkout() {
+    sessionStorage.removeItem('currentWorkout');
+  }
+
+  updateSessionWorkout() {
+    sessionStorage.setItem('currentWorkout', JSON.stringify(this.currentWorkout));
   }
 
 }

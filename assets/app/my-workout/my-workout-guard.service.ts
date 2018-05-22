@@ -11,7 +11,7 @@ export class MyWorkoutGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.myWorkoutService.getCurrentWorkout()) {
+    if (this.myWorkoutService.getCurrentWorkout() || sessionStorage.getItem('currentWorkout')) {
       return true;
     } else {
       this.router.navigate(['/my-workout/new-workout']);
