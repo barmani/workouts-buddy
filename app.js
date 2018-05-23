@@ -176,6 +176,64 @@ var exercise = new Exercise({
   video: 'https://www.youtube.com/embed/MKmrqcoCZ-M'
 });
 exercise.save();
+var exercise = new Exercise({
+  name: 'Leg Raise',
+  description: 'Lie on back with your legs straight out. Put your hands under your'
+            +  'butt and lift your legs up to a 90 degree angle, keeping them straight.',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/JB2oyawG9KI'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Russian Twist',
+  description: 'Sit so that your back and legs are at a 45 degree angle from the'
+            +  ' ground with your knees bent. Put your hands together and twist to'
+            +  ' each side.',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/wkD8rjkodUI'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Sit-up',
+  description: 'Lie on your back with your knees bent, feet flat on the floor.'
+            +  ' Using your abs, bring your body up so you are sitting straight up.',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/jDwoBqPH0jk'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Double Crunch',
+  description: 'Lie on your back with your legs out straight and slightly raised.'
+              + ' Perform a crunch, pulling your legs in at the same time.',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/otOKB-iZ548'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Bicycle',
+  description: 'Lie on your back with your hands behind your head, legs raised with '
+             + 'your knees at a 90 degree angle. Move each elbow toward your knee by twisting your body, '
+             + 'one after the other, simultaneously bringing the corresponding knee toward your elbow.',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/9FGilxCbdz8'
+});
+exercise.save();
+var exercise = new Exercise({
+  name: 'Plank',
+  description: 'Get in push up position. Bring your elbows down so that they are '
+            +  'flat on the ground. Hold for as long as you can (or want).',
+  muscle: 'ABS',
+  equipment: 'BODYWEIGHT',
+  video: 'https://www.youtube.com/embed/pSHjTRCQxIw'
+});
+exercise.save();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
