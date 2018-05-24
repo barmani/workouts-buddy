@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-md-6">
     <h3>{{ exercise.name }}</h3>
-    <div *ngIf="location === 'current-workout' && difficulty != 'CUSTOM'">
+    <div *ngIf="location === 'current-workout' && difficulty != 'CUSTOM' && exercise.muscle != 'ABS'">
       <h3>({{ numberOfSets }} sets)</h3>
+    </div>
+    <div *ngIf="exercise.muscle === 'ABS'">
+      <h3>(30-60 seconds)</h3>
     </div>
     <h5>Muscle: {{ exercise.muscle }}</h5>
     <h5>Equipment: {{ exercise.equipment }}</h5>

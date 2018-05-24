@@ -23,14 +23,16 @@ export class ExerciseComponent implements OnInit {
 
   ngOnInit() {
     if (this.difficulty === 'BEGINNER') {
-      if (this.largeMuscles.includes(this.exercise.name)) {
+      if (this.largeMuscles.includes(this.exercise.muscle)) {
         this.numberOfSets = '3-4';
       } else {
         this.numberOfSets = '3';
       }
     } else if (this.difficulty === 'INTERMEDIATE') {
-      if (this.largeMuscles.includes(this.exercise.name)) {
+      if (this.largeMuscles.includes(this.exercise.muscle)) {
         this.numberOfSets = '4-5';
+      } else {
+        this.numberOfSets = '4';
       }
     } else if (this.difficulty === 'ADVANCED') {
       this.numberOfSets = '5';
