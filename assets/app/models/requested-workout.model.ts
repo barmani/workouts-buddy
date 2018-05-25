@@ -1,14 +1,11 @@
 export class RequestedWorkout {
   difficulty: string;
-  largeMuscleGroup: string;
-  smallMuscleGroup: string;
+  muscleGroups: string[];
   abs?: boolean;
 
-  constructor(difficulty: string, largeMuscleGroup: string,
-              smallMuscleGroup: string, abs?: boolean) {
+  constructor(difficulty: string, muscleGroups: string[], abs?: boolean) {
     this.difficulty = difficulty;
-    this.largeMuscleGroup = largeMuscleGroup;
-    this.smallMuscleGroup = smallMuscleGroup;
+    this.muscleGroups = muscleGroups;
     this.abs = abs;
   }
 

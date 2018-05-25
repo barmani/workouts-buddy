@@ -41,84 +41,75 @@
            Level III</span></h2>
          </div>
       </div>
-      <div class="large-muscle-group row" [hidden]="currentQuestion != question.LargeMuscle">
-        <h3>Choose a large muscle group</h3>
+      <div class="large-muscle-group row" [hidden]="currentQuestion != question.MuscleGroups">
+        <h3>Choose Two Muscle Groups</h3>
 
         <div class="radio">
-          <h2><span class="label label-default" for="chest">
-            <input type="radio"
+          <h2><span class="label label-default" for="chest">Chest</span></h2>
+            <input type="checkbox"
                    class="form-control"
                    id="chest"
-                   name="large-muscle-radio"
+                   name="muscle-group-checkboxes"
                    value="chest"
                    required
                    ngModel
-                   (click)="onInputSelected($event)">
-         Chest</span></h2>
+                   (click)="onMuscleGroupInputSelected($event.target)">
         </div>
 
         <div class="radio">
-        <h2><span class="label label-default" for="back">
-        <input type="radio"
+        <h2><span class="label label-default" for="back">Back</span></h2>
+        <input type="checkbox"
                class="form-control"
                id="back"
-               name="large-muscle-radio"
+               name="muscle-group-checkboxes"
                value="back"
                ngModel
-               (click)="onInputSelected($event)">
-         Back</span></h2>
+               (click)="onMuscleGroupInputSelected($event.target)">
          </div>
 
         <div class="radio">
-          <h2><span class="label label-default" for="legs">
-          <input type="radio"
+          <h2><span class="label label-default" for="legs">Legs</span></h2>
+          <input type="checkbox"
                  class="form-control"
                  id="legs"
-                 name="large-muscle-radio"
+                 name="muscle-group-checkboxes"
                  value="legs"
                  ngModel
-                 (click)="onInputSelected($event)">
-           Legs</span></h2>
+                 (click)="onMuscleGroupInputSelected($event.target)">
          </div>
-      </div>
-      <div class="small-muscle-group row" [hidden]="currentQuestion != question.SmallMuscle">
-        <h3>Choose a small muscle group</h3>
 
         <div class="radio">
-          <h2><span class="label label-default" for="triceps">
-          <input type="radio"
+          <h2><span class="label label-default" for="triceps">Triceps</span></h2>
+          <input type="checkbox"
                  class="form-control"
                  id="triceps"
-                 name="small-muscle-radio"
+                 name="muscle-group-checkboxes"
                  value="triceps"
                  required
                  ngModel
-                 (click)="onInputSelected($event)">
-          Triceps</span></h2>
+                 (click)="onMuscleGroupInputSelected($event.target)">
         </div>
 
         <div class="radio">
-          <h2><span class="label label-default" for="biceps">
-          <input type="radio"
+          <h2><span class="label label-default" for="biceps">Biceps</span></h2>
+          <input type="checkbox"
                  class="form-control"
                  id="biceps"
-                 name="small-muscle-radio"
+                 name="muscle-group-checkboxes"
                  value="biceps"
                  ngModel
-                 (click)="onInputSelected($event)">
-          Biceps</span></h2>
+                 (click)="onMuscleGroupInputSelected($event.target)">
         </div>
 
         <div class="radio">
-          <h2><span class="label label-default" for="Shoulders">
-          <input type="radio"
+          <h2><span class="label label-default" for="shoulders">Shoulders</span></h2>
+          <input type="checkbox"
                  class="form-control"
                  id="shoulders"
-                 name="small-muscle-radio"
+                 name="muscle-group-checkboxes"
                  value="shoulders"
                  ngModel
-                 (click)="onInputSelected($event)">
-           Shoulders</span></h2>
+                 (click)="onMuscleGroupInputSelected($event.target)">
          </div>
       </div>
 
