@@ -51,9 +51,9 @@
                    id="chest"
                    name="muscle-group-checkboxes"
                    value="chest"
+                   [(ngModel)]="checkBoxes['chest']"
                    required
-                   ngModel
-                   (click)="onMuscleGroupInputSelected($event.target)">
+                   (click)="onMuscleGroupInputSelected($event)">
         </div>
 
         <div class="radio">
@@ -63,8 +63,8 @@
                id="back"
                name="muscle-group-checkboxes"
                value="back"
-               ngModel
-               (click)="onMuscleGroupInputSelected($event.target)">
+               [(ngModel)]="checkBoxes['back']"
+               (click)="onMuscleGroupInputSelected($event)">
          </div>
 
         <div class="radio">
@@ -74,8 +74,8 @@
                  id="legs"
                  name="muscle-group-checkboxes"
                  value="legs"
-                 ngModel
-                 (click)="onMuscleGroupInputSelected($event.target)">
+                 [(ngModel)]="checkBoxes['legs']"
+                 (click)="onMuscleGroupInputSelected($event)">
          </div>
 
         <div class="radio">
@@ -85,9 +85,8 @@
                  id="triceps"
                  name="muscle-group-checkboxes"
                  value="triceps"
-                 required
-                 ngModel
-                 (click)="onMuscleGroupInputSelected($event.target)">
+                 [(ngModel)]="checkBoxes['triceps']"
+                 (click)="onMuscleGroupInputSelected($event)">
         </div>
 
         <div class="radio">
@@ -97,8 +96,8 @@
                  id="biceps"
                  name="muscle-group-checkboxes"
                  value="biceps"
-                 ngModel
-                 (click)="onMuscleGroupInputSelected($event.target)">
+                 [(ngModel)]="checkBoxes['biceps']"
+                 (click)="onMuscleGroupInputSelected($event)">
         </div>
 
         <div class="radio">
@@ -108,8 +107,8 @@
                  id="shoulders"
                  name="muscle-group-checkboxes"
                  value="shoulders"
-                 ngModel
-                 (click)="onMuscleGroupInputSelected($event.target)">
+                 [(ngModel)]="checkBoxes['shoulders']"
+                 (click)="onMuscleGroupInputSelected($event)">
          </div>
       </div>
 

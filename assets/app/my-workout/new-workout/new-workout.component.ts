@@ -21,12 +21,34 @@ export class NewWorkoutComponent {
   currentQuestion = this.question.Difficulty;
   selectedMuscles: string[] = [];
   requestedWorkout: RequestedWorkout;
+  checkBoxes = { chest: false,
+                back: false,
+                legs: false,
+                triceps: false,
+                biceps: false,
+                shoulders: false
+              };
 
   constructor(private myWorkoutService: MyWorkoutService, private router: Router) {}
 
   // add the string to the array. Use binding to check boxes with the string contained in them?
   onMuscleGroupInputSelected(event) {
-    this.selectedMuscles.push(event.getAttribute('value').toUpperCase());
+    if (event.srcElement.checked) {
+      this.selectedMuscles.push(event.srcElement.value.toUpperCase());
+      this.checkBoxes[event.srcElement.value] = true;
+      if (this.selectedMuscles.length == 3) {
+        let removedMuscle = this.selectedMuscles[0].toLowerCase();
+        setTimeout(() => {
+          this.checkBoxes[removedMuscle] = false;
+        });
+        this.selectedMuscles.splice(0, 1);
+      }
+    } else {
+      this.checkBoxes[event.srcElement.value] = false;
+      this.selectedMuscles.splice(this.selectedMuscles.indexOf(event.srcElement.value.toUpperCase()), 1);
+    }
+    console.log(this.selectedMuscles);
+    console.log(this.checkBoxes);
   }
 
   onInputSelected(event) {
