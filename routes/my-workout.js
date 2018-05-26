@@ -4,6 +4,7 @@ var router = express.Router();
 var Exercise = require('../models/exercise');
 var Workout = require('../models/workout');
 
+const largeMuscles = ['CHEST', 'BACK', 'LEGS'];
 
 /* PATCH request to replace an exercise in the current workout */
 router.patch('/current-workout', function(req, res, next) {
@@ -73,107 +74,59 @@ router.post('/new-workout', function(req, res, next) {
   }
 
   // get exercise options based on form results
-  let largeMuscleOptions = [];
-  let smallMuscleOptions = [];
+  let exerciseOptions = [];
   let workoutExercises = [];
   let abWorkoutExercises = [];
-  // get large muscle exercises
-  Exercise.find({
-    muscle: exerciseRequest.largeMuscleGroup.toUpperCase(),
-    equipment: { $in: equipmentOptions }
-  }).count((err, count) => {
-    // have to do this to get the number of records returned
-    Exercise.find({
-      muscle: exerciseRequest.largeMuscleGroup.toUpperCase(),
-      equipment: { $in: equipmentOptions }
-    }).exec((err, exercises) => {
-      exercises.forEach((exercise) => {
-        largeMuscleOptions.push(exercise);
-        if (largeMuscleOptions.length === count) {
-          getSmallMuscles();
-        }
-      });
-    });
-  });
+  let index = 0;
 
-  // get small muscle exercises. Declare in function to run synchronously
-  function getSmallMuscles() {
+  addMuscleGroup(exerciseRequest.muscleGroups[index]);
+
+  // come back to this function to add each muscle group's exercises to workout
+  function addMuscleGroup(muscleGroup) {
+    let isLargeMuscle = largeMuscles.includes(muscleGroup);
+    // make sure ab exercises are returned in query
+    if (muscleGroup === 'ABS') {
+      equipmentOptions.push('BODYWEIGHT');
+    }
     Exercise.find({
-      muscle: exerciseRequest.smallMuscleGroup.toUpperCase(),
+      muscle: muscleGroup,
       equipment: { $in: equipmentOptions }
     }).count((err, count) => {
+      // have to do this to get the number of records returned
       Exercise.find({
-        muscle: exerciseRequest.smallMuscleGroup.toUpperCase(),
+        muscle: muscleGroup,
         equipment: { $in: equipmentOptions }
       }).exec((err, exercises) => {
         exercises.forEach((exercise) => {
-          smallMuscleOptions.push(exercise);
-          if (smallMuscleOptions.length === count) {
-            buildWorkoutExerciseArray();
+          exerciseOptions.push(exercise);
+          if (exerciseOptions.length === count) {
+            if (muscleGroup === 'ABS') {
+              buildWorkoutExerciseArray(4);
+            } else if (isLargeMuscle) {
+              buildWorkoutExerciseArray(numberOfLargeExercises);
+            } else {
+              buildWorkoutExerciseArray(numberOfSmallExercises);
+            }
           }
         });
       });
     });
   }
 
-  // get exercises for the workout
-  function buildWorkoutExerciseArray() {
-    for (let i = 0; i < numberOfLargeExercises; i++) {
-      let randomIndex = Math.floor(Math.random() * largeMuscleOptions.length);
-      let exercise = largeMuscleOptions.splice(randomIndex, 1);
+  // add random exercises of muscle type to workout
+  function buildWorkoutExerciseArray(numberOfExercises) {
+    for (let j = 0; j < numberOfExercises; j++) {
+      let randomIndex = Math.floor(Math.random() * exerciseOptions.length);
+      let exercise = exerciseOptions.splice(randomIndex, 1);
       workoutExercises.push(exercise[0]);
-      if (workoutExercises.length === numberOfLargeExercises) {
-        // add small muscles after large muscles are complete
-        addSmallMuscleToWorkoutArray();
-      }
     }
-  }
-
-  function addSmallMuscleToWorkoutArray() {
-    for (let j = 0; j < numberOfSmallExercises; j++) {
-      let randomIndex = Math.floor(Math.random() * smallMuscleOptions.length);
-      let exercise = smallMuscleOptions.splice(randomIndex, 1);
-      workoutExercises.push(exercise[0]);
-      if (workoutExercises.length === numberOfLargeExercises + numberOfSmallExercises) {
-        // synchronous call to create the workout after workoutExercises array is filled
-        if (exerciseRequest.abs) {
-          buildAbWorkout();
-        } else {
-          createWorkout();
-        }
-      }
+    if (index + 1 === exerciseRequest.muscleGroups.length) {
+      createWorkout();
+    } else {
+      addMuscleGroup(exerciseRequest.muscleGroups[++index]);
     }
-  }
+    exerciseOptions = [];
 
-  // get array of ab exercises
-  function buildAbWorkout() {
-    Exercise.find({
-      muscle: 'ABS',
-    }).count((err, count) => {
-      Exercise.find({
-        muscle: 'ABS'
-      }).exec((err, exercises) => {
-        exercises.forEach((exercise) => {
-          abWorkoutExercises.push(exercise);
-          if (abWorkoutExercises.length === count) {
-            addAbsToWorkoutArray();
-          }
-        });
-      });
-    });
-  }
-
-  // add 4 ab exercises to the workout. Detect them on the frontend
-  function addAbsToWorkoutArray() {
-    for (let i = 0; i < 4; i++) {
-      let randomIndex = Math.floor(Math.random() * abWorkoutExercises.length);
-      let exercise = abWorkoutExercises.splice(randomIndex, 1);
-      workoutExercises.push(exercise[0]);
-      if (workoutExercises.length === numberOfLargeExercises + numberOfSmallExercises + 4) {
-        // synchronous call to create the workout after workoutExercises array is filled
-        createWorkout();
-      }
-    }
   }
 
   // create workout after all arrays are filled

@@ -73,11 +73,12 @@ export class NewWorkoutComponent {
       alert('Please select two muscles');
       this.currentQuestion = this.question.MuscleGroups;
     } else {
-      let absChecked: boolean = form.value['abs-checkbox']  ? true : false;
+      if (form.value['abs-checkbox']) {
+        this.selectedMuscles.push('ABS');
+      }
 
       this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
-                                              this.selectedMuscles,
-                                              absChecked);
+                                              this.selectedMuscles);
       this.myWorkoutService.createNewWorkout(this.requestedWorkout)
         .subscribe(() => {
           this.router.navigate(['/my-workout/current-workout']);
