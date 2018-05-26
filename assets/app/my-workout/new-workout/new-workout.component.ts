@@ -36,19 +36,23 @@ export class NewWorkoutComponent {
     if (event.srcElement.checked) {
       this.selectedMuscles.push(event.srcElement.value.toUpperCase());
       this.checkBoxes[event.srcElement.value] = true;
+      // make sure only two exercises are selected at once
       if (this.selectedMuscles.length == 3) {
         let removedMuscle = this.selectedMuscles[0].toLowerCase();
+        // timeout so angular detects change
         setTimeout(() => {
           this.checkBoxes[removedMuscle] = false;
         });
         this.selectedMuscles.splice(0, 1);
       }
+      // go to next page
+      if (this.selectedMuscles.length == 2) {
+        this.currentQuestion++;
+      }
     } else {
       this.checkBoxes[event.srcElement.value] = false;
       this.selectedMuscles.splice(this.selectedMuscles.indexOf(event.srcElement.value.toUpperCase()), 1);
     }
-    console.log(this.selectedMuscles);
-    console.log(this.checkBoxes);
   }
 
   onInputSelected(event) {
@@ -65,15 +69,20 @@ export class NewWorkoutComponent {
   }
 
   onSubmit(form: NgForm) {
-    let absChecked: boolean = form.value['abs-checkbox']  ? true : false;
+    if (this.selectedMuscles.length != 2) {
+      alert('Please select two muscles');
+      this.currentQuestion = this.question.MuscleGroups;
+    } else {
+      let absChecked: boolean = form.value['abs-checkbox']  ? true : false;
 
-    this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
-                                            this.selectedMuscles,
-                                            absChecked);
-    this.myWorkoutService.createNewWorkout(this.requestedWorkout)
-      .subscribe(() => {
-        this.router.navigate(['/my-workout/current-workout']);
-      });
-    form.resetForm();
+      this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
+                                              this.selectedMuscles,
+                                              absChecked);
+      this.myWorkoutService.createNewWorkout(this.requestedWorkout)
+        .subscribe(() => {
+          this.router.navigate(['/my-workout/current-workout']);
+        });
+      form.resetForm();
+    }
   }
 }

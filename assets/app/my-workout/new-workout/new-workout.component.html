@@ -51,7 +51,7 @@
                    id="chest"
                    name="muscle-group-checkboxes"
                    value="chest"
-                   [(ngModel)]="checkBoxes['chest']"
+                   [checked]="checkBoxes['chest']"
                    required
                    (click)="onMuscleGroupInputSelected($event)">
         </div>
@@ -63,7 +63,7 @@
                id="back"
                name="muscle-group-checkboxes"
                value="back"
-               [(ngModel)]="checkBoxes['back']"
+               [checked]="checkBoxes['back']"
                (click)="onMuscleGroupInputSelected($event)">
          </div>
 
@@ -74,7 +74,7 @@
                  id="legs"
                  name="muscle-group-checkboxes"
                  value="legs"
-                 [(ngModel)]="checkBoxes['legs']"
+                 [checked]="checkBoxes['legs']"
                  (click)="onMuscleGroupInputSelected($event)">
          </div>
 
@@ -85,7 +85,7 @@
                  id="triceps"
                  name="muscle-group-checkboxes"
                  value="triceps"
-                 [(ngModel)]="checkBoxes['triceps']"
+                 [checked]="checkBoxes['triceps']"
                  (click)="onMuscleGroupInputSelected($event)">
         </div>
 
@@ -96,7 +96,7 @@
                  id="biceps"
                  name="muscle-group-checkboxes"
                  value="biceps"
-                 [(ngModel)]="checkBoxes['biceps']"
+                 [checked]="checkBoxes['biceps']"
                  (click)="onMuscleGroupInputSelected($event)">
         </div>
 
@@ -107,7 +107,7 @@
                  id="shoulders"
                  name="muscle-group-checkboxes"
                  value="shoulders"
-                 [(ngModel)]="checkBoxes['shoulders']"
+                 [checked]="checkBoxes['shoulders']"
                  (click)="onMuscleGroupInputSelected($event)">
          </div>
       </div>
