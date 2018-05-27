@@ -79,6 +79,12 @@ router.post('/new-workout', function(req, res, next) {
   let abWorkoutExercises = [];
   let index = 0;
 
+  // make sure large muscles appear first
+  if (!largeMuscles.includes(exerciseRequest.muscleGroups[index])) {
+    const temp = exerciseRequest.muscleGroups[index];
+    exerciseRequest.muscleGroups[index] = exerciseRequest.muscleGroups[index + 1];
+    exerciseRequest.muscleGroups[index + 1] = temp;
+  }
   addMuscleGroup(exerciseRequest.muscleGroups[index]);
 
   // come back to this function to add each muscle group's exercises to workout
