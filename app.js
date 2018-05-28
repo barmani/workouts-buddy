@@ -10,6 +10,7 @@ var appRoutes = require('./routes/app');
 var customWorkoutRoutes = require('./routes/custom-workout');
 var dashRoutes = require('./routes/dash');
 var myWorkoutRoutes = require('./routes/my-workout');
+var userRoutes = require('./routes/user');
 
 var Exercise = require('./models/exercise');
 
@@ -257,6 +258,7 @@ app.use(function(req, res, next) {
 app.use('/custom-workout', customWorkoutRoutes);
 app.use('/dash', appRoutes);
 app.use('/my-workout', myWorkoutRoutes);
+app.use('/user', userRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
