@@ -8,10 +8,12 @@ import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-wo
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
 import { CustomWorkoutService } from "./custom-workout/custom-workout.service";
 import { DashboardComponent } from "./dash/dashboard.component";
+import { EqualValidator } from './login-signup/equal-validator.directive';
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
 import { HeaderComponent } from "./header.component";
 import { LoginComponent } from './login-signup/login.component';
 import { LoginSignupComponent } from './login-signup/login-signup.component';
+import { LoginSignupService } from './login-signup/login-signup.service';
 import { MyWorkoutComponent } from "./my-workout/my-workout.component";
 import { MyWorkoutGuard } from "./my-workout/my-workout-guard.service";
 import { MyWorkoutService } from "./my-workout/my-workout.service";
@@ -25,6 +27,7 @@ import { SignupComponent } from './login-signup/signup.component';
       CurrentWorkoutComponent,
       CustomWorkoutComponent,
       DashboardComponent,
+      EqualValidator,
       ExerciseComponent,
       HeaderComponent,
       LoginComponent,
@@ -34,7 +37,7 @@ import { SignupComponent } from './login-signup/signup.component';
       SignupComponent
     ],
     imports: [BrowserModule, routing, FormsModule, ReactiveFormsModule, HttpModule],
-    providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService],
+    providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
