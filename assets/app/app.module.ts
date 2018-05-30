@@ -11,15 +11,15 @@ import { DashboardComponent } from "./dash/dashboard.component";
 import { EqualValidator } from './login-signup/equal-validator.directive';
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
 import { HeaderComponent } from "./header.component";
-import { LoginComponent } from './login-signup/login.component';
-import { LoginSignupComponent } from './login-signup/login-signup.component';
+import { LoginComponent } from './login-signup/login/login.component';
+import { LoginSignupComponent } from './login-signup/login-signup/login-signup.component';
 import { LoginSignupService } from './login-signup/login-signup.service';
 import { MyWorkoutComponent } from "./my-workout/my-workout.component";
 import { MyWorkoutGuard } from "./my-workout/my-workout-guard.service";
 import { MyWorkoutService } from "./my-workout/my-workout.service";
 import { NewWorkoutComponent} from "./my-workout/new-workout/new-workout.component";
 import { routing } from "./app.routing";
-import { SignupComponent } from './login-signup/signup.component';
+import { SignupComponent } from './login-signup/signup/signup.component';
 
 @NgModule({
     declarations: [

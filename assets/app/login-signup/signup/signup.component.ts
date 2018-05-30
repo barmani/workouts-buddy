@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginSignupService } from './login-signup.service';
+import { LoginSignupService } from '../login-signup.service';
 import { NgForm } from '@angular/forms';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-signup',
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
   user: User;
@@ -19,6 +20,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User(this.username, this.email, this.password);
+    console.log(this.retypePassword);
   }
 
   onSubmit(form: NgForm) {
