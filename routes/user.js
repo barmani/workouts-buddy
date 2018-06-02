@@ -7,7 +7,6 @@ var User = require('../models/user');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   var user = new User({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 10),
@@ -43,7 +42,7 @@ router.post('/login', function(req, res, next) {
         error: {message: 'User not found'}
       });
     }
-    if (bcrypt.compareSync(req.body.password, user.password)) {
+    if (!bcrypt.compareSync(req.body.password, user.password)) {
       return res.status(401).json({
         title: 'Incorrect password',
         error: {message: 'Incorrect password'}

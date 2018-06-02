@@ -15,8 +15,8 @@ export class LoginComponent {
   constructor(private loginSignupService: LoginSignupService, private router: Router) {}
 
   onSubmit(form: NgForm) {
-    const user = new User(form.value.username, form.value.email, form.value.password);
-    this.loginSignupService.login(user).subscribe(
+    const formInfo= {username: form.value['username-login'], password: form.value['password-login']};
+    this.loginSignupService.login(formInfo).subscribe(
       data => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);

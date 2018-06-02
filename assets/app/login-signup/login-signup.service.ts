@@ -18,8 +18,8 @@ export class LoginSignupService {
       .catch((error: Response) => Observable.throw(error.json()));
   }
 
-  login(user: User) {
-    const body = JSON.stringify(user);
+  login(formInfo: {username: string, password: string}) {
+    const body = JSON.stringify(formInfo);
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
