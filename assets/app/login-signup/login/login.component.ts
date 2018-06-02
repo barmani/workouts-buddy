@@ -20,6 +20,7 @@ export class LoginComponent {
       data => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
+        this.loginSignupService.setLoginObservableValue(true);
         this.router.navigateByUrl('/');
       },
       err => console.log(err)
