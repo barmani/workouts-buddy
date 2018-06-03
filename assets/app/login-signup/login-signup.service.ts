@@ -8,7 +8,6 @@ import { User } from '../models/user.model';
 
 @Injectable()
 export class LoginSignupService {
-  currentUser: User;
   private subject = new Subject<any>();
 
   constructor(private http: Http) {}
@@ -35,7 +34,7 @@ export class LoginSignupService {
   logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    this.setLoginObservableValue(false);
+    this.setLoginObservableValue(false, '');
   }
 
   isLoggedIn() {
@@ -46,8 +45,8 @@ export class LoginSignupService {
     return this.subject.asObservable();
   }
 
-  setLoginObservableValue(value: boolean) {
-    this.subject.next(value);
+  setLoginObservableValue(loggedIn: boolean, username: string) {
+    this.subject.next({isLoggedIn: loggedIn, username: username});
   }
 
 }

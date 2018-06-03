@@ -11,14 +11,16 @@ import { LoginSignupService } from './login-signup/login-signup.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  currentUser: User = this.loginSignupService.currentUser;
   isLoggedIn: boolean;
   subscription: Subscription;
+  username: string;
 
   constructor(private loginSignupService: LoginSignupService, private router: Router) {
     this.subscription = this.loginSignupService.getLoginObservable()
-      .subscribe(isLoggedIn => {
-        this.isLoggedIn = isLoggedIn;
+      .subscribe(loginInfo => {
+        console.log(loginInfo);
+        this.isLoggedIn = loginInfo.isLoggedIn;
+        this.username = loginInfo.username;
       });
   }
 
