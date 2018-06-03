@@ -6,6 +6,7 @@
     </div>
     <div class="col-md-2">
       <input type="text" ngModel name="username-login" required>
+      <small *ngIf="invalidUsername" class="text-danger">Username not found</small>
     </div>
   </div>
   <div class="row">
@@ -14,6 +15,7 @@
     </div>
     <div class="col-md-2">
       <input type="password" ngModel name="password-login" required>
+      <small *ngIf="invalidPassword" class="text-danger">Password Incorrect</small>
     </div>
   </div>
   <button class="btn btn-primary" [disabled]="f.form.invalid" type="submit">Login</button>

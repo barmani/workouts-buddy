@@ -11,6 +11,8 @@ import { User } from '../../models/user.model';
     templateUrl: './login.component.html'
 })
 export class LoginComponent {
+  invalidUsername = false;
+  invalidPassword = false;
 
   constructor(private loginSignupService: LoginSignupService, private router: Router) {}
 
@@ -23,7 +25,18 @@ export class LoginComponent {
         this.loginSignupService.setLoginObservableValue(true);
         this.router.navigateByUrl('/');
       },
-      err => console.log(err)
+      err => {
+        if (err.title === "Incorrect password") {
+          this.invalidPassword = true;
+          this.invalidUsername = false;
+        } else if (err.title === "User not found") {
+          this.invalidUsername = true;
+          this.invalidPassword = false;
+        } else {
+          this.invalidPassword = false;
+          this.invalidUsername = false;
+        }
+      }
     )
     form.reset();
   }

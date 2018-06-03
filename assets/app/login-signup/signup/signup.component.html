@@ -7,7 +7,7 @@
     <div class="col-md-4">
       <input type="text" [ngModel]="user.username" name="username-signup" minlength="5" required #username="ngModel">
       <div class="row">
-        <small [hidden]="username.valid || (username.pristine && !f.submitted)">
+        <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
           Username is required (minimum 5 characters)
         </small>
       </div>
@@ -21,7 +21,7 @@
       <input type="password" name="password" [ngModel]="user.password" required validateEqual="retypePasswordInput" reverse="true" #password="ngModel">
       <div class="row">
         <small [hidden]="(password.pristine &&
-          !f.submitted) || password.valid">
+          !f.submitted) || password.valid" class="text-danger">
             Password is required and must be at least 8 characters
         </small>
       </div>
@@ -34,7 +34,7 @@
     <div class="col-md-4">
       <input type="password" name="retypePassword" [ngModel]="retypePassword" required validateEqual="password" #retypePasswordInput="ngModel">
       <div class="row">
-        <small [hidden]="retypePasswordInput.valid || (retypePasswordInput.pristine && !f.submitted)">
+        <small [hidden]="retypePasswordInput.valid || (retypePasswordInput.pristine && !f.submitted)" class="text-danger">
             Password mismatch
         </small>
       </div>
@@ -48,7 +48,7 @@
       <input type="email" [ngModel]="user.email" name="email-signup" required
        pattern="^([A-Za-z0-9_\-\.])+\@[A-Za-z0-9_\-\.]+\.[A-Za-z0-9_\-\.]+$" #email="ngModel">
        <div class="row">
-         <small [hidden]="email.valid || (email.pristine && !f.submitted)">
+         <small [hidden]="email.valid || (email.pristine && !f.submitted)" class="text-danger">
            Email is required and format should be <i>john@doe.com</i>.
          </small>
        </div>
