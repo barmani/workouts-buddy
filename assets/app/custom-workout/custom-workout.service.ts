@@ -3,7 +3,7 @@ import { Http, Response, Headers } from "@angular/http";
 import { Exercise } from "../models/exercise.model";
 import { Workout } from "../models/workout.model";
 
-import 'rxjs/Rx';
+import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 
 @Injectable()
@@ -18,9 +18,11 @@ export class CustomWorkoutService {
     const headers = new Headers({'Content-Type': 'application/json'});
     const body = JSON.stringify(searchParams);
     return this.http.post('http://localhost:3000/custom-workout', body, { headers: headers })
-      .map((response: Response) => {
-        const exercises: Exercise[] = response.json().exercises;
-        return exercises;
-      });
+      .pipe(
+        map((response: Response) => {
+          const exercises: Exercise[] = response.json().exercises;
+          return exercises;
+        })
+      );
   }
 }

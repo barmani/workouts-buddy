@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from "./app.component";
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
@@ -36,7 +37,7 @@ import { SignupComponent } from './login-signup/signup/signup.component';
       NewWorkoutComponent,
       SignupComponent
     ],
-    imports: [BrowserModule, routing, FormsModule, ReactiveFormsModule, HttpModule],
+    imports: [BrowserModule, routing, FormsModule, ReactiveFormsModule, HttpModule, MatDialogModule],
     providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService],
     bootstrap: [AppComponent]
 })

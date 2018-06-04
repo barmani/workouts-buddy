@@ -18,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private loginSignupService: LoginSignupService, private router: Router) {
     this.subscription = this.loginSignupService.getLoginObservable()
       .subscribe(loginInfo => {
-        console.log(loginInfo);
         this.isLoggedIn = loginInfo.isLoggedIn;
         this.username = loginInfo.username;
       });
@@ -26,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn = this.loginSignupService.isLoggedIn();
+    this.username = this.loginSignupService.username();
   }
 
   ngOnDestroy() {

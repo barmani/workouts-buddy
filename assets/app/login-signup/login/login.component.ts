@@ -22,6 +22,7 @@ export class LoginComponent {
       data => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
+        localStorage.setItem('username', formInfo.username);
         this.loginSignupService.setLoginObservableValue(true, formInfo.username);
         this.router.navigateByUrl('/');
       },

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
-import 'rxjs/Rx';
-import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { User } from '../models/user.model';
 
@@ -17,8 +17,10 @@ export class LoginSignupService {
       'Content-Type': 'application/json'
     });
     return this.http.post('http://localhost:3000/user', body, {headers: headers})
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json()));
+      .pipe(
+        map((response: Response) => response.json()),
+        catchError((error: Response) => throwError(error.json()))
+      );
   }
 
   login(formInfo: {username: string, password: string}) {
@@ -27,13 +29,16 @@ export class LoginSignupService {
       'Content-Type': 'application/json'
     });
     return this.http.post('http://localhost:3000/user/login', body, {headers: headers})
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json()));
+      .pipe(
+        map((response: Response) => response.json()),
+        catchError((error: Response) => throwError(error.json()))
+      )
   }
 
   logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.setLoginObservableValue(false, '');
   }
 
@@ -47,6 +52,10 @@ export class LoginSignupService {
 
   setLoginObservableValue(loggedIn: boolean, username: string) {
     this.subject.next({isLoggedIn: loggedIn, username: username});
+  }
+
+  username() {
+    return localStorage.getItem('username');
   }
 
 }
