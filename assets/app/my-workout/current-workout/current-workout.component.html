@@ -6,7 +6,7 @@
     <button class="btn btn-primary" (click)="resetWorkout()">New Workout</button>
   </div>
   <div class="col-md-1">
-    <button class="btn btn-primary" (click)="saveWorkout()" *ngIf="isLoggedIn">Save Workout</button>
+    <button class="btn btn-primary" (click)="openDialog()" *ngIf="isLoggedIn">Save Workout</button>
   </div>
 </div>
 <div class="row" *ngFor="let exercise of workout.exercises">

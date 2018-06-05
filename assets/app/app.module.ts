@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { AppComponent } from "./app.component";
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
@@ -20,6 +21,7 @@ import { MyWorkoutGuard } from "./my-workout/my-workout-guard.service";
 import { MyWorkoutService } from "./my-workout/my-workout.service";
 import { NewWorkoutComponent} from "./my-workout/new-workout/new-workout.component";
 import { routing } from "./app.routing";
+import { SaveWorkoutDialogComponent } from './my-workout/save-workout-dialog.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
 
 @NgModule({
@@ -35,10 +37,23 @@ import { SignupComponent } from './login-signup/signup/signup.component';
       LoginSignupComponent,
       MyWorkoutComponent,
       NewWorkoutComponent,
+      SaveWorkoutDialogComponent,
       SignupComponent
     ],
-    imports: [BrowserModule, routing, FormsModule, ReactiveFormsModule, HttpModule, MatDialogModule],
+    imports: [BrowserModule,
+              BrowserAnimationsModule,
+              routing,
+              FormsModule,
+              ReactiveFormsModule,
+              HttpModule,
+              MatDialogModule,
+              MatFormFieldModule,
+              MatInputModule],
+    exports: [MatDialogModule,
+              MatFormFieldModule,
+              MatInputModule],
     providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService],
+    entryComponents: [SaveWorkoutDialogComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule {
