@@ -6,22 +6,26 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
     selector: 'app-new-workout',
     template:
     `
-    <h2 mat-dialog-title>Save Workout</h2>
+    <div class="dialog-container">
+      <h2 mat-dialog-title>Save Workout</h2>
 
-    <mat-dialog-content [formGroup]="form">
+      <mat-dialog-content [formGroup]="form">
 
-      <mat-form-field>
-          <input matInput
-                  placeholder="Workout Name"
-                 formControlName="workoutName">
-      </mat-form-field>
+        <mat-form-field>
+            <label for="workout-name">Name:</label>
+            <input matInput
+                    name="workout-name"
+                    placeholder=""
+                   formControlName="workoutName">
+        </mat-form-field>
 
-    </mat-dialog-content>
+      </mat-dialog-content>
 
-    <mat-dialog-actions>
-      <button class="mat-raised-button"(click)="close()">Close</button>
-      <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
-    </mat-dialog-actions>
+      <mat-dialog-actions>
+        <button class="mat-raised-button"(click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+      </mat-dialog-actions>
+    </div>
     `
 })
 export class SaveWorkoutDialogComponent {
@@ -40,6 +44,7 @@ export class SaveWorkoutDialogComponent {
             workoutName: [this.workoutName, []]
         });
     }
+
 
     save() {
         this.dialogRef.close(this.form.value);

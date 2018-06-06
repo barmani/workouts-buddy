@@ -42,15 +42,16 @@ export class CurrentWorkoutComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    dialogConfig.autoFocus = true
+    dialogConfig.width = '400px';
 
     dialogConfig.data = {
            id: 1,
-           title: 'Save Workout'
+           title: 'Save Workout',
     };
 
     const dialogRef = this.dialog.open(SaveWorkoutDialogComponent, dialogConfig);
-
+    dialogRef.updatePosition({ top: '-2113px', left: '500px' });
     dialogRef.afterClosed().subscribe(
         data => console.log("Dialog output:", data)
     );
