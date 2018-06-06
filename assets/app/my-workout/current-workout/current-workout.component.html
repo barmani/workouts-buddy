@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-8">
     <h3>Current Workout</h3>
   </div>
   <div class="col-md-1">
@@ -9,11 +9,15 @@
     <button class="btn btn-primary" (click)="openDialog()" *ngIf="isLoggedIn">Save Workout</button>
   </div>
 </div>
-<div class="row" *ngFor="let exercise of workout.exercises">
-  <hr>
-  <app-exercise [exercise]="exercise"
-                [difficulty]="workout.difficulty"
-                [location]="'current-workout'"
-                (exerciseSelected)="swapExercise($event)">
-  </app-exercise>
+<div class="row">
+  <div class="col-md-8">
+    <div class="row" *ngFor="let exercise of workout.exercises">
+      <hr>
+      <app-exercise [exercise]="exercise"
+                    [difficulty]="workout.difficulty"
+                    [location]="'current-workout'"
+                    (exerciseSelected)="swapExercise($event)">
+      </app-exercise>
+    </div>
+  </div>
 </div>

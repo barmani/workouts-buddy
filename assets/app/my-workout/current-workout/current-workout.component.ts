@@ -44,6 +44,7 @@ export class CurrentWorkoutComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true
     dialogConfig.width = '400px';
+    dialogConfig.position = {top: '-275vh', left: '155vh'};
 
     dialogConfig.data = {
            id: 1,
@@ -51,7 +52,6 @@ export class CurrentWorkoutComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(SaveWorkoutDialogComponent, dialogConfig);
-    dialogRef.updatePosition({ top: '-2113px', left: '500px' });
     dialogRef.afterClosed().subscribe(
         data => console.log("Dialog output:", data)
     );
