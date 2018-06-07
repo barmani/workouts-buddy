@@ -7,6 +7,7 @@ import { MyWorkoutService } from '../my-workout.service';
 import { Exercise } from '../../models/exercise.model';
 import { LoginSignupService } from '../../login-signup/login-signup.service';
 import { SaveWorkoutDialogComponent } from '../save-workout-dialog.component';
+import { SavedWorkoutsService } from '../../saved-workouts/saved-workouts.service';
 import { Workout } from '../../models/workout.model';
 
 @Component({
@@ -20,6 +21,7 @@ export class CurrentWorkoutComponent implements OnInit {
 
   constructor(private myWorkoutService: MyWorkoutService,
               private loginSignupService: LoginSignupService,
+              private savedWorkoutsService: SavedWorkoutsService,
               private router: Router,
               private dialog: MatDialog) {
     this.subscription = this.loginSignupService.getLoginObservable()
@@ -52,8 +54,16 @@ export class CurrentWorkoutComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(SaveWorkoutDialogComponent, dialogConfig);
+
     dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
+        data => {
+          if (data) {
+            if (data.workoutName) {
+              this.workout.name = data.workoutName;
+              this.savedWorkoutsService.addWorkout(this.workout).subscribe();
+            }
+          }
+        }
     );
   }
 

@@ -10,6 +10,7 @@ var appRoutes = require('./routes/app');
 var customWorkoutRoutes = require('./routes/custom-workout');
 var dashRoutes = require('./routes/dash');
 var myWorkoutRoutes = require('./routes/my-workout');
+var savedWorkoutRoutes = require('./routes/saved-workouts');
 var userRoutes = require('./routes/user');
 
 var Exercise = require('./models/exercise');
@@ -259,6 +260,7 @@ app.use('/custom-workout', customWorkoutRoutes);
 app.use('/dash', appRoutes);
 app.use('/my-workout', myWorkoutRoutes);
 app.use('/user', userRoutes);
+app.use('/saved-workouts', savedWorkoutRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 
-/* GET home page. */
+/* Create a new user */
 router.post('/', function(req, res, next) {
   var user = new User({
     username: req.body.username,
@@ -54,6 +54,19 @@ router.post('/login', function(req, res, next) {
          token: token,
          userId: user._id
      });
+  });
+});
+
+/* verify token before user specific requests */
+router.use('/', function(req, res, next) {
+  jwt.verify(req.query.token, 'secret', function(err, decoded) {
+    if (err) {
+      return res.status(401).json({
+        title: 'User not authenticated',
+        error: err
+      });
+    }
+    next();
   });
 });
 
