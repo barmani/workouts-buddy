@@ -4,6 +4,8 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
+var Workout = require('../models/workout');
+var Exercise = require('../models/exercise');
 
 /* verify token before user specific requests */
 router.use('/', function(req, res, next) {
@@ -20,11 +22,52 @@ router.use('/', function(req, res, next) {
 
 router.patch('/', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
-  console.log(decoded.user_id);
-  User.findById(decoded.user_id, function(err, user) {
-    console.log(user);
-    console.log(req.body);
-  })
+  if (decoded) {
+    User.findById(decoded.user._id, function(err, user) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      if (!user) {
+        return res.status(401).json({
+          title: 'User not found',
+          error: {message: 'User not found'}
+        });
+      }
+      let workoutExercises = [];
+      req.body.exercises.forEach((exercise) => {
+        const newExercise = new Exercise({
+          name: exercise.name,
+          description: exercise.description,
+          muscle: exercise.muscle,
+          equipment: exercise.equipment,
+          video: exercise.video
+        });
+        workoutExercises.push(newExercise);
+      });
+      const newWorkout = new Workout({
+        name: req.body.name,
+        difficulty: req.body.difficulty,
+        exercises: workoutExercises
+      });
+      user.workouts.push(newWorkout);
+      user.save(function(err, result) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occurred',
+            error: err
+          });
+        }
+        res.status(200).json({
+          message: 'Workout saved',
+          obj: result
+        });
+      });
+
+    })
+  }
 })
 
 module.exports = router;
