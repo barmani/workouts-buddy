@@ -22,6 +22,7 @@ import { MyWorkoutService } from "./my-workout/my-workout.service";
 import { NewWorkoutComponent} from "./my-workout/new-workout/new-workout.component";
 import { routing } from "./app.routing";
 import { SaveWorkoutDialogComponent } from './my-workout/save-workout-dialog.component';
+import { SavedWorkoutsComponent } from './saved-workouts/saved-workouts.component';
 import { SavedWorkoutsService } from './saved-workouts/saved-workouts.service';
 import { SignupComponent } from './login-signup/signup/signup.component';
 
@@ -39,6 +40,7 @@ import { SignupComponent } from './login-signup/signup/signup.component';
       MyWorkoutComponent,
       NewWorkoutComponent,
       SaveWorkoutDialogComponent,
+      SavedWorkoutsComponent,
       SignupComponent
     ],
     imports: [BrowserModule,
