@@ -20,6 +20,35 @@ router.use('/', function(req, res, next) {
   });
 });
 
+router.get('/', function(req, res, next) {
+    var decoded = jwt.decode(req.query.token);
+    if (decoded) {
+      User.findById(decoded.user._id, function(err, user) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occurred',
+            error: err
+          });
+        }
+        if (!user) {
+          return res.status(401).json({
+            title: 'User not found',
+            error: {message: 'User not found'}
+          });
+        }
+        const workouts = user.workouts;
+        res.status(200).json({
+            message: 'received workouts',
+            obj: workouts
+        });
+      })
+    } else {
+      return res.status(500).json({
+        title: 'Invalid token',
+      });
+    }
+});
+
 router.patch('/', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
   if (decoded) {
@@ -67,6 +96,10 @@ router.patch('/', function(req, res, next) {
       });
 
     })
+  } else {
+    return res.status(500).json({
+      title: 'Invalid token',
+    });
   }
 })
 
