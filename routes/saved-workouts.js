@@ -36,12 +36,20 @@ router.get('/', function(req, res, next) {
             error: {message: 'User not found'}
           });
         }
-        const workouts = user.workouts;
-        res.status(200).json({
-            message: 'received workouts',
-            obj: workouts
+        let workouts = [];
+        user.workouts.forEach((workoutId, index) => {
+          Workout.findById(workoutId)
+                 .populate({
+                   path: 'exercises',
+                   model: 'Exercise'
+                 })
+                 .exec(function(err, workout) {
+                   if (!err && workout) {
+                     console.log(workout);
+                   }
+                 });
         });
-      })
+      });
     } else {
       return res.status(500).json({
         title: 'Invalid token',
@@ -49,6 +57,7 @@ router.get('/', function(req, res, next) {
     }
 });
 
+// add a workout to a user's saved workouts
 router.patch('/', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
   if (decoded) {
@@ -81,6 +90,14 @@ router.patch('/', function(req, res, next) {
         difficulty: req.body.difficulty,
         exercises: workoutExercises
       });
+      newWorkout.save(function(err, result) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occurred while saving the workout',
+            error: err
+          });
+        }
+      });
       user.workouts.push(newWorkout);
       user.save(function(err, result) {
         if (err) {
@@ -89,13 +106,12 @@ router.patch('/', function(req, res, next) {
             error: err
           });
         }
-        res.status(200).json({
+        return res.status(200).json({
           message: 'Workout saved',
           obj: result
         });
       });
-
-    })
+    });
   } else {
     return res.status(500).json({
       title: 'Invalid token',
