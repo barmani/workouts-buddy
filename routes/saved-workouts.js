@@ -39,13 +39,17 @@ router.get('/', function(req, res, next) {
         let workouts = [];
         user.workouts.forEach((workoutId, index) => {
           Workout.findById(workoutId)
-                 .populate({
-                   path: 'exercises',
-                   model: 'Exercise'
-                 })
+                 .populate('exercises')
                  .exec(function(err, workout) {
                    if (!err && workout) {
-                     console.log(workout);
+                     workouts.push(workout);
+                   }
+                   if (index === user.workouts.length - 1) {
+                     console.log(workouts);
+                     return res.status(200).json({
+                       message: 'retrieved workouts',
+                       obj: workouts
+                     })
                    }
                  });
         });
@@ -75,40 +79,43 @@ router.patch('/', function(req, res, next) {
         });
       }
       let workoutExercises = [];
-      req.body.exercises.forEach((exercise) => {
-        const newExercise = new Exercise({
+      req.body.exercises.forEach((exercise, index) => {
+        Exercise.find({
           name: exercise.name,
           description: exercise.description,
           muscle: exercise.muscle,
           equipment: exercise.equipment,
           video: exercise.video
-        });
-        workoutExercises.push(newExercise);
-      });
-      const newWorkout = new Workout({
-        name: req.body.name,
-        difficulty: req.body.difficulty,
-        exercises: workoutExercises
-      });
-      newWorkout.save(function(err, result) {
-        if (err) {
-          return res.status(500).json({
-            title: 'An error occurred while saving the workout',
-            error: err
-          });
-        }
-      });
-      user.workouts.push(newWorkout);
-      user.save(function(err, result) {
-        if (err) {
-          return res.status(500).json({
-            title: 'An error occurred',
-            error: err
-          });
-        }
-        return res.status(200).json({
-          message: 'Workout saved',
-          obj: result
+        }, function(err, exercise) {
+          workoutExercises.push(exercise[0]);
+          if (index === req.body.exercises.length - 1) {
+            const newWorkout = new Workout({
+              name: req.body.name,
+              difficulty: req.body.difficulty,
+              exercises: workoutExercises
+            });
+            newWorkout.save(function(err, result) {
+              if (err) {
+                return res.status(500).json({
+                  title: 'An error occurred while saving the workout',
+                  error: err
+                });
+              }
+            });
+            user.workouts.push(newWorkout);
+            user.save(function(err, result) {
+              if (err) {
+                return res.status(500).json({
+                  title: 'An error occurred',
+                  error: err
+                });
+              }
+              return res.status(200).json({
+                message: 'Workout saved',
+                obj: result
+              });
+            });
+          }
         });
       });
     });
