@@ -79,7 +79,7 @@ router.patch('/', function(req, res, next) {
         });
       }
       let workoutExercises = [];
-      req.body.exercises.forEach((exercise, index) => {
+      req.body.exercises.forEach((exercise) => {
         Exercise.find({
           name: exercise.name,
           description: exercise.description,
@@ -88,7 +88,7 @@ router.patch('/', function(req, res, next) {
           video: exercise.video
         }, function(err, exercise) {
           workoutExercises.push(exercise[0]);
-          if (index === req.body.exercises.length - 1) {
+          if (workoutExercises.length === req.body.exercises.length) {
             const newWorkout = new Workout({
               name: req.body.name,
               difficulty: req.body.difficulty,
