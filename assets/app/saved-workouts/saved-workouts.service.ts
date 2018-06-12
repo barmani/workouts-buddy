@@ -17,10 +17,11 @@ export class SavedWorkoutsService {
     .pipe(
       map((response: Response) => {
         const result = response.json();
-        console.log(result);
+        return result.obj;
       }), catchError((error: Response) => throwError(error.json()))
     );
   }
+
   addWorkout(workout: Workout) {
     const body = JSON.stringify(workout);
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -29,9 +30,7 @@ export class SavedWorkoutsService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
-          console.log(result);
         }), catchError((error: Response) => throwError(error.json()))
-
       );
   }
 }

@@ -44,8 +44,7 @@ router.get('/', function(req, res, next) {
                    if (!err && workout) {
                      workouts.push(workout);
                    }
-                   if (index === user.workouts.length - 1) {
-                     console.log(workouts);
+                   if (workouts.length === user.workouts.length) {
                      return res.status(200).json({
                        message: 'retrieved workouts',
                        obj: workouts
