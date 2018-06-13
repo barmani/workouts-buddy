@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from "./app.component";
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
@@ -50,6 +51,7 @@ import { SignupComponent } from './login-signup/signup/signup.component';
               ReactiveFormsModule,
               HttpModule,
               MatDialogModule,
+              MatExpansionModule,
               MatFormFieldModule,
               MatInputModule],
     exports: [MatDialogModule,

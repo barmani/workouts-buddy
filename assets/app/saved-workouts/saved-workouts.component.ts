@@ -25,4 +25,20 @@ export class SavedWorkoutsComponent implements OnInit {
     });
   }
 
+  getExerciseMuscleGroups(workout: Workout) {
+    let uniqueExercises = [];
+    let retStr = '';
+    workout.exercises.forEach((exercise) => {
+      if (!uniqueExercises.includes(exercise.muscle)) {
+        if (uniqueExercises.length > 0) {
+          retStr += ', ' + exercise.muscle
+        } else {
+          retStr += exercise.muscle;
+        }
+        uniqueExercises.push(exercise.muscle);
+      }
+    });
+    return retStr;
+  }
+
 }
