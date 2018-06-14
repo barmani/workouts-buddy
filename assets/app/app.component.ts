@@ -14,10 +14,12 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean;
   subscription: Subscription;
   username: string;
+  userId: string = localStorage.getItem['userId']
 
   constructor(private loginSignupService: LoginSignupService, private router: Router) {
     this.subscription = this.loginSignupService.getLoginObservable()
       .subscribe(loginInfo => {
+        console.log(loginInfo);
         this.isLoggedIn = loginInfo.isLoggedIn;
         this.username = loginInfo.username;
       });

@@ -58,4 +58,9 @@ export class LoginSignupService {
     return localStorage.getItem('username');
   }
 
+  getUserPage() {
+
+
+  }
+
 }

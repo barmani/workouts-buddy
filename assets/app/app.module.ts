@@ -26,6 +26,7 @@ import { SaveWorkoutDialogComponent } from './my-workout/save-workout-dialog.com
 import { SavedWorkoutsComponent } from './saved-workouts/saved-workouts.component';
 import { SavedWorkoutsService } from './saved-workouts/saved-workouts.service';
 import { SignupComponent } from './login-signup/signup/signup.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
     declarations: [
@@ -42,9 +43,11 @@ import { SignupComponent } from './login-signup/signup/signup.component';
       NewWorkoutComponent,
       SaveWorkoutDialogComponent,
       SavedWorkoutsComponent,
-      SignupComponent
+      SignupComponent,
+      UserPageComponent
     ],
-    imports: [BrowserModule,
+    imports: [
+              BrowserModule,
               BrowserAnimationsModule,
               routing,
               FormsModule,
@@ -53,10 +56,13 @@ import { SignupComponent } from './login-signup/signup/signup.component';
               MatDialogModule,
               MatExpansionModule,
               MatFormFieldModule,
-              MatInputModule],
-    exports: [MatDialogModule,
+              MatInputModule
+             ],
+    exports: [
+              MatDialogModule,
               MatFormFieldModule,
-              MatInputModule],
+              MatInputModule
+             ],
     providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService, SavedWorkoutsService],
     entryComponents: [SaveWorkoutDialogComponent],
     bootstrap: [AppComponent]
