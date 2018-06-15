@@ -1,14 +1,16 @@
-<div class="col-md-10">
-  <app-header></app-header>
-</div>
-<div class="col-md-2" *ngIf="!isLoggedIn">
-  <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
-</div>
-<div class="col-md-1" *ngIf="isLoggedIn">
-  <h5>Welcome, <a [routerLink]="['/user', userId]">{{ username }}</a></h5>
-</div>
-<div class="col-md-1" *ngIf="isLoggedIn">
-  <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+<div class="row">
+  <div class="col-md-10">
+    <app-header></app-header>
+  </div>
+  <div class="col-md-2" *ngIf="!isLoggedIn">
+    <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
+  </div>
+  <div class="col-md-1" *ngIf="isLoggedIn">
+    <h5>Welcome, <a [routerLink]="['/user', userId]">{{ username }}</a></h5>
+  </div>
+  <div class="col-md-1" *ngIf="isLoggedIn">
+    <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+  </div>
 </div>
 <hr>
 <router-outlet></router-outlet>

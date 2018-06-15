@@ -39,7 +39,7 @@ export class LoginSignupService {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    this.setLoginObservableValue(false, '');
+    this.setLoginObservableValue(false, '', '');
   }
 
   isLoggedIn() {
@@ -50,16 +50,21 @@ export class LoginSignupService {
     return this.subject.asObservable();
   }
 
-  setLoginObservableValue(loggedIn: boolean, username: string) {
-    this.subject.next({isLoggedIn: loggedIn, username: username});
+  setLoginObservableValue(loggedIn: boolean, username: string, userId: string) {
+    this.subject.next({isLoggedIn: loggedIn, username: username, userId: userId});
   }
 
   username() {
     return localStorage.getItem('username');
   }
 
-  getUserPage() {
-
+  getUserPage(userId: string) {
+    return this.http.get('localhost:3000/user/' + userId)
+      .pipe(
+        map((response: Response) => {
+          console.log(response);
+        })
+      );
 
   }
 

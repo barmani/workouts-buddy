@@ -70,4 +70,23 @@ router.use('/', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  User.findById(req.params.id)
+    .exec(fuction(err, user) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred',
+          error: err
+        });
+      }
+      if (!user) {
+        return res.status(401).json({
+          message: 'User not found',
+          error: {message: 'User not found'}
+        });
+      }
+      return user;
+    })
+});
+
 module.exports = router;
