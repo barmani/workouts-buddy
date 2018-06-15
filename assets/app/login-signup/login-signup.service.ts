@@ -59,10 +59,12 @@ export class LoginSignupService {
   }
 
   getUserPage(userId: string) {
-    return this.http.get('localhost:3000/user/' + userId)
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/user/' + userId + token)
       .pipe(
         map((response: Response) => {
-          console.log(response);
+          const result = response.json();
+          console.log(result);
         })
       );
 

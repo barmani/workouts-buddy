@@ -71,8 +71,7 @@ router.use('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  User.findById(req.params.id)
-    .exec(fuction(err, user) {
+  User.findById(req.params.id, function(err, user) {
       if (err) {
         return res.status(500).json({
           title: 'An error occurred',
@@ -85,8 +84,11 @@ router.get('/:id', function(req, res, next) {
           error: {message: 'User not found'}
         });
       }
-      return user;
-    })
+      return res.status(200).json({
+        message: 'User data retrieved',
+        obj: user
+      });
+    });
 });
 
 module.exports = router;
