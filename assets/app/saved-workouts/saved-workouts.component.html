@@ -10,6 +10,9 @@
       <mat-panel-description>
         {{ getExerciseMuscleGroups(workout) }}
       </mat-panel-description>
+      <div class="col-md-2">
+        <button class="btn btn-primary" (click)="makeCurrentWorkout(workout)">Make Current Workout</button>
+      </div>
     </mat-expansion-panel-header>
     <span class="row" *ngFor="let exercise of workout.exercises">
       {{ exercise.name }}

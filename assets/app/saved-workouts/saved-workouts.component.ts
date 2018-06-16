@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { MyWorkoutService } from '../my-workout/my-workout.service';
 import { SavedWorkoutsService } from './saved-workouts.service';
 import { Workout } from '../models/workout.model';
 import { Exercise } from '../models/exercise.model';
@@ -10,7 +12,9 @@ import { Exercise } from '../models/exercise.model';
 })
 export class SavedWorkoutsComponent implements OnInit {
   workouts: Workout[] = [];
-  constructor(private savedWorkoutsService: SavedWorkoutsService) {}
+  constructor(private savedWorkoutsService: SavedWorkoutsService,
+              private myWorkoutService: MyWorkoutService,
+              private router: Router) {}
 
   ngOnInit() {
     this.savedWorkoutsService.getWorkouts().subscribe((workouts) => {
@@ -41,4 +45,8 @@ export class SavedWorkoutsComponent implements OnInit {
     return retStr;
   }
 
+  makeCurrentWorkout(workout: Workout) {
+    this.myWorkoutService.setCurrentWorkout(workout);
+    this.router.navigate(['/my-workout/current-workout']);
+  }
 }
