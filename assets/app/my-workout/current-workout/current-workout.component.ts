@@ -70,4 +70,12 @@ export class CurrentWorkoutComponent implements OnInit {
   swapExercise(event: Exercise) {
     this.myWorkoutService.replaceExercise(event, this.workout.exercises.indexOf(event)).subscribe();
   }
+
+  getWorkoutExerciseNames(): string[] {
+    let workoutExerciseNames = [];
+    this.workout.exercises.forEach((exercise) => {
+      workoutExerciseNames.push(exercise.name);
+    });
+    return workoutExerciseNames;
+  }
 }

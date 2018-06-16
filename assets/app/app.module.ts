@@ -7,6 +7,7 @@ import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/ma
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from "./app.component";
+import { ChecklistComponent } from './my-workout/checklist/checklist.component';
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
 import { CustomWorkoutService } from "./custom-workout/custom-workout.service";
@@ -31,6 +32,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 @NgModule({
     declarations: [
       AppComponent,
+      ChecklistComponent,
       CurrentWorkoutComponent,
       CustomWorkoutComponent,
       DashboardComponent,

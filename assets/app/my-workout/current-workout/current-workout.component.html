@@ -20,4 +20,9 @@
       </app-exercise>
     </div>
   </div>
+  <div>
+    <app-checklist [title]="workout.name" [items]="getWorkoutExerciseNames()">
+        Loading checklist
+    </app-checklist>
+  </div>
 </div>

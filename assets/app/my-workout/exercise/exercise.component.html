@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <h3>{{ exercise.name }}</h3>
     <div *ngIf="location === 'current-workout' && difficulty != 'CUSTOM' && exercise.muscle != 'ABS'">
       <h3>({{ numberOfSets }} sets)</h3>
@@ -17,7 +17,10 @@
       Add to Workout
     </button>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
+    reps will go here
+  </div>
+  <div class="col-md-4">
     <iframe width="300"
             height="200"
             [src]="sanitizeUrl(exercise.video)"
