@@ -26,6 +26,7 @@ import { routing } from "./app.routing";
 import { SaveWorkoutDialogComponent } from './my-workout/save-workout-dialog.component';
 import { SavedWorkoutsComponent } from './saved-workouts/saved-workouts.component';
 import { SavedWorkoutsService } from './saved-workouts/saved-workouts.service';
+import { SetComponent } from './my-workout/set/set.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
 import { UserPageComponent } from './user-page/user-page.component';
 
@@ -45,6 +46,7 @@ import { UserPageComponent } from './user-page/user-page.component';
       NewWorkoutComponent,
       SaveWorkoutDialogComponent,
       SavedWorkoutsComponent,
+      SetComponent,
       SignupComponent,
       UserPageComponent
     ],

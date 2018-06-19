@@ -5,7 +5,7 @@ var schema = new Schema({
   weight: Number,
   unitOfMeasure: {
     type: String,
-    enum: ['LBS', 'KG', 'ADVANCED', 'CUSTOM'],
+    enum: ['LBS', 'KG'],
     default: ['LBS']
   },
   reps: Number
