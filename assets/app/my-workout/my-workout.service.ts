@@ -28,6 +28,7 @@ export class MyWorkoutService {
                                                        exercise.description,
                                                        exercise.muscle,
                                                        exercise.equipment,
+                                                       exercise._id,
                                                        exercise.video);
             exercises.push(newExercise);
           });
@@ -39,6 +40,7 @@ export class MyWorkoutService {
   }
 
   getCurrentWorkout() {
+    console.log(this.currentWorkout);
     return this.currentWorkout;
   }
 
@@ -56,7 +58,7 @@ export class MyWorkoutService {
           const result = response.json();
           const newExercise = new Exercise(result.newExercise.name, result.newExercise.description,
                                            result.newExercise.muscle, result.newExercise.equipment,
-                                           result.newExercise.video);
+                                           result.newExercise._id, result.newExercise.video);
           this.currentWorkout.exercises.splice(exerciseIndex, 1, newExercise);
           this.updateSessionWorkout();
         })
@@ -74,6 +76,16 @@ export class MyWorkoutService {
 
   updateSessionWorkout() {
     sessionStorage.setItem('currentWorkout', JSON.stringify(this.currentWorkout));
+  }
+
+  getUserSets(userId: string, exerciseId: string) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.get('http://localhost:3000/user/' + userId + '/' + exerciseId + token)
+      .pipe(
+        map((response: Response) => {
+          const result = response.json();
+        })
+      )
   }
 
 }

@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.userId = loginInfo.userId;
         this.isLoggedIn = loginInfo.isLoggedIn;
         this.username = loginInfo.username;
-        console.log(this.userId);
       });
   }
 

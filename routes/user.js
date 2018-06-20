@@ -91,4 +91,12 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
+router.get('/:id/:exerciseId/', function(req, res, next) {
+  console.log(req.params.id);
+  console.log(req.params.exerciseId);
+  return res.status(200).json({
+    message: 'User sets retrieved'
+  });
+});
+
 module.exports = router;

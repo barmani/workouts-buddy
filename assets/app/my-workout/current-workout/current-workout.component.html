@@ -16,6 +16,8 @@
       <app-exercise [exercise]="exercise"
                     [difficulty]="workout.difficulty"
                     [location]="'current-workout'"
+                    [isLoggedIn]="isLoggedIn"
+                    [userId]="userId"
                     (exerciseSelected)="swapExercise($event)">
       </app-exercise>
     </div>

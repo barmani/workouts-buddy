@@ -6,8 +6,6 @@ import { Set } from '../../models/set.model';
 import { MyWorkoutService } from '../my-workout.service';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LoginSignupService } from '../../login-signup/login-signup.service';
-
 @Component({
     selector: 'app-exercise',
     templateUrl: './exercise.component.html'
@@ -17,27 +15,20 @@ export class ExerciseComponent implements OnInit {
   @Input() exercise: Exercise;
   @Input() difficulty?: string;
   @Input() location: string;
+  @Input() isLoggedIn: boolean;
+  @Input() userId: string;
   @Output() exerciseSelected = new EventEmitter<Exercise>();
 
   numberOfSets: string = '';
   largeMuscles = ['CHEST', 'BACK', 'LEGS'];
   smallMuscles = ['BICEPS', 'TRICEPS', 'SHOULDERS'];
-  isLoggedIn: boolean;
   subscription: Subscription;
   username: string;
-  userId: string = localStorage.getItem('userId');
   lastSets: Set[] = []; // the sets the user did for this exercise last time
 
-  constructor(private loginSignupService: LoginSignupService,
-              private myWorkoutService: MyWorkoutService,
+  constructor(private myWorkoutService: MyWorkoutService,
               private sanitizer: DomSanitizer) {
-    this.subscription = this.loginSignupService.getLoginObservable()
-      .subscribe(loginInfo => {
-        this.userId = loginInfo.userId;
-        this.isLoggedIn = loginInfo.isLoggedIn;
-        this.username = loginInfo.username;
-        console.log(this.userId);
-      });
+
   }
 
   ngOnInit() {
@@ -58,7 +49,7 @@ export class ExerciseComponent implements OnInit {
     }
 
     if (this.isLoggedIn) {
-
+      this.myWorkoutService.getUserSets(this.userId, this.exercise._id).subscribe();
     }
   }
 

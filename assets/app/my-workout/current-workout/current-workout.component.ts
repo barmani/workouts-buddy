@@ -18,16 +18,20 @@ export class CurrentWorkoutComponent implements OnInit {
   workout: Workout;
   isLoggedIn: boolean;
   subscription: Subscription;
+  userId: string = localStorage.getItem('userId');
+  username: string;
 
   constructor(private myWorkoutService: MyWorkoutService,
               private loginSignupService: LoginSignupService,
               private savedWorkoutsService: SavedWorkoutsService,
               private router: Router,
               private dialog: MatDialog) {
-    this.subscription = this.loginSignupService.getLoginObservable()
-      .subscribe(loginInfo => {
-        this.isLoggedIn = loginInfo.isLoggedIn;
-      });
+  this.subscription = this.loginSignupService.getLoginObservable()
+    .subscribe(loginInfo => {
+      this.userId = loginInfo.userId;
+      this.isLoggedIn = loginInfo.isLoggedIn;
+      this.username = loginInfo.username;
+    });
   }
 
   ngOnInit() {
