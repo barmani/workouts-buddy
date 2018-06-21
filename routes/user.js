@@ -92,10 +92,38 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/:id/:exerciseId/', function(req, res, next) {
-  console.log(req.params.id);
-  console.log(req.params.exerciseId);
-  return res.status(200).json({
-    message: 'User sets retrieved'
+  User.findById(req.params.id, function(err, user) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      });
+    }
+    if (!user) {
+      return res.status(401).json({
+        message: 'User not found',
+        error: {message: 'User not found'}
+      });
+    }
+    if (user.exerciseSets.length === 0) {
+      return res.status(401).json({
+        message: 'No sets saved for this exercise',
+        error: {message: 'No sets'}
+      });
+    }
+    user.exerciseSets.forEach((exerciseSet, index) => {
+      if (exerciseSet.exercise === req.params.exerciseId) {
+        return res.status(200).json({
+          message: 'Exercise set found',
+          obj: exerciseSet
+        });
+      } else if (index === user.exerciseSets.length - 1) {
+        return res.status(401).json({
+          message: 'No sets saved for this exercise',
+          error: {message: 'No sets'}
+        });
+      }
+    });
   });
 });
 
