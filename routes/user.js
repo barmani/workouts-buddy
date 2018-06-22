@@ -106,9 +106,9 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
       });
     }
     if (user.exerciseSets.length === 0) {
-      return res.status(401).json({
+      return res.status(200).json({
         message: 'No sets saved for this exercise',
-        error: {message: 'No sets'}
+        obj: []
       });
     }
     user.exerciseSets.forEach((exerciseSet, index) => {
@@ -118,9 +118,9 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
           obj: exerciseSet
         });
       } else if (index === user.exerciseSets.length - 1) {
-        return res.status(401).json({
+        return res.status(200).json({
           message: 'No sets saved for this exercise',
-          error: {message: 'No sets'}
+          obj: []
         });
       }
     });

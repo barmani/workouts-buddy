@@ -27,6 +27,7 @@ import { SaveWorkoutDialogComponent } from './my-workout/save-workout-dialog.com
 import { SavedWorkoutsComponent } from './saved-workouts/saved-workouts.component';
 import { SavedWorkoutsService } from './saved-workouts/saved-workouts.service';
 import { SetComponent } from './my-workout/set/set.component';
+import { SetContainerComponent } from './my-workout/set-container/set-container.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
 import { UserPageComponent } from './user-page/user-page.component';
 
@@ -47,6 +48,7 @@ import { UserPageComponent } from './user-page/user-page.component';
       SaveWorkoutDialogComponent,
       SavedWorkoutsComponent,
       SetComponent,
+      SetContainerComponent,
       SignupComponent,
       UserPageComponent
     ],

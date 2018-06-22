@@ -1,0 +1,17 @@
+<div class="col-md-12">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label for="weight">Weight: </label>
+      <input id="weight" name="weight" required type="text" ngModel>
+      <label for="unitOfMeasure">Unit: </label>
+      <select name="unitOfMeasure" id="unitOfMeasure" ngModel>
+        <option *ngFor="let unitOfMeasure of unitsOfMeasure" [ngValue]="unitOfMeasure">{{ unitOfMeasure }}</option>
+      </select>
+      <label for="reps">Reps: </label>
+      <select name="reps" id="reps" ngModel>
+        <option *ngFor="let repOption of repOptions" [ngValue]="repOption">{{ repOption }}</option>
+      </select>
+      <button class="btn btn-success" [disabled]="f.form.invalid" type="submit">Create My Workout</button>
+    </div>
+  </form>
+</div>
