@@ -3,8 +3,8 @@ import { Http, Response, Headers } from "@angular/http";
 import { Exercise } from "../models/exercise.model";
 import { Workout } from "../models/workout.model";
 
-import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { RequestedWorkout } from "../models/requested-workout.model";
 
 @Injectable()
@@ -40,7 +40,6 @@ export class MyWorkoutService {
   }
 
   getCurrentWorkout() {
-    console.log(this.currentWorkout);
     return this.currentWorkout;
   }
 
@@ -84,7 +83,9 @@ export class MyWorkoutService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
-        })
+          return result.obj;
+        }),
+        catchError((error: Response) => throwError(error.json()))
       )
   }
 

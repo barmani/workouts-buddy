@@ -49,7 +49,12 @@ export class ExerciseComponent implements OnInit {
     }
 
     if (this.isLoggedIn) {
-      this.myWorkoutService.getUserSets(this.userId, this.exercise._id).subscribe();
+      this.myWorkoutService.getUserSets(this.userId, this.exercise._id)
+        .subscribe(data => {
+          this.lastSets = data;
+        },
+        error => console.log(error)
+        );
     }
   }
 

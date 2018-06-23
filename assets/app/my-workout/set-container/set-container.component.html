@@ -1,0 +1,10 @@
+<div class="row" *ngFor="let set of sets">
+  <app-set-component
+    [weight]="set.weight"
+    [unitOfMeasure]="set.unitOfMeasure"
+    [reps]="set.reps">
+  </app-set-component>
+</div>
+<div class="row" *ngIf="!sets || sets.length === 0">
+  <app-set-component></app-set-component>
+</div>

@@ -10,10 +10,13 @@ import { MyWorkoutService } from '../my-workout.service';
     selector: 'app-set-container',
     templateUrl: './set-container.component.html'
 })
-export class SetContainerComponent {
+export class SetContainerComponent implements OnInit {
 
 @Input() sets?: Set[];
 
+ngOnInit() {
+  console.log(this.sets);
+}
 
 
 }

@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="row">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="form-group">
       <label for="weight">Weight: </label>
@@ -11,7 +11,7 @@
       <select name="reps" id="reps" ngModel>
         <option *ngFor="let repOption of repOptions" [ngValue]="repOption">{{ repOption }}</option>
       </select>
-      <button class="btn btn-success" [disabled]="f.form.invalid" type="submit">Create My Workout</button>
+      <!-- <button class="btn btn-success" [disabled]="f.form.invalid" type="submit">Create My Workout</button> -->
     </div>
   </form>
 </div>
