@@ -231,16 +231,16 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // });
 // exercise.save();
 
-mongoose
-  .connect(
-    "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/node-angular?retryWrites=true"
-  )
-  .then(() => {
-    console.log("Connected to database!");
-  })
-  .catch(() => {
-    console.log("Connection failed!");
-  });
+// mongoose
+//   .connect(
+//     "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/workouts-buddy?retryWrites=true"
+//   )
+//   .then(() => {
+//     console.log("Connected to database!");
+//   })
+//   .catch(() => {
+//     console.log("Connection failed!!!!");
+//   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -264,6 +264,8 @@ app.use((req, res, next) => {
     next();
   }
 });
+
+
 app.use('/custom-workout', customWorkoutRoutes);
 app.use('/dash', appRoutes);
 app.use('/my-workout', myWorkoutRoutes);
