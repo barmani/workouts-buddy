@@ -7,7 +7,8 @@ import { MyWorkoutService } from '../my-workout.service';
 
 @Component({
     selector: 'app-set-component',
-    templateUrl: './set.component.html'
+    templateUrl: './set.component.html',
+    styleUrls: ['./set.component.css']
 })
 export class SetComponent {
 

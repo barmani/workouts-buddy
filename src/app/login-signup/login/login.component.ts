@@ -20,6 +20,7 @@ export class LoginComponent {
     const formInfo = {username: form.value['username-login'], password: form.value['password-login']};
     this.loginSignupService.login(formInfo).subscribe(
       data => {
+        console.log(formInfo);
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('username', formInfo.username);
