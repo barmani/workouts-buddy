@@ -11,6 +11,8 @@
       <select name="reps" id="reps" ngModel>
         <option *ngFor="let repOption of repOptions" [ngValue]="repOption">{{ repOption }}</option>
       </select>
+      <span class="glyphicon glyphicon-plus" id="add-set-icon" (click)="addSet()"></span>
+      <span class="glyphicon glyphicon-minus" id="remove-set-icon" (click)="removeSet()"></span>
       <!-- <button class="btn btn-success" [disabled]="f.form.invalid" type="submit">Create My Workout</button> -->
     </div>
   </form>

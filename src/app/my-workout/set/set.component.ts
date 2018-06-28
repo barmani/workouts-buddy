@@ -12,13 +12,20 @@ import { MyWorkoutService } from '../my-workout.service';
 })
 export class SetComponent {
 
-@Input() weight?: number;
-@Input() unitOfMeasure?: string;
-@Input() reps?: number;
+  @Input() weight?: number;
+  @Input() unitOfMeasure?: string;
+  @Input() reps?: number;
+  @Output() changeAmountOfSets: EventEmitter<string> = new EventEmitter<string>();// may want to change to js object w/ index to handle which to remove and avoid removing all
 
-unitsOfMeasure = ['LBS', 'KG'];
-repOptions = Array.from({length: 100}, (v, k) => k+1);
+  unitsOfMeasure = ['LBS', 'KG'];
+  repOptions = Array.from({length: 100}, (v, k) => k+1);
 
+  addSet() {
+    this.changeAmountOfSets.emit('add');
+  }
 
+  removeSet() {
+    this.changeAmountOfSets.emit('remove');
+  }
 
 }
