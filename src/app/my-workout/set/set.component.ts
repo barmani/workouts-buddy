@@ -10,22 +10,27 @@ import { MyWorkoutService } from '../my-workout.service';
     templateUrl: './set.component.html',
     styleUrls: ['./set.component.css']
 })
-export class SetComponent {
+export class SetComponent implements OnInit {
 
   @Input() weight?: number;
   @Input() unitOfMeasure?: string;
   @Input() reps?: number;
-  @Output() changeAmountOfSets: EventEmitter<string> = new EventEmitter<string>();// may want to change to js object w/ index to handle which to remove and avoid removing all
+  @Input() index: number;
+  @Input() setArrayLength: number; // have this to make sure the user cannot add more than 6 sets
+  @Output() changeAmountOfSets: EventEmitter<{add: boolean, index: number}> = new EventEmitter<{add: boolean, index: number}>();
 
   unitsOfMeasure = ['LBS', 'KG'];
   repOptions = Array.from({length: 100}, (v, k) => k+1);
 
+  ngOnInit() {
+  }
+
   addSet() {
-    this.changeAmountOfSets.emit('add');
+    this.changeAmountOfSets.emit({add: true, index: this.index});
   }
 
   removeSet() {
-    this.changeAmountOfSets.emit('remove');
+    this.changeAmountOfSets.emit({add: false, index: this.index});
   }
 
 }

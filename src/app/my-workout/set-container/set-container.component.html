@@ -1,9 +1,11 @@
-<div class="row" *ngFor="let set of sets">
+<div class="row" *ngFor="let set of sets; let i = index">
   <app-set-component
-    (changeAmountOfSets)="changeAmountOfSets()"
+    (changeAmountOfSets)="changeAmountOfSets($event)"
     [weight]="set.weight"
     [unitOfMeasure]="set.unitOfMeasure"
     [reps]="set.reps"
+    [index]="i"
+    [setArrayLength]="sets.length"
     >
   </app-set-component>
 </div>

@@ -17,15 +17,15 @@ export class SetContainerComponent implements OnInit {
 ngOnInit() {
   if (!this.sets || this.sets.length === 0) {
     // fill empty set with one set, then keep adding to it
-    this.sets = [];
+    this.sets.push(new Set());
   }
 }
 
 changeAmountOfSets(event) {
-  if (event === 'add') {
-    console.log('add');
-  } else if (event === "remove") {
-    console.log('remove');
+  if (event.add) {
+    this.sets.splice(event.index + 1, 0, new Set());
+  } else {
+    this.sets.splice(event.index, 1);
   }
 }
 
