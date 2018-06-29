@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { Exercise } from '../../models/exercise.model';
 import { MyWorkoutService } from '../my-workout.service';
-
+import { Set } from '../../models/set.model';
 
 @Component({
     selector: 'app-set-component',
@@ -13,9 +13,8 @@ import { MyWorkoutService } from '../my-workout.service';
 })
 export class SetComponent implements OnInit {
 
-  @Input() weight?: number;
-  @Input() unitOfMeasure?: string;
-  @Input() reps?: number;
+  @Input() set?: Set;
+  @Input() exerciseId: string;
   @Input() index: number;
   @Input() setArrayLength: number; // have this to make sure the user cannot add more than 6 sets
   @Output() changeAmountOfSets: EventEmitter<{add: boolean, index: number}> = new EventEmitter<{add: boolean, index: number}>();
@@ -27,17 +26,28 @@ export class SetComponent implements OnInit {
   unitsOfMeasure = ['LBS', 'KG'];
   repOptions = Array.from({length: 100}, (v, k) => k+1);
 
+  constructor(private myWorkoutService: MyWorkoutService) {}
+
   ngOnInit() {
-    this.repsFormControl.setValue(this.reps);
-    this.weightFormControl.setValue(this.weight);
-    this.unitOfMeasureFormControl.setValue(this.unitOfMeasure);
+    if (this.set) {
+      this.repsFormControl.setValue(this.set.reps);
+      this.weightFormControl.setValue(this.set.weight);
+      this.unitOfMeasureFormControl.setValue(this.set.unitOfMeasure);
+    } else {
+      this.set = new Set();
+    }
     this.setForm = new FormGroup({
       reps: this.repsFormControl,
       weight: this.weightFormControl,
       unitOfMeasure: this.unitOfMeasureFormControl
     });
     this.setForm.valueChanges.subscribe((value) => {
-      console.log(value);
+      this.set.reps = value.reps;
+      this.set.unitOfMeasure = value.unitOfMeasure;
+      this.set.weight = value.weight;
+      if (localStorage.getItem('userId')) {
+        this.myWorkoutService.setEdited(this.set, localStorage.getItem('userId'), this.exerciseId);
+      }
     });
   }
 

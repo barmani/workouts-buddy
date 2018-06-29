@@ -13,6 +13,7 @@ import { MyWorkoutService } from '../my-workout.service';
 export class SetContainerComponent implements OnInit {
 
 @Input() sets?: Set[];
+@Input() exerciseId: string;
 
 ngOnInit() {
   if (!this.sets || this.sets.length === 0) {

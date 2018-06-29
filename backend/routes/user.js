@@ -129,4 +129,14 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
   });
 });
 
+// edit an existing exercise set
+router.patch('/:userId/:exerciseId/:setId', function(req, res, next) {
+  console.log('patch!');
+});
+
+// add a new exercise set
+router.post('/:userId/:exerciseId', function(req, res, next) {
+  console.log('post!');
+});
+
 module.exports = router;

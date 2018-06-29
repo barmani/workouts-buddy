@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from "@angular/http";
 import { Exercise } from "../models/exercise.model";
 import { Workout } from "../models/workout.model";
+import { Set } from "../models/set.model";
 
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -87,6 +88,33 @@ export class MyWorkoutService {
         }),
         catchError((error: Response) => throwError(error.json()))
       )
+  }
+
+  setEdited(set: Set, userId: string, exerciseId: string) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const body = JSON.stringify(set);
+    if (set._id) {
+      return this.http.patch('http://localhost:3000/user/' + userId + '/' + exerciseId + '/' + set._id + token,
+                              body, {headers: headers})
+        .pipe(
+          map((response: Response) => {
+            const result = response.json();
+            return result.obj;
+          }),
+          catchError((error: Response) => throwError(error.json()))
+        );
+    } else {
+      return this.http.post('http://localhost:3000/user/' + userId + '/' + exerciseId + token,
+                              body, {headers: headers})
+        .pipe(
+          map((response: Response) => {
+            const result = response.json();
+            return result.obj;
+          }),
+          catchError((error: Response) => throwError(error.json()))
+        );
+    }
   }
 
 }
