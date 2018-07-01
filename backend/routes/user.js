@@ -136,7 +136,7 @@ router.patch('/:userId/:exerciseId/:setId', function(req, res, next) {
 
 // add a new exercise set
 router.post('/:userId/:exerciseId', function(req, res, next) {
-  console.log('post!');
+  console.log(req.body);
 });
 
 module.exports = router;

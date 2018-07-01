@@ -32,9 +32,11 @@ export class SetComponent implements OnInit {
     if (this.set) {
       this.repsFormControl.setValue(this.set.reps);
       this.weightFormControl.setValue(this.set.weight);
-      this.unitOfMeasureFormControl.setValue(this.set.unitOfMeasure);
-    } else {
-      this.set = new Set();
+      if (this.set.unitOfMeasure) {
+        this.unitOfMeasureFormControl.setValue(this.set.unitOfMeasure);
+      } else {
+        this.unitOfMeasureFormControl.setValue(this.unitsOfMeasure[0]);
+      }
     }
     this.setForm = new FormGroup({
       reps: this.repsFormControl,
@@ -45,8 +47,11 @@ export class SetComponent implements OnInit {
       this.set.reps = value.reps;
       this.set.unitOfMeasure = value.unitOfMeasure;
       this.set.weight = value.weight;
-      if (localStorage.getItem('userId')) {
-        this.myWorkoutService.setEdited(this.set, localStorage.getItem('userId'), this.exerciseId);
+      if (localStorage.getItem('userId') && this.isValidEntry(value)) {
+        this.myWorkoutService.setEdited(this.set, localStorage.getItem('userId'), this.exerciseId)
+          .subscribe((updatedSet) => {
+             console.log(updatedSet);
+          });
       }
     });
   }
@@ -57,6 +62,10 @@ export class SetComponent implements OnInit {
 
   removeSet() {
     this.changeAmountOfSets.emit({add: false, index: this.index});
+  }
+
+  isValidEntry(value): boolean {
+    return !isNaN(value.weight);
   }
 
 }
