@@ -4,11 +4,12 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
+var ExerciseSet = require('../models/exercise-set');
+var Set = require('../models/set');
 
 
 /* Create a new user */
 router.post('', function(req, res, next) {
-  console.log('creating user');
   var user = new User({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 10),
@@ -136,7 +137,60 @@ router.patch('/:userId/:exerciseId/:setId', function(req, res, next) {
 
 // add a new exercise set
 router.post('/:userId/:exerciseId', function(req, res, next) {
-  console.log(req.body);
+  var newSet = new Set({
+    weight: parseInt(req.body.weight),
+    unitOfMeasure: req.body.unitOfMeasure,
+    reps: req.body.reps
+  });
+  // create the set
+  newSet.save(function(err, set) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred saving the set',
+        error: err
+      });
+    }
+    User.findById(req.params.id, function(err, user) {
+      var found = false;
+      user.exerciseSets.forEach((exerciseSet) => {
+        if (exerciseSet.exercise === req.params.exerciseId) {
+          found = true;
+          // TODO: Here is where to potentially delete old sets
+          exerciseSet.push(set);
+          exerciseSet.save(function(err, result) {
+            if (err) {
+              return res.status(500).json({
+                title: 'An error occurred saving the exercise set',
+                error: err
+              });
+            }
+            return res.status(201).json({
+              message: 'Exercise Set updated successfully',
+              obj: set
+            });
+          });
+        }
+      });
+      if (!found) {
+        var newExerciseSet = new ExerciseSet({
+          sets: [set._id],
+          exercise: req.params.exerciseId
+        });
+        newExerciseSet.save(function(err, exerciseSet) {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occurred saving the exercise set',
+              error: err
+            });
+          }
+          return res.status(201).json({
+            message: 'Exercise Set updated successfully',
+            obj: set
+          });
+        });
+      }
+    });
+  });
 });
 
 module.exports = router;
