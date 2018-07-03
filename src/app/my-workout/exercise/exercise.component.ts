@@ -51,8 +51,10 @@ export class ExerciseComponent implements OnInit {
     if (this.isLoggedIn) {
       this.myWorkoutService.getUserSets(this.userId, this.exercise._id)
         .subscribe(data => {
-          if (data && data.length > 0)
-          this.lastSets = data;
+          if (data && data.length > 0) {
+            this.lastSets = data;
+            console.log(this.lastSets)
+          }
         },
         error => console.log(error)
         );

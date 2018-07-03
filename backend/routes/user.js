@@ -110,22 +110,27 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
     }
     if (user.exerciseSets.length === 0) {
       return res.status(200).json({
-        message: 'No sets saved for this exercise',
+        message: 'No sets saved yet',
         obj: []
       });
     }
-    user.exerciseSets.forEach((exerciseSet, index) => {
-      if (exerciseSet.exercise === req.params.exerciseId) {
-        return res.status(200).json({
-          message: 'Exercise set found',
-          obj: exerciseSet
-        });
-      } else if (index === user.exerciseSets.length - 1) {
-        return res.status(200).json({
-          message: 'No sets saved for this exercise',
-          obj: []
-        });
-      }
+    user.exerciseSets.forEach((exerciseSetId, index) => {
+      ExerciseSet.findById(exerciseSetId, function(err, exerciseSet) {
+        console.log('exercise set id ' + exerciseSet.exercise);
+        console.log('exercise id ' + req.params.exerciseId);
+        console.log(exerciseSet.exercise == req.params.exerciseId);
+        if (exerciseSet.exercise == req.params.exerciseId) {
+          return res.status(200).json({
+            message: 'Exercise set found',
+            obj: exerciseSet
+          });
+        } else if (index === user.exerciseSets.length - 1) {
+          return res.status(200).json({
+            message: 'No sets saved for this exercise',
+            obj: []
+          });
+        }
+      });
     });
   });
 });
@@ -150,13 +155,13 @@ router.post('/:userId/:exerciseId', function(req, res, next) {
         error: err
       });
     }
-    User.findById(req.params.id, function(err, user) {
+    User.findById(req.params.userId, function(err, user) {
       var found = false;
       user.exerciseSets.forEach((exerciseSet) => {
         if (exerciseSet.exercise === req.params.exerciseId) {
           found = true;
           // TODO: Here is where to potentially delete old sets
-          exerciseSet.push(set);
+          exerciseSet.sets.push(set);
           exerciseSet.save(function(err, result) {
             if (err) {
               return res.status(500).json({
@@ -183,9 +188,18 @@ router.post('/:userId/:exerciseId', function(req, res, next) {
               error: err
             });
           }
-          return res.status(201).json({
-            message: 'Exercise Set updated successfully',
-            obj: set
+          user.exerciseSets.push(newExerciseSet);
+          user.save(function(err, savedUser) {
+            if (err) {
+              return res.status(500).json({
+                title: 'An error occurred saving the exercise set to the user\'s sets',
+                error: err
+              });
+            }
+            return res.status(201).json({
+              message: 'Exercise set added to user\'s exercise sets successfully',
+              obj: set
+            });
           });
         });
       }

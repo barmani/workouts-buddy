@@ -84,6 +84,7 @@ export class MyWorkoutService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
+          console.log(result);
           return result.obj;
         }),
         catchError((error: Response) => throwError(error.json()))
