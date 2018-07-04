@@ -53,6 +53,7 @@ export class SetComponent implements OnInit {
              if (!this.set._id) {
                this.set._id = updatedSet._id;
              }
+             console.log(this.set.reps);
           });
       }
     });

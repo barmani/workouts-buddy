@@ -136,7 +136,41 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
 
 // edit an existing exercise set
 router.patch('/:userId/:exerciseId/:setId', function(req, res, next) {
-  console.log('patch!');
+  Set.findById(req.params.setId, function(err, set) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred saving the set',
+        error: err
+      });
+    }
+    if (!set) {
+      return res.status(500).json({
+        title: 'set not found',
+        error: err
+      });
+    }
+    if (req.body.weight) {
+      set.weight = req.body.weight;
+    }
+    if (req.body.unitOfMeasure) {
+      set.unitOfMeasure = req.body.unitOfMeasure;
+    }
+    if (req.body.reps) {
+      set.reps = req.body.reps;
+    }
+    set.save(function(err, savedSet) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred saving the set',
+          error: err
+        });
+      }
+      return res.status(201).json({
+        message: 'Set updated successfully',
+        obj: savedSet
+      });
+    })
+  });
 });
 
 // add a new exercise set

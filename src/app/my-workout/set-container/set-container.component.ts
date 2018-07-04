@@ -16,10 +16,7 @@ export class SetContainerComponent implements OnInit {
 @Input() exerciseId: string;
 
 ngOnInit() {
-  if (!this.sets || this.sets.length === 0) {
-    // fill empty set with one set, then keep adding to it
-    this.sets.push(new Set());
-  }
+
 }
 
 changeAmountOfSets(event) {

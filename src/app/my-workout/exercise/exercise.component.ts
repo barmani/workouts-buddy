@@ -54,8 +54,9 @@ export class ExerciseComponent implements OnInit {
           if (data && Object.keys(data.obj).length !== 0) {
             data.obj.sets.forEach((set) => {
               this.lastSets.push(new Set(set.weight, set.unitOfMeasure, set.reps, set._id));
-              console.log(this.lastSets);
-            })
+            });
+          } else {
+            this.lastSets.push(new Set());
           }
         },
         error => console.log(error)
