@@ -115,10 +115,9 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
       });
     }
     user.exerciseSets.forEach((exerciseSetId, index) => {
-      ExerciseSet.findById(exerciseSetId, function(err, exerciseSet) {
-        console.log('exercise set id ' + exerciseSet.exercise);
-        console.log('exercise id ' + req.params.exerciseId);
-        console.log(exerciseSet.exercise == req.params.exerciseId);
+      ExerciseSet.findById(exerciseSetId)
+                 .populate('sets')
+                 .exec(function(err, exerciseSet) {
         if (exerciseSet.exercise == req.params.exerciseId) {
           return res.status(200).json({
             message: 'Exercise set found',
@@ -127,7 +126,7 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
         } else if (index === user.exerciseSets.length - 1) {
           return res.status(200).json({
             message: 'No sets saved for this exercise',
-            obj: []
+            obj: {}
           });
         }
       });

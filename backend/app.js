@@ -254,10 +254,10 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
-  //intercepts OPTIONS method
+  //intercepts OPTIONS method from CORS
   if ('OPTIONS' === req.method) {
     //respond with 200
-    res.send(200);
+    res.sendStatus(200);
   }
   else {
   //move on
