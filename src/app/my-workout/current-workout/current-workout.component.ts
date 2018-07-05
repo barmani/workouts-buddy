@@ -21,6 +21,9 @@ export class CurrentWorkoutComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
   username: string;
 
+  largeMuscles = ['CHEST', 'BACK', 'LEGS'];
+  smallMuscles = ['BICEPS', 'TRICEPS', 'SHOULDERS'];
+
   constructor(private myWorkoutService: MyWorkoutService,
               private loginSignupService: LoginSignupService,
               private savedWorkoutsService: SavedWorkoutsService,
@@ -37,6 +40,31 @@ export class CurrentWorkoutComponent implements OnInit {
   ngOnInit() {
     this.workout = this.myWorkoutService.getCurrentWorkout();
     this.isLoggedIn = this.loginSignupService.isLoggedIn();
+  }
+
+  getNumberOfSets(exercise: Exercise) {
+    let numberOfSets = '';
+
+    if (exercise.muscle === 'ABS') {
+      numberOfSets = '30-60 seconds'
+    } else  if (this.workout.difficulty === 'BEGINNER') {
+      if (this.largeMuscles.includes(exercise.muscle)) {
+        numberOfSets = '3-4 sets';
+      } else {
+        numberOfSets = '3 sets';
+      }
+    } else if (this.workout.difficulty === 'INTERMEDIATE') {
+      if (this.largeMuscles.includes(exercise.muscle)) {
+        numberOfSets = '4-5 sets';
+      } else {
+        numberOfSets = '4 sets';
+      }
+    } else if (this.workout.difficulty === 'ADVANCED') {
+      numberOfSets = '5 sets';
+    }
+
+    return numberOfSets;
+
   }
 
   resetWorkout() {

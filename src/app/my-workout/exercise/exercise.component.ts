@@ -19,7 +19,6 @@ export class ExerciseComponent implements OnInit {
   @Input() userId: string;
   @Output() exerciseSelected = new EventEmitter<Exercise>();
 
-  numberOfSets: string = '';
   largeMuscles = ['CHEST', 'BACK', 'LEGS'];
   smallMuscles = ['BICEPS', 'TRICEPS', 'SHOULDERS'];
   subscription: Subscription;
@@ -32,22 +31,6 @@ export class ExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.difficulty === 'BEGINNER') {
-      if (this.largeMuscles.includes(this.exercise.muscle)) {
-        this.numberOfSets = '3-4';
-      } else {
-        this.numberOfSets = '3';
-      }
-    } else if (this.difficulty === 'INTERMEDIATE') {
-      if (this.largeMuscles.includes(this.exercise.muscle)) {
-        this.numberOfSets = '4-5';
-      } else {
-        this.numberOfSets = '4';
-      }
-    } else if (this.difficulty === 'ADVANCED') {
-      this.numberOfSets = '5';
-    }
-
     if (this.isLoggedIn) {
       this.myWorkoutService.getUserSets(this.userId, this.exercise._id)
         .subscribe(data => {
