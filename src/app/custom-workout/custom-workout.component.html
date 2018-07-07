@@ -18,12 +18,26 @@
       <button class="btn btn-primary" [disabled]="f.form.invalid" type="submit">Search</button>
     </form>
     <div class="row" *ngIf="searchResults">
-      <div class="row" *ngFor="let exercise of searchResults">
         <hr>
-        <app-exercise [exercise]="exercise" [location]="'custom-workout'" (exerciseSelected)="addToWorkout($event)">
+        <!-- <app-exercise [exercise]="exercise" [location]="'custom-workout'" (exerciseSelected)="addToWorkout($event)">
           Loading...
-        </app-exercise>
-      </div>
+        </app-exercise> -->
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let exercise of searchResults">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ exercise.name }}
+              </mat-panel-title>
+              <mat-panel-description>
+
+              </mat-panel-description>
+              <div class="col-md-2">
+                <button class="btn btn-primary" (click)="addToWorkout(exercise)">Add To Workout</button>
+              </div>
+            </mat-expansion-panel-header>
+            <app-exercise [exercise]="exercise"></app-exercise>
+          </mat-expansion-panel>
+        </mat-accordion>
     </div>
   </div>
   <div class="col-md-4" *ngIf="customWorkout.exercises.length > 0">

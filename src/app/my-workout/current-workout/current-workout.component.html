@@ -18,15 +18,13 @@
             {{ exercise.name }} ({{ getNumberOfSets(exercise) }})
           </mat-panel-title>
           <mat-panel-description>
-            
+
           </mat-panel-description>
           <div class="col-md-2">
             <button class="btn btn-primary" (click)="swapExercise(exercise)">Swap Out</button>
           </div>
         </mat-expansion-panel-header>
         <app-exercise [exercise]="exercise"
-                      [difficulty]="workout.difficulty"
-                      [location]="'current-workout'"
                       [isLoggedIn]="isLoggedIn"
                       [userId]="userId">
         </app-exercise>

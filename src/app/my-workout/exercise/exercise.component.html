@@ -1,15 +1,9 @@
 <div class="row">
   <div class="col-md-4">
     <h3>{{ exercise.name }}</h3>
-    <div *ngIf="exercise.muscle === 'ABS'">
-      <h3>(30-60 seconds)</h3>
-    </div>
     <h5>Muscle: {{ exercise.muscle }}</h5>
     <h5>Equipment: {{ exercise.equipment }}</h5>
     <p>{{ exercise.description }}</p>
-    <button class="btn btn-primary" (click)="outputExercise()" *ngIf="location === 'custom-workout'">
-      Add to Workout
-    </button>
   </div>
   <div class="col-md-4">
     <app-set-container [sets]="lastSets" [exerciseId]="exercise._id"></app-set-container>

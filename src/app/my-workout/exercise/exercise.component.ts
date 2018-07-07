@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Exercise } from '../../models/exercise.model';
@@ -13,11 +13,8 @@ import { Subscription } from 'rxjs';
 export class ExerciseComponent implements OnInit {
 
   @Input() exercise: Exercise;
-  @Input() difficulty?: string;
-  @Input() location: string;
   @Input() isLoggedIn: boolean;
   @Input() userId: string;
-  @Output() exerciseSelected = new EventEmitter<Exercise>();
 
   largeMuscles = ['CHEST', 'BACK', 'LEGS'];
   smallMuscles = ['BICEPS', 'TRICEPS', 'SHOULDERS'];
@@ -49,10 +46,6 @@ export class ExerciseComponent implements OnInit {
 
   sanitizeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-
-  outputExercise() {
-    this.exerciseSelected.emit(this.exercise);
   }
 
 }
