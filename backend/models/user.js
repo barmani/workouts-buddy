@@ -6,6 +6,7 @@ var schema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   email: {type: String, required: true, unique: true},
+  active: {type: Boolean, required: true, default: false},
   workouts: [ { type: Schema.Types.ObjectId, ref: 'Workout' } ],
   exerciseSets: [ { type: Schema.Types.ObjectId, ref: 'ExerciseSet' } ]
 });

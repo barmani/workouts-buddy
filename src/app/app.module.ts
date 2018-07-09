@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
-import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from "./app.component";
@@ -15,7 +15,7 @@ import { CustomWorkoutService } from "./custom-workout/custom-workout.service";
 import { DashboardComponent } from "./dash/dashboard.component";
 import { EqualValidator } from './login-signup/equal-validator.directive';
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
-import { HeaderComponent } from "./header.component";
+import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from './login-signup/login/login.component';
 import { LoginSignupComponent } from './login-signup/login-signup/login-signup.component';
 import { LoginSignupService } from './login-signup/login-signup.service';
@@ -64,7 +64,8 @@ import { UserPageComponent } from './user-page/user-page.component';
               MatDialogModule,
               MatExpansionModule,
               MatFormFieldModule,
-              MatInputModule
+              MatInputModule,
+              MatToolbarModule
              ],
     exports: [
               MatDialogModule,
