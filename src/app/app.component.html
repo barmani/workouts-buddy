@@ -1,16 +1,30 @@
 <div class="row">
-  <div class="col-md-12">
-    <app-header></app-header>
-  </div>
-  <div class="col-md-2" *ngIf="!isLoggedIn">
-    <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
-  </div>
-  <div class="col-md-1" *ngIf="isLoggedIn">
-    <h5>Welcome, <a [routerLink]="['/user', userId]">{{ username }}</a></h5>
-  </div>
-  <div class="col-md-1" *ngIf="isLoggedIn">
-    <button class="btn btn-danger" (click)="onLogout()">Logout</button>
-  </div>
+  <mat-toolbar color="primary">
+    <div class="col-md-2">
+      <a class="main-logo" routerLink="/">WorkoutsBuddy</a>
+    </div>
+    <div class="col-md-7">
+      <ul>
+        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/my-workout']">Create/View Workout</a></li>
+        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/custom-workout']">Custom Workout</a></li>
+        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/dash']">Dashboard</a></li>
+        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/saved-workouts']">My Saved Workouts</a></li>
+      </ul>
+    </div>
+    <div class=".col-md-3">
+      <div *ngIf="!isLoggedIn">
+        <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <h5>Welcome, <a class="user-link" [routerLink]="['/user', userId]">{{ username }}</a></h5>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+      </div>
+    </div>
+  </mat-toolbar>
 </div>
-<hr>
-<router-outlet></router-outlet>
+<div class="app-wrapper">
+  <hr>
+  <router-outlet></router-outlet>
+</div>
