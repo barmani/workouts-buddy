@@ -8,9 +8,12 @@ import { MatDialogModule,
          MatFormFieldModule,
          MatInputModule,
          MatToolbarModule,
-         MatRadioModule } from '@angular/material';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatExpansionModule } from '@angular/material/expansion';
+         MatRadioModule,
+         MatCheckboxModule,
+         MatButtonModule,
+         MatSlideToggleModule,
+         MatStepperModule,
+         MatExpansionModule } from '@angular/material';
 
 import { AppComponent } from "./app.component";
 import { ChecklistComponent } from './my-workout/checklist/checklist.component';
@@ -72,7 +75,10 @@ import { UserPageComponent } from './user-page/user-page.component';
               MatInputModule,
               MatToolbarModule,
               MatStepperModule,
-              MatRadioModule
+              MatRadioModule,
+              MatCheckboxModule,
+              MatButtonModule,
+              MatSlideToggleModule
              ],
     exports: [
               MatDialogModule,

@@ -3,100 +3,60 @@
     <mat-step [stepControl]="levelsFormGroup">
       <form [formGroup]="levelsFormGroup">
         <ng-template matStepLabel>Choose a Difficulty</ng-template>
-        <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl">
-          <mat-radio-button class="level-radio-button" *ngFor="let level of levels" [value]="level">
-            {{ level }}
-          </mat-radio-button>
-        </mat-radio-group>
-        <div>
-          <button mat-button matStepperNext type="button">Next</button>
+        <div class="row align-content-center">
+          <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl">
+            <div class="col-md-1 col-md-offset-2" *ngFor="let level of levels">
+              <mat-radio-button class="level-radio-button" [value]="level">
+                {{ level }}
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+        <div class="row">
+          <hr>
+          <div class="col-md-2 col-md-offset-5">
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
         </div>
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Choose Two Muscle Groups</ng-template>
 
-      <div class="radio">
-        <h2><span class="label label-default" for="chest">Chest</span></h2>
-          <input type="checkbox"
-                 class="form-control"
-                 id="chest"
-                 name="muscle-group-checkboxes"
-                 value="chest"
-                 [checked]="checkBoxes['chest']"
-                 required
-                 (click)="onMuscleGroupInputSelected($event)">
+      <div class="col-md-2 col-md-offset-2">
+        <div class="row">
+          <h5>Large Muscles: </h5>
+        </div>
+        <div class="row">
+          <mat-checkbox>Chest</mat-checkbox>
+        </div>
+        <div class="row">
+          <mat-checkbox>Back</mat-checkbox>
+        </div>
+        <div class="row">
+          <mat-checkbox>Legs</mat-checkbox>
+        </div>
       </div>
 
-      <div class="radio">
-      <h2><span class="label label-default" for="back">Back</span></h2>
-      <input type="checkbox"
-             class="form-control"
-             id="back"
-             name="muscle-group-checkboxes"
-             value="back"
-             [checked]="checkBoxes['back']"
-             (click)="onMuscleGroupInputSelected($event)">
-       </div>
-
-      <div class="radio">
-        <h2><span class="label label-default" for="legs">Legs</span></h2>
-        <input type="checkbox"
-               class="form-control"
-               id="legs"
-               name="muscle-group-checkboxes"
-               value="legs"
-               [checked]="checkBoxes['legs']"
-               (click)="onMuscleGroupInputSelected($event)">
-       </div>
-
-      <div class="radio">
-        <h2><span class="label label-default" for="triceps">Triceps</span></h2>
-        <input type="checkbox"
-               class="form-control"
-               id="triceps"
-               name="muscle-group-checkboxes"
-               value="triceps"
-               [checked]="checkBoxes['triceps']"
-               (click)="onMuscleGroupInputSelected($event)">
+      <div class="col-md-2 col-md-offset-2">
+        <div class="row">
+          <h5>Small Muscles: </h5>
+        </div>
+        <div class="row">
+          <mat-checkbox>Biceps</mat-checkbox>
+        </div>
+        <div class="row">
+          <mat-checkbox>Triceps</mat-checkbox>
+        </div>
+        <div class="row">
+          <mat-checkbox>Shoulders</mat-checkbox>
+        </div>
       </div>
-
-      <div class="radio">
-        <h2><span class="label label-default" for="biceps">Biceps</span></h2>
-        <input type="checkbox"
-               class="form-control"
-               id="biceps"
-               name="muscle-group-checkboxes"
-               value="biceps"
-               [checked]="checkBoxes['biceps']"
-               (click)="onMuscleGroupInputSelected($event)">
+      <div class="col-md-2 col-md-offset-2">
+        <mat-slide-toggle>Finish with Abs?</mat-slide-toggle>
       </div>
-
-      <div class="radio">
-        <h2><span class="label label-default" for="shoulders">Shoulders</span></h2>
-        <input type="checkbox"
-               class="form-control"
-               id="shoulders"
-               name="muscle-group-checkboxes"
-               value="shoulders"
-               [checked]="checkBoxes['shoulders']"
-               (click)="onMuscleGroupInputSelected($event)">
-       </div>
-      <div>
-        <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-button matStepperNext type="button">Next</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Add Abs</ng-template>
-
-      <h2><span class="label label-default" for="abs">Abs</span></h2>
-      <input type="checkbox"
-             class="form-control"
-             id="abs"
-             name="abs-checkbox"
-             ngModel>
-      <div>
+      <hr>
+      <div class="col-md-2 col-md-offset-5">
         <button mat-button matStepperPrevious type="button">Back</button>
         <button mat-button matStepperNext type="button">Next</button>
       </div>
