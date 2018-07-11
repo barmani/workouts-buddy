@@ -113,24 +113,24 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
         message: 'No sets saved yet',
         obj: []
       });
-    }
-    user.exerciseSets.forEach((exerciseSetId, index) => {
-      ExerciseSet.findById(exerciseSetId)
-                 .populate('sets')
-                 .exec(function(err, exerciseSet) {
-        if (exerciseSet.exercise == req.params.exerciseId) {
-          return res.status(200).json({
-            message: 'Exercise set found',
-            obj: exerciseSet
-          });
-        } else if (index === user.exerciseSets.length - 1) {
-          return res.status(200).json({
-            message: 'No sets saved for this exercise',
-            obj: {}
-          });
-        }
+    } else {
+      var retExerciseSet = {};
+      user.exerciseSets.forEach((exerciseSetId, index) => {
+        ExerciseSet.findById(exerciseSetId)
+                   .populate('sets')
+                   .exec(function(err, exerciseSet) {
+          if (exerciseSet.exercise == req.params.exerciseId) {
+            retExerciseSet = exerciseSet
+          }
+          if (index === user.exerciseSets.length - 1) {
+            return res.status(200).json({
+              message: 'Sets Retrieved',
+              obj: retExerciseSet
+            });
+          }
+        });
       });
-    });
+    }
   });
 });
 

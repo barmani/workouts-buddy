@@ -15,16 +15,15 @@
       <div *ngIf="!isLoggedIn">
         <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
       </div>
-      <div *ngIf="isLoggedIn">
-        <h5>Welcome, <a class="user-link" [routerLink]="['/user', userId]">{{ username }}</a></h5>
+      <div class="col-md-6" *ngIf="isLoggedIn">
+        <h5 id="welcome-statement">Welcome, <a id="user-link" [routerLink]="['/user', userId]">{{ username }}</a></h5>
       </div>
-      <div *ngIf="isLoggedIn">
+      <div class="col-md-6" *ngIf="isLoggedIn">
         <button class="btn btn-danger" (click)="onLogout()">Logout</button>
       </div>
     </div>
   </mat-toolbar>
 </div>
 <div class="app-wrapper">
-  <hr>
   <router-outlet></router-outlet>
 </div>

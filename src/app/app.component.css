@@ -15,17 +15,23 @@ ul {
   font-size: .75em;
 }
 
+.menu-option:hover {
+  color: lightgray;
+}
+
 li {
   display: inline;
   padding: 2rem;
 }
 
-
-
 .app-wrapper {
   padding: 4rem;
 }
 
-.login-elements {
+#welcome-statement {
+  font-size: .7em;
+}
 
+#user-link:hover {
+  color: lightgray;
 }
