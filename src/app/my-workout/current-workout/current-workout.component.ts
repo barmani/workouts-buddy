@@ -75,10 +75,10 @@ export class CurrentWorkoutComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true
-    dialogConfig.width = '400px';
-    dialogConfig.position = {top: '-275vh', left: '155vh'};
+    dialogConfig.width = '30rem';
+    dialogConfig.position = {top: '4rem', right: '4rem'};
 
     dialogConfig.data = {
            id: 1,
