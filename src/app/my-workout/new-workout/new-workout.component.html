@@ -1,46 +1,17 @@
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <mat-horizontal-stepper formArrayName="formArray" linear>
-    <mat-step>
-      <ng-template matStepLabel>Choose a Difficulty</ng-template>
-          <div class="radio">
-            <h2><span class="label label-default" for="beginner-difficulty">
-            <input type="radio"
-                   class="form-control"
-                   id="beginner-difficulty"
-                   name="difficulty-radio"
-                   value="beginner"
-                   required
-                   ngModel
-                   (click)="onInputSelected($event)">
-           Level I</span></h2>
-         </div>
-
-        <div class="radio">
-          <h2><span class="label label-default" for="intermediate-difficulty">
-          <input type="radio"
-                 class="form-control"
-                 id="intermediate-difficulty"
-                 name="difficulty-radio"
-                 value="intermediate"
-                 ngModel
-                 (click)="onInputSelected($event)">
-         Level II</span></h2>
-       </div>
-
-        <div class="radio">
-          <h2><span class="label label-default" for="advanced-difficulty">
-          <input type="radio"
-                 class="form-control"
-                 id="advanced-difficulty"
-                 name="difficulty-radio"
-                 value="advanced"
-                 ngModel
-                 (click)="onInputSelected($event)">
-           Level III</span></h2>
-         </div>
-      <div>
-        <button mat-button matStepperNext type="button">Next</button>
-      </div>
+  <mat-horizontal-stepper linear>
+    <mat-step [stepControl]="levelsFormGroup">
+      <form [formGroup]="levelsFormGroup">
+        <ng-template matStepLabel>Choose a Difficulty</ng-template>
+        <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl">
+          <mat-radio-button class="level-radio-button" *ngFor="let level of levels" [value]="level">
+            {{ level }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext type="button">Next</button>
+        </div>
+      </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Choose Two Muscle Groups</ng-template>
@@ -131,7 +102,6 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-</form>
 
 <!-- <div class="col-md-12">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">

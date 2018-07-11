@@ -4,7 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
-import { MatDialogModule, MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
+import { MatDialogModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatToolbarModule,
+         MatRadioModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -67,7 +71,8 @@ import { UserPageComponent } from './user-page/user-page.component';
               MatFormFieldModule,
               MatInputModule,
               MatToolbarModule,
-              MatStepperModule
+              MatStepperModule,
+              MatRadioModule
              ],
     exports: [
               MatDialogModule,

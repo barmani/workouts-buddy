@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { NgForm } from "@angular/forms";
 import { MyWorkoutService } from "../my-workout.service";
@@ -15,7 +16,9 @@ enum Question {
     templateUrl: './new-workout.component.html',
     styleUrls: ['./new-workout.component.css']
 })
-export class NewWorkoutComponent {
+export class NewWorkoutComponent implements OnInit {
+  levels = ['Level I', 'Level II', 'Level III'];
+  levelChosen: string;
 
   question = Question;
   currentQuestion = this.question.Difficulty;
@@ -29,7 +32,22 @@ export class NewWorkoutComponent {
                 shoulders: false
               };
 
-  constructor(private myWorkoutService: MyWorkoutService, private router: Router) {}
+  levelsFormControl = new FormControl();
+
+  levelsFormGroup: FormGroup;
+  muscleGroupFormGroup: FormGroup;
+  absFormGroup: FormGroup;
+
+  constructor(private myWorkoutService: MyWorkoutService,
+              private router: Router,
+              private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.levelsFormGroup = this.fb.group({
+      levelsFormControl: [this.levelsFormControl, Validators.required]
+    });
+
+  }
 
   // add the string to the array. Use binding to check boxes with the string contained in them?
   onMuscleGroupInputSelected(event) {
@@ -55,12 +73,12 @@ export class NewWorkoutComponent {
     }
   }
 
-  onInputSelected(event) {
-    const target = event.target;
-    if (target.checked && this.currentQuestion < this.question.Abs) {
-      this.currentQuestion++;
-    }
-  }
+  // onInputSelected(event) {
+  //   const target = event.target;
+  //   if (target.checked && this.currentQuestion < this.question.Abs) {
+  //     this.currentQuestion++;
+  //   }
+  // }
 
   previous() {
     if (this.currentQuestion != this.question.Difficulty) {
@@ -77,7 +95,7 @@ export class NewWorkoutComponent {
         this.selectedMuscles.push('ABS');
       }
 
-      this.requestedWorkout = new RequestedWorkout(form.value['difficulty-radio'],
+      this.requestedWorkout = new RequestedWorkout(this.levelChosen,
                                               this.selectedMuscles);
       this.myWorkoutService.createNewWorkout(this.requestedWorkout)
         .subscribe(() => {
