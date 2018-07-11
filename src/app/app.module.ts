@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { MatDialogModule, MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from "./app.component";
@@ -65,7 +66,8 @@ import { UserPageComponent } from './user-page/user-page.component';
               MatExpansionModule,
               MatFormFieldModule,
               MatInputModule,
-              MatToolbarModule
+              MatToolbarModule,
+              MatStepperModule
              ],
     exports: [
               MatDialogModule,

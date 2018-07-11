@@ -1,40 +1,137 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <mat-horizontal-stepper formArrayName="formArray" linear>
+    <mat-step>
+      <ng-template matStepLabel>Choose a Difficulty</ng-template>
+          <div class="radio">
+            <h2><span class="label label-default" for="beginner-difficulty">
+            <input type="radio"
+                   class="form-control"
+                   id="beginner-difficulty"
+                   name="difficulty-radio"
+                   value="beginner"
+                   required
+                   ngModel
+                   (click)="onInputSelected($event)">
+           Level I</span></h2>
+         </div>
 
+        <div class="radio">
+          <h2><span class="label label-default" for="intermediate-difficulty">
+          <input type="radio"
+                 class="form-control"
+                 id="intermediate-difficulty"
+                 name="difficulty-radio"
+                 value="intermediate"
+                 ngModel
+                 (click)="onInputSelected($event)">
+         Level II</span></h2>
+       </div>
+
+        <div class="radio">
+          <h2><span class="label label-default" for="advanced-difficulty">
+          <input type="radio"
+                 class="form-control"
+                 id="advanced-difficulty"
+                 name="difficulty-radio"
+                 value="advanced"
+                 ngModel
+                 (click)="onInputSelected($event)">
+           Level III</span></h2>
+         </div>
+      <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Choose Two Muscle Groups</ng-template>
+
+      <div class="radio">
+        <h2><span class="label label-default" for="chest">Chest</span></h2>
+          <input type="checkbox"
+                 class="form-control"
+                 id="chest"
+                 name="muscle-group-checkboxes"
+                 value="chest"
+                 [checked]="checkBoxes['chest']"
+                 required
+                 (click)="onMuscleGroupInputSelected($event)">
+      </div>
+
+      <div class="radio">
+      <h2><span class="label label-default" for="back">Back</span></h2>
+      <input type="checkbox"
+             class="form-control"
+             id="back"
+             name="muscle-group-checkboxes"
+             value="back"
+             [checked]="checkBoxes['back']"
+             (click)="onMuscleGroupInputSelected($event)">
+       </div>
+
+      <div class="radio">
+        <h2><span class="label label-default" for="legs">Legs</span></h2>
+        <input type="checkbox"
+               class="form-control"
+               id="legs"
+               name="muscle-group-checkboxes"
+               value="legs"
+               [checked]="checkBoxes['legs']"
+               (click)="onMuscleGroupInputSelected($event)">
+       </div>
+
+      <div class="radio">
+        <h2><span class="label label-default" for="triceps">Triceps</span></h2>
+        <input type="checkbox"
+               class="form-control"
+               id="triceps"
+               name="muscle-group-checkboxes"
+               value="triceps"
+               [checked]="checkBoxes['triceps']"
+               (click)="onMuscleGroupInputSelected($event)">
+      </div>
+
+      <div class="radio">
+        <h2><span class="label label-default" for="biceps">Biceps</span></h2>
+        <input type="checkbox"
+               class="form-control"
+               id="biceps"
+               name="muscle-group-checkboxes"
+               value="biceps"
+               [checked]="checkBoxes['biceps']"
+               (click)="onMuscleGroupInputSelected($event)">
+      </div>
+
+      <div class="radio">
+        <h2><span class="label label-default" for="shoulders">Shoulders</span></h2>
+        <input type="checkbox"
+               class="form-control"
+               id="shoulders"
+               name="muscle-group-checkboxes"
+               value="shoulders"
+               [checked]="checkBoxes['shoulders']"
+               (click)="onMuscleGroupInputSelected($event)">
+       </div>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Add Abs</ng-template>
+
+      <h2><span class="label label-default" for="abs">Abs</span></h2>
+      <input type="checkbox"
+             class="form-control"
+             id="abs"
+             name="abs-checkbox"
+             ngModel>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>
 
 <!-- <div class="col-md-12">
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
