@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { NgForm } from "@angular/forms";
 import { MyWorkoutService } from "../my-workout.service";
@@ -24,7 +24,7 @@ export class NewWorkoutComponent implements OnInit {
   currentQuestion = this.question.Difficulty;
   selectedMuscles: string[] = [];
   requestedWorkout: RequestedWorkout;
-  checkBoxes = { chest: false,
+  checkBox = { chest: false,
                 back: false,
                 legs: false,
                 triceps: false,
@@ -33,10 +33,18 @@ export class NewWorkoutComponent implements OnInit {
               };
 
   levelsFormControl = new FormControl();
-
+  chestFormControl = new FormControl();
+  backFormControl = new FormControl();
+  legsFormControl = new FormControl();
+  tricepsFormControl = new FormControl();
+  bicepsFormControl = new FormControl();
+  shouldersFormControl = new FormControl();
+  musclesSelected: AbstractControl[] = [];
+  // Form Controls are Chest, Back, Legs, Biceps, Triceps, Shoulders
+  // muscleGroupsFormArray = new FormArray([this.chestFormControl, this.backFormControl, this.legsFormControl,
+  //                                        this.tricepsFormControl, this.bicepsFormControl, this.shouldersFormControl]);
   levelsFormGroup: FormGroup;
   muscleGroupFormGroup: FormGroup;
-  absFormGroup: FormGroup;
 
   constructor(private myWorkoutService: MyWorkoutService,
               private router: Router,
@@ -46,30 +54,28 @@ export class NewWorkoutComponent implements OnInit {
     this.levelsFormGroup = this.fb.group({
       levelsFormControl: [this.levelsFormControl, Validators.required]
     });
+    this.muscleGroupFormGroup = this.fb.group({
+      chest: this.chestFormControl,
+      back: this.backFormControl,
+      legs: this.legsFormControl,
+      triceps: this.tricepsFormControl,
+      biceps: this.bicepsFormControl,
+      shoulders: this.shouldersFormControl
+    })
 
   }
 
   // add the string to the array. Use binding to check boxes with the string contained in them?
   onMuscleGroupInputSelected(event) {
-    if (event.srcElement.checked) {
-      this.selectedMuscles.push(event.srcElement.value.toUpperCase());
-      this.checkBoxes[event.srcElement.value] = true;
-      // make sure only two exercises are selected at once
-      if (this.selectedMuscles.length == 3) {
-        let removedMuscle = this.selectedMuscles[0].toLowerCase();
-        // timeout so angular detects change
-        setTimeout(() => {
-          this.checkBoxes[removedMuscle] = false;
-        });
-        this.selectedMuscles.splice(0, 1);
-      }
-      // go to next page
-      if (this.selectedMuscles.length == 2) {
-        this.currentQuestion++;
+    if (event.checked) {
+      this.musclesSelected.push(this.muscleGroupFormGroup.controls[event.source.value]);
+      if (this.musclesSelected.length > 2) {
+        const removedControl = this.musclesSelected.splice(0, 1)[0] as FormControl;
+        removedControl.setValue(false);
       }
     } else {
-      this.checkBoxes[event.srcElement.value] = false;
-      this.selectedMuscles.splice(this.selectedMuscles.indexOf(event.srcElement.value.toUpperCase()), 1);
+      this.musclesSelected.splice(this.musclesSelected
+                                      .indexOf(this.muscleGroupFormGroup.controls[event.source.value], 1))
     }
   }
 
