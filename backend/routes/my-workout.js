@@ -56,12 +56,12 @@ router.post('/new-workout', function(req, res, next) {
   // amount of different exercises to do depending on difficulty
   let numberOfLargeExercises = 0;
   let numberOfSmallExercises = 0;
-  if (exerciseRequest.difficulty === 'advanced') {
+  if (exerciseRequest.difficulty === 'Level III') {
     equipmentOptions = ['CABLE', 'DUMBBELL', 'BARBELL', 'DUMBBELL', 'BODYWEIGHT'];
     difficulty = 'ADVANCED';
     numberOfLargeExercises = 4;
     numberOfSmallExercises = 3;
-  } else if (exerciseRequest.difficulty === 'intermediate') {
+  } else if (exerciseRequest.difficulty === 'Level II') {
     equipmentOptions = ['MACHINE', 'CABLE', 'DUMBBELL', 'BARBELL', 'DUMBBELL'];
     difficulty = 'INTERMEDIATE';
     numberOfLargeExercises = 3;
@@ -72,7 +72,6 @@ router.post('/new-workout', function(req, res, next) {
     numberOfLargeExercises = 3;
     numberOfSmallExercises = 2;
   }
-
   // get exercise options based on form results
   let exerciseOptions = [];
   let workoutExercises = [];
@@ -132,7 +131,6 @@ router.post('/new-workout', function(req, res, next) {
       addMuscleGroup(exerciseRequest.muscleGroups[++index]);
     }
     exerciseOptions = [];
-
   }
 
   // create workout after all arrays are filled

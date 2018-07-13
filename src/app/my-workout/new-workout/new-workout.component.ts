@@ -82,7 +82,6 @@ export class NewWorkoutComponent implements OnInit {
                                                    muscleNames);
       this.myWorkoutService.createNewWorkout(this.requestedWorkout)
         .subscribe(() => {
-          console.log('here');
           this.router.navigate(['/my-workout/current-workout']);
         });
       this.levelsFormGroup.reset();
