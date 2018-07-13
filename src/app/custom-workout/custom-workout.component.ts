@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CustomWorkoutService } from './custom-workout.service';
 import { Exercise } from '../models/exercise.model';
@@ -6,20 +6,30 @@ import { MyWorkoutService } from '../my-workout/my-workout.service';
 import { Router } from '@angular/router';
 import { Workout } from '../models/workout.model';
 
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-custom-workout',
     templateUrl: './custom-workout.component.html'
 })
-export class CustomWorkoutComponent {
+export class CustomWorkoutComponent implements OnInit {
   muscleFields = ['', 'BICEPS', 'BACK', 'TRICEPS', 'CHEST', 'LEGS', 'SHOULDERS', 'ABS', 'FULL_BODY'];
   equipmentFields = ['', 'BARBELL', 'DUMBBELL', 'FREEWEIGHT', 'BODYWEIGHT', 'CABLE', 'MACHINE'];
   searchResults: Exercise[];
   customWorkout: Workout = new Workout('custom workout', 'CUSTOM', []);
 
+  formGroup: FormGroup;
+
   constructor(private customWorkoutService: CustomWorkoutService, private myWorkoutService: MyWorkoutService,
-              private router: Router) {}
+              private router: Router, private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.formGroup = this.fb.group({
+      muscleGroup: new FormControl(),
+      equipment: new FormControl(),
+      exerciseName: new FormControl()
+    });
+  }
 
   addToWorkout(exercise: Exercise) {
     this.customWorkout.exercises.push(exercise);
@@ -39,14 +49,17 @@ export class CustomWorkoutComponent {
     this.router.navigate(['/my-workout/current-workout']);
   }
 
-  search(form: NgForm) {
+  search() {
     let usedExerciseNames = [];
     this.customWorkout.exercises.forEach((exercise) => {
       usedExerciseNames.push(exercise.name);
     });
-    const searchParams = { muscle: form.value['muscle-groups'],
-                         equipment: form.value['equipment-options'],
-                         name: form.value['name-search'],
+    const muscle = this.formGroup.value.muscleGroup ? this.formGroup.value.muscleGroup : '';
+    const equipment = this.formGroup.value.equipment ? this.formGroup.value.equipment : '';
+    const name = this.formGroup.value.exerciseName ? this.formGroup.value.exerciseName : '';
+    const searchParams = { muscle: muscle,
+                         equipment: equipment,
+                         name: name,
                          usedExerciseNames: usedExerciseNames
                        };
     this.customWorkoutService.exerciseSearch(searchParams)

@@ -1,27 +1,28 @@
 <div class="row">
   <div class="col-md-8">
-    <form (ngSubmit)="search(f)" #f="ngForm">
+    <form [formGroup]="formGroup" (ngSubmit)="search()">
       <h1>Create Custom Workout</h1>
-      <label for="muscle-group">Muscle Group
-        <select name="muscle-groups" class="form-control" id="muscle-group" ngModel>
-          <option *ngFor="let field of muscleFields" [ngValue]="field">{{ field }}</option>
-        </select>
-      </label>
-      <label for="equipment-options">Equipment
-        <select name="equipment-options" class="form-control" id="equipment-options" ngModel>
-          <option *ngFor="let field of equipmentFields" [ngValue]="field">{{ field }}</option>
-        </select>
-      </label>
-      <label for="name-search">Name
-        <input type="text" id="name-search" class="form-control" name="name-search" ngModel>
-      </label>
-      <button class="btn btn-primary" [disabled]="f.form.invalid" type="submit">Search</button>
+      <mat-form-field>
+        <mat-select placeholder="Muscle Group" formControlName="muscleGroup">
+          <mat-option *ngFor="let field of muscleFields" [value]="field">
+            {{ field }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Equipment" formControlName="equipment">
+          <mat-option *ngFor="let field of equipmentFields" [value]="field">
+            {{ field }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName">
+      </mat-form-field>
+      <button class="btn btn-primary" type="submit">Search</button>
     </form>
     <div class="row" *ngIf="searchResults">
         <hr>
-        <!-- <app-exercise [exercise]="exercise" [location]="'custom-workout'" (exerciseSelected)="addToWorkout($event)">
-          Loading...
-        </app-exercise> -->
         <mat-accordion>
           <mat-expansion-panel *ngFor="let exercise of searchResults">
             <mat-expansion-panel-header>

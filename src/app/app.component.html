@@ -8,7 +8,7 @@
         <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/my-workout']">Create/View Workout</a></li>
         <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/custom-workout']">Custom Workout</a></li>
         <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/dash']">Dashboard</a></li>
-        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/saved-workouts']">My Saved Workouts</a></li>
+        <li><a class="menu-option" *ngIf="isLoggedIn" mat-button routerLinkActive="mat-accent" [routerLink]="['/saved-workouts']">My Saved Workouts</a></li>
       </ul>
     </div>
     <div class=".col-md-3">
