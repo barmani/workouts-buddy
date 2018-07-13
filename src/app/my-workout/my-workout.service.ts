@@ -17,7 +17,6 @@ export class MyWorkoutService {
   createNewWorkout(requestedWorkout: RequestedWorkout) {
     const headers = new Headers({'Content-Type': 'application/json'});
     const body = JSON.stringify(requestedWorkout);
-    console.log(requestedWorkout);
     return this.http.post('http://localhost:3000/my-workout/new-workout', body, {headers: headers})
       .pipe(
         map((response: Response) => {
