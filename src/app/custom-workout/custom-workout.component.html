@@ -2,55 +2,70 @@
   <div class="col-md-8">
     <form [formGroup]="formGroup" (ngSubmit)="search()">
       <h1>Create Custom Workout</h1>
-      <mat-form-field>
-        <mat-select placeholder="Muscle Group" formControlName="muscleGroup">
-          <mat-option *ngFor="let field of muscleFields" [value]="field">
-            {{ field }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Equipment" formControlName="equipment">
-          <mat-option *ngFor="let field of equipmentFields" [value]="field">
-            {{ field }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName">
-      </mat-form-field>
-      <button class="btn btn-primary" type="submit">Search</button>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="Muscle Group" formControlName="muscleGroup">
+            <mat-option *ngFor="let field of muscleFields" [value]="field">
+              {{ field }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="Equipment" formControlName="equipment">
+            <mat-option *ngFor="let field of equipmentFields" [value]="field">
+              {{ field }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName">
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
     </form>
-    <div class="row" *ngIf="searchResults">
-        <hr>
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let exercise of searchResults">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ exercise.name }}
-              </mat-panel-title>
-              <mat-panel-description>
+  </div>
+</div>
+<div class="col-md-8">
+  <div class="row" *ngIf="searchResults && searchResults.length > 0; else noResultsTemplate">
+      <hr>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let exercise of searchResults">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ exercise.name }}
+            </mat-panel-title>
+            <mat-panel-description>
 
-              </mat-panel-description>
-              <div class="col-md-2">
-                <button class="btn btn-primary" (click)="addToWorkout(exercise)">Add To Workout</button>
-              </div>
-            </mat-expansion-panel-header>
-            <app-exercise [exercise]="exercise"></app-exercise>
-          </mat-expansion-panel>
-        </mat-accordion>
+            </mat-panel-description>
+            <div class="col-md-2">
+              <button class="btn btn-primary" (click)="addToWorkout(exercise)">Add To Workout</button>
+            </div>
+          </mat-expansion-panel-header>
+          <app-exercise [exercise]="exercise"></app-exercise>
+        </mat-expansion-panel>
+      </mat-accordion>
+  </div>
+  <ng-template #noResultsTemplate>
+    <div class="col-md-2 col-md-offset-7" *ngIf="noResults">
+      <p>Sorry, there were no results!</p>
+    </div>
+  </ng-template>
+</div>
+<div class="col-md-4" *ngIf="customWorkout.exercises.length > 0">
+  <h6>Current Workout</h6>
+  <div class="row" *ngFor="let exercise of customWorkout.exercises">
+    <div class="col-md-4">
+      <p>{{ exercise.name }} ({{ exercise.muscle }})</p>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" (click)="remove(exercise)">Remove</button>
     </div>
   </div>
-  <div class="col-md-4" *ngIf="customWorkout.exercises.length > 0">
-    <h6>Current Workout</h6>
-    <div class="row" *ngFor="let exercise of customWorkout.exercises">
-      <div class="col-md-4">
-        <p>{{ exercise.name }} ({{ exercise.muscle }})</p>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-primary" (click)="remove(exercise)">Remove</button>
-      </div>
-    </div>
-    <button class="btn btn-success" (click)="saveWorkout()">Save Workout</button>
-  </div>
+  <button class="btn btn-success" (click)="saveWorkout()">Save Workout</button>
 </div>

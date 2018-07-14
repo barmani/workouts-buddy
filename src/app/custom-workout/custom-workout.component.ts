@@ -15,8 +15,10 @@ import { NgForm, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 export class CustomWorkoutComponent implements OnInit {
   muscleFields = ['', 'BICEPS', 'BACK', 'TRICEPS', 'CHEST', 'LEGS', 'SHOULDERS', 'ABS', 'FULL_BODY'];
   equipmentFields = ['', 'BARBELL', 'DUMBBELL', 'FREEWEIGHT', 'BODYWEIGHT', 'CABLE', 'MACHINE'];
+  allExercises: Exercise[];
   searchResults: Exercise[];
   customWorkout: Workout = new Workout('custom workout', 'CUSTOM', []);
+  noResults: boolean;
 
   formGroup: FormGroup;
 
@@ -28,6 +30,10 @@ export class CustomWorkoutComponent implements OnInit {
       muscleGroup: new FormControl(),
       equipment: new FormControl(),
       exerciseName: new FormControl()
+    });
+    this.customWorkoutService.getExerciseNames().subscribe((result) => {
+      this.allExercises = result.exercises;
+      console.log(this.allExercises);
     });
   }
 
@@ -65,6 +71,8 @@ export class CustomWorkoutComponent implements OnInit {
     this.customWorkoutService.exerciseSearch(searchParams)
       .subscribe((exercises: Exercise[]) => {
         this.searchResults = exercises;
+        this.noResults = !exercises || exercises.length === 0;
+        console.log(this.noResults);
       });
   }
 

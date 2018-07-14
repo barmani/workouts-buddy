@@ -25,4 +25,13 @@ export class CustomWorkoutService {
         })
       );
   }
+
+  getExerciseNames() {
+    return this.http.get('http://localhost:3000/custom-workout')
+      .pipe(
+        map((response: Response) => {
+          return response.json();
+        })
+      );
+  }
 }

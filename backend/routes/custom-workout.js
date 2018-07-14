@@ -4,6 +4,15 @@ var router = express.Router();
 var Exercise = require('../models/exercise');
 var Workout = require('../models/workout');
 
+router.get('/', function(req, res, next) {
+  Exercise.find().sort('name').exec((err, exercises) => {
+    return res.status(200).json({
+      message: 'Found exercise names',
+      exercises: exercises
+    });
+  });
+});
+
 router.post('/', function(req, res, next) {
   Exercise.find({
     muscle: { $regex: req.body.muscle, $options: "i" },
