@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Workout } from '../models/workout.model';
 
 import { NgForm, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
     selector: 'app-custom-workout',
@@ -19,8 +21,9 @@ export class CustomWorkoutComponent implements OnInit {
   searchResults: Exercise[];
   customWorkout: Workout = new Workout('custom workout', 'CUSTOM', []);
   noResults: boolean;
-
   formGroup: FormGroup;
+  filteredOptions: Observable<string[]>;
+  currentOptions: string[] = [];
 
   constructor(private customWorkoutService: CustomWorkoutService, private myWorkoutService: MyWorkoutService,
               private router: Router, private fb: FormBuilder) {}
@@ -29,12 +32,56 @@ export class CustomWorkoutComponent implements OnInit {
     this.formGroup = this.fb.group({
       muscleGroup: new FormControl(),
       equipment: new FormControl(),
-      exerciseName: new FormControl()
+      exerciseName: new FormControl
     });
     this.customWorkoutService.getExerciseNames().subscribe((result) => {
       this.allExercises = result.exercises;
-      console.log(this.allExercises);
+      this.allExercises.forEach((exercise) => {
+        this.currentOptions.push(exercise.name);
+      });
     });
+    this.filteredOptions = this.formGroup.get('exerciseName').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+      
+    this.onChanges();
+  }
+
+  private onChanges() {
+    this.formGroup.get('muscleGroup').valueChanges.subscribe((value) => {
+      this.reEvaluateOptions();
+    });
+    this.formGroup.get('equipment').valueChanges.subscribe((value) => {
+      this.reEvaluateOptions();
+    });
+  }
+
+  private reEvaluateOptions() {
+    this.currentOptions = [];
+    const muscleGroup = this.formGroup.get('muscleGroup').value
+                        ? this.formGroup.get('muscleGroup').value
+                        : '';
+    const equipment = this.formGroup.get('equipment').value
+                        ? this.formGroup.get('equipment').value
+                        : '';
+    this.allExercises.forEach((exercise) => {
+      if (exercise.muscle.includes(muscleGroup) && exercise.equipment.includes(equipment)) {
+        this.currentOptions.push(exercise.name);
+      }
+    });
+    this.filteredOptions = this.formGroup.get('exerciseName').valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.currentOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   addToWorkout(exercise: Exercise) {

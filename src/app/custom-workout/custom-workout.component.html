@@ -22,8 +22,13 @@
       </div>
       <div class="col-md-3">
         <mat-form-field>
-          <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName">
+          <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName" [matAutocomplete]="auto">
         </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </div>
       <div class="col-md-3">
         <button class="btn btn-primary" type="submit">Search</button>

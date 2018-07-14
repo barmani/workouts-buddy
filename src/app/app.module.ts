@@ -15,7 +15,8 @@ import { MatDialogModule,
          MatStepperModule,
          MatExpansionModule,
          MatSnackBarModule,
-         MatSelectModule } from '@angular/material';
+         MatSelectModule,
+         MatAutocompleteModule } from '@angular/material';
 
 import { AppComponent } from "./app.component";
 import { ChecklistComponent } from './my-workout/checklist/checklist.component';
@@ -82,7 +83,8 @@ import { UserPageComponent } from './user-page/user-page.component';
               MatButtonModule,
               MatSlideToggleModule,
               MatSnackBarModule,
-              MatSelectModule
+              MatSelectModule,
+              MatAutocompleteModule
              ],
     exports: [
               MatDialogModule,
