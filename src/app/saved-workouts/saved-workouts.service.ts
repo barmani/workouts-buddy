@@ -46,4 +46,15 @@ export class SavedWorkoutsService {
         })
       );
   }
+
+  removeWorkout(_id: string) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.delete('http://localhost:3000/saved-workouts/' + _id + token, {headers: headers})
+    .pipe(
+      map((response: Response) => {
+        const result = response.json();
+      }), catchError((error) => throwError(error.json()))
+    );
+  }
 }

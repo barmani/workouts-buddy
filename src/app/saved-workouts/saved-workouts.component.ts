@@ -24,7 +24,7 @@ export class SavedWorkoutsComponent implements OnInit {
           exercises.push(new Exercise(exercise.name, exercise.description, exercise.muscle,
                                       exercise.equipment, exercise._id, exercise.video));
         });
-        this.workouts.push(new Workout(workout.name, workout.difficulty, exercises));
+        this.workouts.push(new Workout(workout.name, workout.difficulty, exercises, workout._id));
       });
     });
   }
@@ -51,6 +51,8 @@ export class SavedWorkoutsComponent implements OnInit {
   }
 
   removeWorkout(workout: Workout) {
-    
+    this.savedWorkoutsService.removeWorkout(workout._id).subscribe((result) => {
+      this.workouts.splice(this.workouts.indexOf(workout), 1);
+    });
   }
 }
