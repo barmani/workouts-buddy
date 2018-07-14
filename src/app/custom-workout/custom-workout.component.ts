@@ -45,7 +45,6 @@ export class CustomWorkoutComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
-      
     this.onChanges();
   }
 
@@ -119,8 +118,16 @@ export class CustomWorkoutComponent implements OnInit {
       .subscribe((exercises: Exercise[]) => {
         this.searchResults = exercises;
         this.noResults = !exercises || exercises.length === 0;
-        console.log(this.noResults);
       });
+  }
+
+  clearSearch() {
+    this.formGroup.reset();
+    this.searchResults = [];
+  }
+
+  clearWorkout() {
+    this.customWorkout.exercises = [];
   }
 
 }

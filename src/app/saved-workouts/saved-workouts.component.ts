@@ -49,4 +49,8 @@ export class SavedWorkoutsComponent implements OnInit {
     this.myWorkoutService.setCurrentWorkout(workout);
     this.router.navigate(['/my-workout/current-workout']);
   }
+
+  removeWorkout(workout: Workout) {
+    
+  }
 }
