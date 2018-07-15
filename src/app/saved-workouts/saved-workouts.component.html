@@ -2,7 +2,7 @@
   <h2>Saved Workouts</h2>
 </div>
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let workout of workouts">
+  <mat-expansion-panel *ngFor="let workout of displayedWorkouts">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ workout.name }}
@@ -18,3 +18,8 @@
     </span>
   </mat-expansion-panel>
 </mat-accordion>
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageUpdate($event)">
+</mat-paginator>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { MyWorkoutService } from '../my-workout/my-workout.service';
 import { SavedWorkoutsService } from './saved-workouts.service';
@@ -12,9 +13,14 @@ import { Exercise } from '../models/exercise.model';
 })
 export class SavedWorkoutsComponent implements OnInit {
   workouts: Workout[] = [];
+  displayedWorkouts: Workout[] = [];
+  length = 0;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(private savedWorkoutsService: SavedWorkoutsService,
               private myWorkoutService: MyWorkoutService,
-              private router: Router) {}
+              private router: Router,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.savedWorkoutsService.getWorkouts().subscribe((workouts) => {
@@ -26,6 +32,16 @@ export class SavedWorkoutsComponent implements OnInit {
         });
         this.workouts.push(new Workout(workout.name, workout.difficulty, exercises, workout._id));
       });
+      this.length = this.workouts.length;
+      if (this.workouts.length > this.pageSize) {
+        for (let i = 0; i < this.pageSize; i++) {
+          this.displayedWorkouts.push(this.workouts[i]);
+        }
+      } else {
+        this.workouts.forEach((workout) => {
+          this.displayedWorkouts.push(workout);
+        });
+      }
     });
   }
 
@@ -53,6 +69,31 @@ export class SavedWorkoutsComponent implements OnInit {
   removeWorkout(workout: Workout) {
     this.savedWorkoutsService.removeWorkout(workout._id).subscribe((result) => {
       this.workouts.splice(this.workouts.indexOf(workout), 1);
+      this.length--;
+      setTimeout(() => {
+        this.snackBar.open('Successfully deleted ' + workout.name, 'Dismiss', {
+          duration: 7000
+        });
+      }, 250)
     });
+  }
+
+  pageUpdate(event) {
+    if (event.pageSize != this.pageSize) {
+      this.pageSize = event.pageSize;
+      this.displayedWorkouts = [];
+      for (let i = 0; i < this.pageSize; i++) {
+        if (this.workouts.length > i) { // make sure to not go past array size
+          this.displayedWorkouts.push(this.workouts[i])
+        }
+      }
+    } else if (event.pageIndex != event.previousPageIndex) {
+      this.displayedWorkouts = [];
+      for (let i = event.pageIndex * this.pageSize; i < (event.pageIndex + 1) * this.pageSize; i++) {
+        if (this.workouts.length > i) { // make sure to not go past array size
+          this.displayedWorkouts.push(this.workouts[i])
+        }
+      }
+    }
   }
 }
