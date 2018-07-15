@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { PasswordValidation } from './password-validation';
 
 import { LoginSignupService } from '../login-signup/login-signup.service';
 import { Workout } from '../models/workout.model';
 import { Exercise } from '../models/exercise.model';
 import { Subscription } from 'rxjs';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-user-page',
@@ -16,6 +25,10 @@ export class UserPageComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
   subscription: Subscription;
   changePasswordFormGroup: FormGroup;
+
+  oldPassword = new FormControl('', [Validators.required]);
+  newPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  newPasswordConfirm = new FormControl('', [Validators.required])
 
   constructor(private loginSignupService: LoginSignupService,
               private fb: FormBuilder,
@@ -34,12 +47,20 @@ export class UserPageComponent implements OnInit {
       this.router.navigateByUrl('/login-signup?token=invalid');
     }
     this.changePasswordFormGroup = this.fb.group({
-      oldPassword: new FormControl(),
-      newPassword: new FormControl(),
-      newPasswordConfirm: new FormControl()
-    });
+      oldPassword: this.oldPassword,
+      newPassword: this.newPassword,
+      newPasswordConfirm: this.newPasswordConfirm,
+    }, {validator: PasswordValidation.MatchPassword});
     // this.loginSignupService.getUserPage(this.userId).subscribe((result) => {
     //   console.log(result);
     // });
+  }
+
+  changePassword() {
+
+  }
+
+  private equalPasswords() {
+    return this.newPassword.value === this.newPasswordConfirm.value ? null : {mismatch: true};
   }
 }
