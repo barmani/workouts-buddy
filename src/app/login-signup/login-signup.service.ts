@@ -65,7 +65,6 @@ export class LoginSignupService {
           const result = response.json();
         })
       );
-
   }
 
 }

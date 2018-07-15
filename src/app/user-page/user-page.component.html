@@ -1,1 +1,21 @@
-<h2>user page</h2>
+<h2>{{ username }}</h2>
+<form [formGroup]="changePasswordFormGroup">
+  <div class="col-md-4">
+    <h5>Change Password</h5>
+    <div class="row">
+      <mat-form-field>
+        <input matInput placeholder="Old Password" formControlName="oldPassword">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <input matInput placeholder="New Password" formControlName="newPassword">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <input matInput placeholder="Confirm New Password" formControlName="newPasswordConfirm">
+      </mat-form-field>
+    </div>
+  </div>
+</form>
