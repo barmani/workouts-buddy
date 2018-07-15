@@ -74,7 +74,7 @@ export class SavedWorkoutsComponent implements OnInit {
         this.snackBar.open('Successfully deleted ' + workout.name, 'Dismiss', {
           duration: 7000
         });
-      }, 250)
+      }, 250);
     });
   }
 

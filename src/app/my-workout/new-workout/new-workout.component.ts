@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 import { NgForm } from "@angular/forms";
 import { MyWorkoutService } from "../my-workout.service";
@@ -34,7 +35,8 @@ export class NewWorkoutComponent implements OnInit {
 
   constructor(private myWorkoutService: MyWorkoutService,
               private router: Router,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.levelsFormGroup = this.fb.group({
@@ -69,7 +71,11 @@ export class NewWorkoutComponent implements OnInit {
 
   onSubmit() {
     if (this.musclesSelected.length != 2) {
-      alert('Please select two muscles');
+      setTimeout(() => {
+        this.snackBar.open('Please select two muscles', 'Dismiss', {
+          duration: 3000
+        });
+      }, 250);
     } else {
       let muscleNames = [];
       this.musclesSelected.forEach((obj) => {
@@ -86,6 +92,16 @@ export class NewWorkoutComponent implements OnInit {
         });
       this.levelsFormGroup.reset();
       this.muscleGroupFormGroup.reset();
+    }
+  }
+
+  levelWasSelected() {
+    if (!this.levelsFormControl.value) {
+      setTimeout(() => {
+        this.snackBar.open('Must select a level!', 'Dismiss', {
+          duration: 3000
+        });
+      }, 250);
     }
   }
 }

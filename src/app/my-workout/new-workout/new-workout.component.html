@@ -3,7 +3,7 @@
       <form [formGroup]="levelsFormGroup">
         <ng-template matStepLabel>Choose a Difficulty</ng-template>
         <div class="row align-content-center">
-          <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl">
+          <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl" required>
             <div class="col-md-1 col-md-offset-2" *ngFor="let level of levels">
               <mat-radio-button class="level-radio-button" [value]="level">
                 {{ level }}
@@ -14,7 +14,7 @@
         <div class="row">
           <hr>
           <div class="col-md-2 col-md-offset-5">
-            <button mat-button matStepperNext type="button">Next</button>
+            <button mat-button matStepperNext type="button" (click)="levelWasSelected()">Next</button>
           </div>
         </div>
       </form>
@@ -22,66 +22,70 @@
     <mat-step [stepControl]="muscleGroupFormGroup">
       <form [formGroup]="muscleGroupFormGroup">
         <ng-template matStepLabel>Choose Two Muscle Groups</ng-template>
-        <div class="col-md-2 col-md-offset-2">
-          <div class="row">
-            <h5>Large Muscles: </h5>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-2">
+            <div class="row">
+              <h5>Large Muscles: </h5>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="chest"
+                formControlName="chest"
+                (change)="onMuscleGroupInputSelected($event)">
+              Chest</mat-checkbox>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="back"
+                formControlName="back"
+                (change)="onMuscleGroupInputSelected($event)">
+              Back</mat-checkbox>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="legs"
+                formControlName="legs"
+                (change)="onMuscleGroupInputSelected($event)">
+              Legs</mat-checkbox>
+            </div>
           </div>
-          <div class="row">
-            <mat-checkbox
-              value="chest"
-              formControlName="chest"
-              (change)="onMuscleGroupInputSelected($event)">
-            Chest</mat-checkbox>
-          </div>
-          <div class="row">
-            <mat-checkbox
-              value="back"
-              formControlName="back"
-              (change)="onMuscleGroupInputSelected($event)">
-            Back</mat-checkbox>
-          </div>
-          <div class="row">
-            <mat-checkbox
-              value="legs"
-              formControlName="legs"
-              (change)="onMuscleGroupInputSelected($event)">
-            Legs</mat-checkbox>
-          </div>
-        </div>
 
-        <div class="col-md-2 col-md-offset-2">
-          <div class="row">
-            <h5>Small Muscles: </h5>
+          <div class="col-md-2 col-md-offset-2">
+            <div class="row">
+              <h5>Small Muscles: </h5>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="triceps"
+                formControlName="triceps"
+                (change)="onMuscleGroupInputSelected($event)">
+              Triceps</mat-checkbox>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="biceps"
+                formControlName="biceps"
+                (change)="onMuscleGroupInputSelected($event)">
+              Biceps</mat-checkbox>
+            </div>
+            <div class="row">
+              <mat-checkbox
+                value="shoulders"
+                formControlName="shoulders"
+                (change)="onMuscleGroupInputSelected($event)">
+              Shoulders</mat-checkbox>
+            </div>
           </div>
-          <div class="row">
-            <mat-checkbox
-              value="triceps"
-              formControlName="triceps"
-              (change)="onMuscleGroupInputSelected($event)">
-            Triceps</mat-checkbox>
+          <div class="col-md-2 col-md-offset-1">
+            <mat-slide-toggle formControlName="abs">Finish with Abs?</mat-slide-toggle>
           </div>
-          <div class="row">
-            <mat-checkbox
-              value="biceps"
-              formControlName="biceps"
-              (change)="onMuscleGroupInputSelected($event)">
-            Biceps</mat-checkbox>
-          </div>
-          <div class="row">
-            <mat-checkbox
-              value="shoulders"
-              formControlName="shoulders"
-              (change)="onMuscleGroupInputSelected($event)">
-            Shoulders</mat-checkbox>
-          </div>
-        </div>
-        <div class="col-md-2 col-md-offset-2">
-          <mat-slide-toggle formControlName="abs">Finish with Abs?</mat-slide-toggle>
         </div>
         <hr>
-        <div class="col-md-2 col-md-offset-5">
-          <button mat-button matStepperPrevious type="button">Back</button>
-          <button mat-button matStepperNext type="submit" (click)="onSubmit()">Create Workout</button>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-5">
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="submit" (click)="onSubmit()">Create Workout</button>
+          </div>
         </div>
       </form>
 

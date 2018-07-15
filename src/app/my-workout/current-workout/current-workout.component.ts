@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig, MatSnackBar } from "@angular/material";
 
 import { MyWorkoutService } from '../my-workout.service';
 import { Exercise } from '../../models/exercise.model';
@@ -28,7 +28,8 @@ export class CurrentWorkoutComponent implements OnInit {
               private loginSignupService: LoginSignupService,
               private savedWorkoutsService: SavedWorkoutsService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   this.subscription = this.loginSignupService.getLoginObservable()
     .subscribe(loginInfo => {
       this.userId = loginInfo.userId;
@@ -92,7 +93,13 @@ export class CurrentWorkoutComponent implements OnInit {
           if (data) {
             if (data.workoutName) {
               this.workout.name = data.workoutName;
-              this.savedWorkoutsService.addWorkout(this.workout).subscribe();
+              this.savedWorkoutsService.addWorkout(this.workout).subscribe((result) => {
+                setTimeout(() => {
+                  this.snackBar.open('Successfully saved ' + this.workout.name, 'Dismiss', {
+                    duration: 7000
+                  });
+                }, 250);
+              });
             }
           }
         }
