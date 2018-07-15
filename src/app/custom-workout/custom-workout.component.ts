@@ -18,12 +18,17 @@ export class CustomWorkoutComponent implements OnInit {
   muscleFields = ['', 'BICEPS', 'BACK', 'TRICEPS', 'CHEST', 'LEGS', 'SHOULDERS', 'ABS', 'FULL_BODY'];
   equipmentFields = ['', 'BARBELL', 'DUMBBELL', 'FREEWEIGHT', 'BODYWEIGHT', 'CABLE', 'MACHINE'];
   allExercises: Exercise[];
-  searchResults: Exercise[];
+  searchResults: Exercise[] = [];
+  displayedSearchResults: Exercise[] = [];
   customWorkout: Workout = new Workout('custom workout', 'CUSTOM', []);
   noResults: boolean;
   formGroup: FormGroup;
   filteredOptions: Observable<string[]>;
   currentOptions: string[] = [];
+
+  length = 0;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
   constructor(private customWorkoutService: CustomWorkoutService, private myWorkoutService: MyWorkoutService,
               private router: Router, private fb: FormBuilder) {}
@@ -66,7 +71,9 @@ export class CustomWorkoutComponent implements OnInit {
                         ? this.formGroup.get('equipment').value
                         : '';
     this.allExercises.forEach((exercise) => {
-      if (exercise.muscle.includes(muscleGroup) && exercise.equipment.includes(equipment)) {
+      if (exercise.muscle.includes(muscleGroup)
+            && exercise.equipment.includes(equipment)
+            && !this.customWorkoutIncludesExercise(exercise.name)) {
         this.currentOptions.push(exercise.name);
       }
     });
@@ -84,12 +91,16 @@ export class CustomWorkoutComponent implements OnInit {
   }
 
   addToWorkout(exercise: Exercise) {
-    this.customWorkout.exercises.push(exercise);
-    this.searchResults.forEach((result) => {
-      if (exercise.name === result.name && exercise.muscle === result.muscle) {
-        this.searchResults.splice(this.searchResults.indexOf(result), 1);
-      }
-    });
+    if (!this.customWorkout.exercises.includes(exercise)) {
+      this.customWorkout.exercises.push(exercise);
+      this.searchResults.forEach((result) => {
+        if (exercise.name === result.name && exercise.muscle === result.muscle) {
+          this.searchResults.splice(this.searchResults.indexOf(result), 1);
+          this.displayedSearchResults.splice(this.displayedSearchResults.indexOf(result), 1);
+          this.reEvaluateOptions(); // make sure this exercise is not included in autocomplete suggestions
+        }
+      });
+    }
   }
 
   remove(exercise: Exercise) {
@@ -117,8 +128,40 @@ export class CustomWorkoutComponent implements OnInit {
     this.customWorkoutService.exerciseSearch(searchParams)
       .subscribe((exercises: Exercise[]) => {
         this.searchResults = exercises;
+        this.displayedSearchResults = [];
         this.noResults = !exercises || exercises.length === 0;
+
+        // adjust pagination settings
+        this.length = this.searchResults.length;
+        if (this.searchResults.length > this.pageSize) {
+          for (let i = 0; i < this.pageSize; i++) {
+            this.displayedSearchResults.push(this.searchResults[i]);
+          }
+        } else {
+          this.searchResults.forEach((result) => {
+            this.displayedSearchResults.push(result);
+          });
+        }
       });
+  }
+
+  pageUpdate(event) {
+    if (event.pageSize != this.pageSize) {
+      this.pageSize = event.pageSize;
+      this.displayedSearchResults = [];
+      for (let i = 0; i < this.pageSize; i++) {
+        if (this.searchResults.length > i) { // make sure to not go past array size
+          this.displayedSearchResults.push(this.searchResults[i])
+        }
+      }
+    } else if (event.pageIndex != event.previousPageIndex) {
+      this.displayedSearchResults = [];
+      for (let i = event.pageIndex * this.pageSize; i < (event.pageIndex + 1) * this.pageSize; i++) {
+        if (this.searchResults.length > i) { // make sure to not go past array size
+          this.displayedSearchResults.push(this.searchResults[i])
+        }
+      }
+    }
   }
 
   clearSearch() {
@@ -128,6 +171,16 @@ export class CustomWorkoutComponent implements OnInit {
 
   clearWorkout() {
     this.customWorkout.exercises = [];
+  }
+
+  customWorkoutIncludesExercise(exerciseName: string) {
+    let retVal: boolean = false;
+    this.customWorkout.exercises.forEach((exercise, index) => {
+      if (exercise.name === exerciseName) {
+        retVal = true;
+      }
+    });
+    return retVal;
   }
 
 }

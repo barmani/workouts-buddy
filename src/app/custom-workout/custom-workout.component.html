@@ -41,7 +41,7 @@
   <div class="row" *ngIf="searchResults && searchResults.length > 0; else noResultsTemplate">
       <hr>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let exercise of searchResults">
+        <mat-expansion-panel *ngFor="let exercise of displayedSearchResults">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ exercise.name }}
@@ -56,6 +56,12 @@
           <app-exercise [exercise]="exercise"></app-exercise>
         </mat-expansion-panel>
       </mat-accordion>
+      <mat-paginator *ngIf="searchResults && searchResults.length > 0"
+                    [length]="length"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageUpdate($event)">
+      </mat-paginator>
   </div>
   <ng-template #noResultsTemplate>
     <div class="col-md-2 col-md-offset-7" *ngIf="noResults">
