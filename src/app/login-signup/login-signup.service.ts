@@ -63,7 +63,23 @@ export class LoginSignupService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
-        })
+        }),
+        catchError((error: Response) => throwError(error.json()))
+      );
+  }
+
+  changeUserData(userId: string, oldPassword?: string, newPassword?: string) {
+    const body = JSON.stringify({oldPassword: oldPassword, newPassword: newPassword});
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.patch('http://localhost:3000/user/' + userId + token, body, {headers: headers})
+      .pipe(
+        map((response: Response) => {
+          const result = response.json();
+        }),
+        catchError((error: Response) => throwError(error.json()))
       );
   }
 

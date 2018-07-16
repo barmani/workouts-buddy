@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Valida
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PasswordValidation } from './password-validation';
+import { MatSnackBar } from '@angular/material';
 
 import { LoginSignupService } from '../login-signup/login-signup.service';
 import { Workout } from '../models/workout.model';
@@ -33,7 +34,8 @@ export class UserPageComponent implements OnInit {
   constructor(private loginSignupService: LoginSignupService,
               private fb: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private snackBar: MatSnackBar) {
     this.subscription = this.loginSignupService.getLoginObservable()
       .subscribe(loginInfo => {
         this.userId = loginInfo.userId;
@@ -57,7 +59,20 @@ export class UserPageComponent implements OnInit {
   }
 
   changePassword() {
-
+    this.loginSignupService.changeUserData(this.userId, this.oldPassword.value, this.newPassword.value).subscribe((response) => {
+      console.log(response);
+      setTimeout(() => {
+        this.snackBar.open('Password changed successfully!', 'Dismiss', {duration: 4000});
+      }, 250);
+    }, (error) => {
+      console.log(error);
+      if (error.title === 'Incorrect password') {
+        setTimeout(() => {
+          this.snackBar.open('Password was incorrect, please try again', 'Dismiss', {duration: 4000});
+        }, 250);
+      }
+    });
+    this.changePasswordFormGroup.reset();
   }
 
   private equalPasswords() {

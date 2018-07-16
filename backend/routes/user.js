@@ -240,4 +240,37 @@ router.post('/:userId/:exerciseId', function(req, res, next) {
   });
 });
 
+router.patch('/:userId', function(req, res, next) {
+  User.findById(req.params.userId, function(err, user) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occurred finding the user',
+        error: err
+      });
+    }
+    if (req.body.newPassword) {
+      if (bcrypt.compareSync(req.body.oldPassword, user.password)) {
+        user.password = bcrypt.hashSync(req.body.newPassword, 10);
+      } else {
+        return res.status(401).json({
+          title: 'Incorrect password',
+          error: {message: 'Incorrect password'}
+        });
+      }
+    }
+    user.save(function(err, result) {
+      if (err) {
+        return res.status(500).json({
+          message: 'An error occurred saving the user',
+          error: err
+        });
+      }
+      return res.status(201).json({
+        message: 'User updated successfully',
+        obj: result
+      })
+    });
+  });
+});
+
 module.exports = router;
