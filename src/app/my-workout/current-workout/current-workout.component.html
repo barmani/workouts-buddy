@@ -1,12 +1,15 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <h3>Current Workout</h3>
   </div>
   <div class="col-md-1">
     <button class="btn btn-primary" (click)="resetWorkout()">New Workout</button>
   </div>
   <div class="col-md-1">
-    <button class="btn btn-primary" (click)="openDialog()" *ngIf="isLoggedIn">Save Workout</button>
+    <button class="btn btn-primary" (click)="openSaveWorkoutDialog()" *ngIf="isLoggedIn">Save Workout</button>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" (click)="openOrderExerciseDialog()">Change Exercise Order</button>
   </div>
 </div>
 <div class="row">

@@ -73,7 +73,7 @@ export class CurrentWorkoutComponent implements OnInit {
     this.router.navigate(['/my-workout/new-workout']);
   }
 
-  openDialog() {
+  openSaveWorkoutDialog() {
     const dialogConfig = new MatDialogConfig();
 
     //dialogConfig.disableClose = true;
@@ -105,6 +105,11 @@ export class CurrentWorkoutComponent implements OnInit {
         }
     );
   }
+
+  openOrderExerciseDialog() {
+    
+  }
+
 
   swapExercise(event: Exercise) {
     this.myWorkoutService.replaceExercise(event, this.workout.exercises.indexOf(event)).subscribe();

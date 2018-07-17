@@ -43,6 +43,7 @@ import { SetComponent } from './my-workout/set/set.component';
 import { SetContainerComponent } from './my-workout/set-container/set-container.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     declarations: [
@@ -68,6 +69,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     imports: [
               BrowserModule,
               BrowserAnimationsModule,
+              DragulaModule,
               routing,
               FormsModule,
               ReactiveFormsModule,
