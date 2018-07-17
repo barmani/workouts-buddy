@@ -20,6 +20,7 @@ import { MatDialogModule,
          MatPaginatorModule } from '@angular/material';
 
 import { AppComponent } from "./app.component";
+import { ChangeExerciseDialogComponent } from "./my-workout/change-exercise-dialog/change-exercise-dialog.component";
 import { ChecklistComponent } from './my-workout/checklist/checklist.component';
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
@@ -48,6 +49,7 @@ import { DragulaModule } from 'ng2-dragula';
 @NgModule({
     declarations: [
       AppComponent,
+      ChangeExerciseDialogComponent,
       ChecklistComponent,
       CurrentWorkoutComponent,
       CustomWorkoutComponent,
@@ -96,7 +98,7 @@ import { DragulaModule } from 'ng2-dragula';
               MatInputModule
              ],
     providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService, SavedWorkoutsService],
-    entryComponents: [SaveWorkoutDialogComponent],
+    entryComponents: [SaveWorkoutDialogComponent, ChangeExerciseDialogComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule {

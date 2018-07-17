@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig, MatSnackBar } from "@angular/material";
 
+import { ChangeExerciseDialogComponent } from "../change-exercise-dialog/change-exercise-dialog.component";
 import { MyWorkoutService } from '../my-workout.service';
 import { Exercise } from '../../models/exercise.model';
 import { LoginSignupService } from '../../login-signup/login-signup.service';
@@ -73,6 +74,23 @@ export class CurrentWorkoutComponent implements OnInit {
     this.router.navigate(['/my-workout/new-workout']);
   }
 
+  openOrderExerciseDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true
+    dialogConfig.width = '30rem';
+    dialogConfig.position = {top: '4rem', right: '4rem'};
+
+    dialogConfig.data = {
+           id: 2,
+           title: 'Change Exercise Order',
+           exercises: this.workout.exercises
+    };
+
+    const dialogRef = this.dialog.open(ChangeExerciseDialogComponent, dialogConfig);
+
+  }
+
   openSaveWorkoutDialog() {
     const dialogConfig = new MatDialogConfig();
 
@@ -83,7 +101,7 @@ export class CurrentWorkoutComponent implements OnInit {
 
     dialogConfig.data = {
            id: 1,
-           title: 'Save Workout',
+           title: 'Save Workout'
     };
 
     const dialogRef = this.dialog.open(SaveWorkoutDialogComponent, dialogConfig);
@@ -104,10 +122,6 @@ export class CurrentWorkoutComponent implements OnInit {
           }
         }
     );
-  }
-
-  openOrderExerciseDialog() {
-    
   }
 
 
