@@ -15,10 +15,10 @@
 <div class="row">
   <div class="col-md-12">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let exercise of workout.exercises">
+      <mat-expansion-panel *ngFor="let exercise of workout.exercises; let i = index">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ exercise.name }} ({{ getNumberOfSets(exercise) }})
+            {{ i + 1 }}. {{ exercise.name }} {{ getNumberOfSets(exercise) }}
           </mat-panel-title>
           <mat-panel-description>
 

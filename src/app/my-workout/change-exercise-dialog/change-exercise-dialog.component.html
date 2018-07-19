@@ -1,1 +1,6 @@
-<h1>hi</h1>
+<div [dragula]='"bag-one"' [dragulaModel]="exercises">
+  <div class="row exercise-row" *ngFor="let exercise of exercises; let i = index" >
+    {{ i + 1 }}. {{ exercise.name }}
+    <hr>
+  </div>
+</div>

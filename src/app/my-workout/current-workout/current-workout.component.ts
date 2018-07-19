@@ -48,21 +48,21 @@ export class CurrentWorkoutComponent implements OnInit {
     let numberOfSets = '';
 
     if (exercise.muscle === 'ABS') {
-      numberOfSets = '30-60 seconds'
+      numberOfSets = '(30-60 seconds)'
     } else  if (this.workout.difficulty === 'BEGINNER') {
       if (this.largeMuscles.includes(exercise.muscle)) {
-        numberOfSets = '3-4 sets';
+        numberOfSets = '(3-4 sets)';
       } else {
-        numberOfSets = '3 sets';
+        numberOfSets = '(3 sets)';
       }
     } else if (this.workout.difficulty === 'INTERMEDIATE') {
       if (this.largeMuscles.includes(exercise.muscle)) {
-        numberOfSets = '4-5 sets';
+        numberOfSets = '(4-5 sets)';
       } else {
-        numberOfSets = '4 sets';
+        numberOfSets = '(4 sets)';
       }
     } else if (this.workout.difficulty === 'ADVANCED') {
-      numberOfSets = '5 sets';
+      numberOfSets = '(5 sets)';
     }
 
     return numberOfSets;
@@ -78,16 +78,18 @@ export class CurrentWorkoutComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true
-    dialogConfig.width = '30rem';
+    dialogConfig.width = '35rem';
+    dialogConfig.height = '100%';
     dialogConfig.position = {top: '4rem', right: '4rem'};
 
     dialogConfig.data = {
            id: 2,
            title: 'Change Exercise Order',
-           exercises: this.workout.exercises
+          // exercises: this.workout.exercises
     };
 
     const dialogRef = this.dialog.open(ChangeExerciseDialogComponent, dialogConfig);
+    dialogRef.componentInstance.exercises = this.workout.exercises;
 
   }
 

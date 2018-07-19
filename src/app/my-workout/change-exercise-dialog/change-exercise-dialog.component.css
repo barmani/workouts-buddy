@@ -1,0 +1,22 @@
+.exercise-row {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.exercise-row:active { 
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.exercise-row:hover {
+  background: #ddd;;
+}
+
+.exercise-row:after {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid #rrggbb;
+}
