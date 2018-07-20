@@ -3,6 +3,7 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var config = require('../../config.json');
+const nodemailer = require('nodemailer');
 
 var User = require('../models/user');
 var ExerciseSet = require('../models/exercise-set');
@@ -23,6 +24,30 @@ router.post('', function(req, res, next) {
         error: err
       });
     }
+    result.activationToken = jwt.sign({user: result}, config.AWT_KEY);
+    result.save();
+    const activationLink = 'http://localhost:4200/login-signup' + '?token=' + result.activationToken + '&username=' + result.username;
+    // configure and send email
+    var smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+          user: config.EMAIL_USERNAME,
+          pass: config.EMAIL_PASSWORD
+      }
+    });
+    const mailOptions = {
+      from: config.EMAIL_USERNAME,
+      to: result.email,
+      subject: 'WorkoutsBuddy Verification',
+      html: '<h3>Hello ' + result.username + ', </h3><br><p>Thank you for joining WorkoutsBuddy!'
+        + ' Click <a href=\"' + activationLink + '\">this link</a> to get started. Happy exercising!'
+    };
+    smtpTransport.sendMail(mailOptions, function (err, info) {
+       if(err)
+         console.log(err);
+       else
+         console.log(info);
+    });
     res.status(201).json({
       message: 'User created',
       obj: result
@@ -45,6 +70,25 @@ router.post('/login', function(req, res, next) {
         title: 'User not found',
         error: {message: 'User not found'}
       });
+    }
+    // make sure account is verified
+    if (!user.active) {
+      // this is the route a user goes to in order to verify their account
+      if (req.query.token === user.activationToken) {
+        user.active = true;
+        user.save();
+        var token = jwt.sign({user: user}, config.AWT_KEY);
+        return res.status(200).json({
+            message: 'Successfully logged in',
+            token: token,
+            userId: user._id
+        });
+      } else {
+        return res.status(401).json({
+          message: 'User not activated',
+          error: {message: 'User not actived'}
+        });
+      }
     }
     if (!bcrypt.compareSync(req.body.password, user.password)) {
       return res.status(401).json({

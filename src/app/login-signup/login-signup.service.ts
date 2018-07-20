@@ -22,12 +22,13 @@ export class LoginSignupService {
       );
   }
 
-  login(formInfo: {username: string, password: string}) {
+  login(formInfo: {username: string, password: string}, token?: string) {
     const body = JSON.stringify(formInfo);
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.post('http://localhost:3000/user/login', body, {headers: headers})
+    let paramToken = token ? '?token=' + token : '';
+    return this.http.post('http://localhost:3000/user/login' + paramToken, body, {headers: headers})
       .pipe(
         map((response: Response) => response.json()),
         catchError((error: Response) => throwError(error.json()))
