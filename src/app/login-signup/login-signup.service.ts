@@ -35,6 +35,18 @@ export class LoginSignupService {
       )
   }
 
+  forgotPassword(username: string) {
+    const body = JSON.stringify(username);
+    const headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    return this.http.patch('http://localhost:3000/user/login', body, {headers: headers})
+      .pipe(
+        map((response: Response) => response.json()),
+        catchError((error: Response) => throwError(error.json()))
+      )
+  }
+
   logout() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');

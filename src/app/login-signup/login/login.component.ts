@@ -41,4 +41,12 @@ export class LoginComponent {
     )
     form.reset();
   }
+
+  forgotPassword(username: string) {
+    if (confirm('Send a password to this user\'s email with a new temporary password?')) {
+      this.loginSignupService.forgotPassword(username).subscribe((response) => {
+        console.log(response);
+      });
+    }
+  }
 }
