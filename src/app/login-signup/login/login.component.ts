@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { LoginSignupService } from '../login-signup.service';
-
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user.model';
 
@@ -14,7 +14,9 @@ export class LoginComponent {
   invalidUsername = false;
   invalidPassword = false;
 
-  constructor(private loginSignupService: LoginSignupService, private router: Router) {}
+  constructor(private loginSignupService: LoginSignupService,
+              private router: Router,
+              private snackBar: MatSnackBar) {}
 
   onSubmit(form: NgForm) {
     const formInfo = {username: form.value['username-login'], password: form.value['password-login']};
@@ -45,7 +47,16 @@ export class LoginComponent {
   forgotPassword(username: string) {
     if (confirm('Send a password to this user\'s email with a new temporary password?')) {
       this.loginSignupService.forgotPassword(username).subscribe((response) => {
-        console.log(response);
+        this.invalidUsername = false;
+        setTimeout(() => {
+          this.snackBar.open('Please check your email to retrive your new password!',
+                             'Dismiss', {duration: 5000});
+        }, 250);
+      },
+      (err) => {
+        if (err.title === 'User not found') {
+          this.invalidUsername = true;
+        }
       });
     }
   }

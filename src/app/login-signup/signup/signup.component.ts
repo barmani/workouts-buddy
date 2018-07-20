@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MatSnackBar } from '@angular/material';
 import { LoginSignupService } from '../login-signup.service';
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user.model';
@@ -15,7 +15,8 @@ export class SignupComponent implements OnInit {
   password = '';
   retypePassword = '';
 
-  constructor(private loginSignupService: LoginSignupService) {}
+  constructor(private loginSignupService: LoginSignupService,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.user = new User(this.username, this.email, this.password);
@@ -27,7 +28,12 @@ export class SignupComponent implements OnInit {
     this.user.email = form.value['email-signup'];
     this.loginSignupService.signup(this.user)
       .subscribe(
-        data => console.log(data),
+        (data) => {
+          setTimeout(() => {
+            this.snackBar.open('Please check your email to retrieve your new password!',
+                               'Dismiss', {duration: 5000});
+          }, 250);
+        },
         error => console.log(error)
       );
   }
