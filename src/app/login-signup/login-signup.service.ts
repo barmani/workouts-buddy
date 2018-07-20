@@ -36,7 +36,7 @@ export class LoginSignupService {
   }
 
   forgotPassword(username: string) {
-    const body = JSON.stringify(username);
+    const body = JSON.stringify({username: username});
     const headers = new Headers({
       'Content-Type': 'application/json'
     });

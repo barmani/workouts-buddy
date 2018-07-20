@@ -105,6 +105,64 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+router.patch('/login', function(req, res, next) {
+  User.findOne({
+    username: req.body.username
+  }, function(err, user) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      });
+    } else if (!user) {
+      return res.status(401).json({
+        title: 'User not found',
+        error: {message: 'User not found'}
+      });
+    } else if (!user.active) {
+      return res.status(401).json({
+        title: 'User not activated',
+        error: {message: 'Activate account first'}
+      });
+    }
+    const randomPassword = Math.random().toString(36).slice((Math.random() + 1) * -6);
+    user.password = bcrypt.hashSync(randomPassword, 10);
+    user.save(function(err, result) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occurred saving the user',
+          error: err
+        });
+      }
+      var smtpTransport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: config.EMAIL_USERNAME,
+            pass: config.EMAIL_PASSWORD
+        }
+      });
+      const mailOptions = {
+        from: config.EMAIL_USERNAME,
+        to: result.email,
+        subject: 'WorkoutsBuddy Password Change',
+        html: '<h3>Hello ' + result.username + ', </h3><br><p>Your new password is:</p><br><p>' + randomPassword
+          + '</p><br> <p>Log in <a href="http://localhost:4200/login-signup">here</a> and change your password in'
+          + ' your settings if you would like. Happy exercising!</p>'
+      };
+      smtpTransport.sendMail(mailOptions, function (err, info) {
+         if(err)
+           console.log(err);
+         else
+           console.log(info);
+      });
+      return res.status(201).json({
+        message: 'Password successfully changed',
+        obj: result
+      });
+    });
+  })
+});
+
 /* verify token before user specific requests */
 router.use('/', function(req, res, next) {
   jwt.verify(req.query.token, config.AWT_KEY, function(err, decoded) {

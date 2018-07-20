@@ -16,7 +16,7 @@
     <div class="col-md-2">
       <input type="password" ngModel name="password-login" required>
       <small *ngIf="invalidPassword" class="text-danger">Password Incorrect</small>
-      <a class="btn"
+      <a class="btn" type="button"
          *ngIf="f.form.controls['username-login'] && f.form.controls['username-login'].value"
          (click)="forgotPassword(f.form.controls['username-login'].value)">
        Forgot Password?</a>
