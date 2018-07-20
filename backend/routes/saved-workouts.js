@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+var config = require('../../config.json');
 
 var User = require('../models/user');
 var Workout = require('../models/workout');
@@ -9,7 +10,7 @@ var Exercise = require('../models/exercise');
 
 /* verify token before user specific requests */
 router.use('/', function(req, res, next) {
-  jwt.verify(req.query.token, 'secret', function(err, decoded) {
+  jwt.verify(req.query.token, config.AWT_KEY, function(err, decoded) {
     if (err) {
       return res.status(401).json({
         title: 'User not authenticated',

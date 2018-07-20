@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+var config = require('../../config.json');
 
 var User = require('../models/user');
 var ExerciseSet = require('../models/exercise-set');
@@ -51,7 +52,7 @@ router.post('/login', function(req, res, next) {
         error: {message: 'Incorrect password'}
       });
     }
-    var token = jwt.sign({user: user}, 'secret');
+    var token = jwt.sign({user: user}, config.AWT_KEY);
      res.status(200).json({
          message: 'Successfully logged in',
          token: token,
@@ -62,7 +63,7 @@ router.post('/login', function(req, res, next) {
 
 /* verify token before user specific requests */
 router.use('/', function(req, res, next) {
-  jwt.verify(req.query.token, 'secret', function(err, decoded) {
+  jwt.verify(req.query.token, config.AWT_KEY, function(err, decoded) {
     if (err) {
       return res.status(401).json({
         title: 'User not authenticated',
