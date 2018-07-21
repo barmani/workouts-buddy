@@ -374,8 +374,23 @@ router.patch('/:userId', function(req, res, next) {
       return res.status(201).json({
         message: 'User updated successfully',
         obj: result
-      })
+      });
     });
+  });
+});
+
+router.delete('/:id', function(req, res, next) {
+  User.findByIdAndRemove(req.params.id, function(err, result) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occurred deleting the user',
+        error: err
+      });
+    }
+    return res.status(201).json({
+      message: 'User updated successfully',
+      obj: result
+    }); 
   });
 });
 

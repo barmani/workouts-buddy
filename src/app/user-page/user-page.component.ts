@@ -79,6 +79,15 @@ export class UserPageComponent implements OnInit {
     this.changePasswordFormGroup.reset();
   }
 
+  removeAccount() {
+    if (confirm('Are you sure you want to remove this account? This cannot be undone!')) {
+      this.loginSignupService.deleteAccount(this.userId).subscribe((result) => {
+        this.loginSignupService.logout();
+        this.router.navigateByUrl('/');
+      });
+    }
+  }
+
   private equalPasswords() {
     return this.newPassword.value === this.newPasswordConfirm.value ? null : {mismatch: true};
   }

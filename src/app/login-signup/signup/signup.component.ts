@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
       .subscribe(
         (data) => {
           setTimeout(() => {
-            this.snackBar.open('Please check your email to retrieve your new password!',
+            this.snackBar.open('Please check your email to verify your account!',
                                'Dismiss', {duration: 5000});
           }, 250);
         },

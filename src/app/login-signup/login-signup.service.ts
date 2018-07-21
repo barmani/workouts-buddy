@@ -98,4 +98,16 @@ export class LoginSignupService {
       );
   }
 
+  deleteAccount(userId: string) {
+    const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
+    return this.http.delete('http://localhost:3000/user/' + userId + token)
+      .pipe(
+        map((response: Response) => {
+          const result = response.json();
+          return result;
+        }),
+        catchError((error: Response) => throwError(error.json()))
+      );
+  }
+
 }
