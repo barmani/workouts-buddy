@@ -76,6 +76,7 @@ export class LoginSignupService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
+          return result;
         }),
         catchError((error: Response) => throwError(error.json()))
       );

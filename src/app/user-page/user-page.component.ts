@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, FormControl, FormGroupDirective, NgForm, Valida
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { PasswordValidation } from './password-validation';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 
+import { ChangeEmailDialogComponent } from './change-email-dialog.component';
 import { LoginSignupService } from '../login-signup/login-signup.service';
 import { Workout } from '../models/workout.model';
 import { Exercise } from '../models/exercise.model';
 import { Subscription } from 'rxjs';
+import { User } from '../models/user.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,6 +29,7 @@ export class UserPageComponent implements OnInit {
   subscription: Subscription;
   changePasswordFormGroup: FormGroup;
 
+  user: User;
   oldPassword = new FormControl('', [Validators.required]);
   newPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
   newPasswordConfirm = new FormControl('', [Validators.required])
@@ -35,7 +38,8 @@ export class UserPageComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
     this.subscription = this.loginSignupService.getLoginObservable()
       .subscribe(loginInfo => {
         this.userId = loginInfo.userId;
@@ -53,9 +57,9 @@ export class UserPageComponent implements OnInit {
       newPassword: this.newPassword,
       newPasswordConfirm: this.newPasswordConfirm,
     }, {validator: PasswordValidation.MatchPassword});
-    // this.loginSignupService.getUserPage(this.userId).subscribe((result) => {
-    //   console.log(result);
-    // });
+    this.loginSignupService.getUserPage(this.userId).subscribe((result) => {
+      this.user = new User(result.obj.username, result.obj.email);
+    });
   }
 
   changePassword() {
@@ -65,7 +69,6 @@ export class UserPageComponent implements OnInit {
         this.snackBar.open('Password changed successfully!', 'Dismiss', {duration: 4000});
       }, 250);
     }, (error) => {
-      console.log(error);
       if (error.title === 'Incorrect password') {
         setTimeout(() => {
           this.snackBar.open('Password was incorrect, please try again', 'Dismiss', {duration: 4000});
@@ -77,5 +80,37 @@ export class UserPageComponent implements OnInit {
 
   private equalPasswords() {
     return this.newPassword.value === this.newPasswordConfirm.value ? null : {mismatch: true};
+  }
+
+  openEmailDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true
+    dialogConfig.width = '40rem';
+    dialogConfig.height = '40%';
+    dialogConfig.position = {top: '4rem', right: '4rem'};
+
+    dialogConfig.data = {
+           id: 2,
+           title: 'Change Email',
+           email: this.user.email
+    };
+
+    const dialogRef = this.dialog.open(ChangeEmailDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+        data => {
+          if (data) {
+            if (data.email !== this.user.email) {
+
+                setTimeout(() => {
+                  this.snackBar.open('Successfully saved ', 'Dismiss', {
+                    duration: 7000
+                  });
+                }, 250);
+            }
+          }
+        }
+    );
   }
 }
