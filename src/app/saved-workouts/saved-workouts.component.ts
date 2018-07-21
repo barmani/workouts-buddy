@@ -30,7 +30,7 @@ export class SavedWorkoutsComponent implements OnInit {
           exercises.push(new Exercise(exercise.name, exercise.description, exercise.muscle,
                                       exercise.equipment, exercise._id, exercise.video));
         });
-        this.workouts.push(new Workout(workout.name, workout.difficulty, exercises, workout._id));
+        this.workouts.push(new Workout(workout.name, workout.difficulty, exercises, workout._id, workout.createdAt));
       });
       this.length = this.workouts.length;
       if (this.workouts.length > this.pageSize) {

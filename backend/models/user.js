@@ -10,6 +10,9 @@ var schema = new Schema({
   activationToken: String,
   workouts: [ { type: Schema.Types.ObjectId, ref: 'Workout' } ],
   exerciseSets: [ { type: Schema.Types.ObjectId, ref: 'ExerciseSet' } ]
+},
+{
+  timestamps: true
 });
 
 schema.plugin(mongooseUniqueValidator);

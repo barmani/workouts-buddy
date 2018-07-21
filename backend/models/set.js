@@ -9,6 +9,9 @@ var schema = new Schema({
     default: ['LBS']
   },
   reps: Number
+},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Set', schema);

@@ -46,6 +46,9 @@ router.get('/', function(req, res, next) {
                      workouts.push(workout);
                    }
                    if (workouts.length === user.workouts.length) {
+                     workouts.sort(function(workout1, workout2) {
+                       return workout2.createdAt.getTime() - workout1.createdAt.getTime()
+                     });
                      return res.status(200).json({
                        message: 'retrieved workouts',
                        obj: workouts

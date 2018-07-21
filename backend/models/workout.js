@@ -13,6 +13,9 @@ var schema = new Schema({
     required: true
   },
   exercises: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }]
+},
+{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Workout', schema);

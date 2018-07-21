@@ -14,7 +14,7 @@ var Exercise = require('./models/exercise');
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/workouts-buddy');
-// for now 'reset and seed' the database
+//for now 'reset and seed' the database
 // Exercise.remove({}, function(err) {
 //   if (err) {
 //     console.log(err);
@@ -230,7 +230,7 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   video: 'https://www.youtube.com/embed/pSHjTRCQxIw'
 // });
 // exercise.save();
-
+//
 // mongoose
 //   .connect(
 //     "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/workouts-buddy?retryWrites=true"
