@@ -14,6 +14,8 @@ export class SignupComponent implements OnInit {
   email = '';
   password = '';
   retypePassword = '';
+  usernameTaken = false;
+  emailTaken = false;
 
   constructor(private loginSignupService: LoginSignupService,
               private snackBar: MatSnackBar) {}
@@ -29,12 +31,24 @@ export class SignupComponent implements OnInit {
     this.loginSignupService.signup(this.user)
       .subscribe(
         (data) => {
+          this.usernameTaken = false;
+          this.emailTaken = false;
           setTimeout(() => {
             this.snackBar.open('Please check your email to verify your account!',
                                'Dismiss', {duration: 5000});
           }, 250);
         },
-        error => console.log(error)
+        (error) => {
+          if (error.error.message.includes('unique')) {
+            if (error.error.message.includes('username')) {
+              this.usernameTaken = true;
+              this.emailTaken = false;
+            } else if (error.error.message.includes('email')) {
+              this.emailTaken = true;
+              this.usernameTaken = false;
+            }
+          }
+        }
       );
   }
 

@@ -10,6 +10,9 @@
         <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
           Username is required (minimum 5 characters)
         </small>
+        <small [hidden]="!usernameTaken" class="text-danger">
+          This username is already in use. Please try a different one.
+        </small>
       </div>
     </div>
   </div>
@@ -50,6 +53,9 @@
        <div class="row">
          <small [hidden]="email.valid || (email.pristine && !f.submitted)" class="text-danger">
            Email is required and format should be <i>john@doe.com</i>.
+         </small>
+         <small [hidden]="!emailTaken" class="text-danger">
+           This email has already been used. Please try a different one
          </small>
        </div>
     </div>
