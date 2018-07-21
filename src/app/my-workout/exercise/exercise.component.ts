@@ -21,6 +21,7 @@ export class ExerciseComponent implements OnInit {
   subscription: Subscription;
   username: string;
   lastSets: Set[] = []; // the sets the user did for this exercise last time
+  safeVideo: SafeResourceUrl;
 
   constructor(private myWorkoutService: MyWorkoutService,
               private sanitizer: DomSanitizer) {
@@ -42,10 +43,7 @@ export class ExerciseComponent implements OnInit {
         error => console.log(error)
         );
     }
-  }
-
-  sanitizeUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    this.safeVideo = this.sanitizer.bypassSecurityTrustResourceUrl(this.exercise.video);
   }
 
 }
