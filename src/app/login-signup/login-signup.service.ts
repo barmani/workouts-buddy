@@ -82,8 +82,8 @@ export class LoginSignupService {
       );
   }
 
-  changeUserData(userId: string, oldPassword?: string, newPassword?: string) {
-    const body = JSON.stringify({oldPassword: oldPassword, newPassword: newPassword});
+  changeUserData(userId: string, oldPassword?: string, newPassword?: string, email?: string) {
+    const body = JSON.stringify({oldPassword: oldPassword, newPassword: newPassword, email: email});
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -92,6 +92,7 @@ export class LoginSignupService {
       .pipe(
         map((response: Response) => {
           const result = response.json();
+          return result;
         }),
         catchError((error: Response) => throwError(error.json()))
       );

@@ -361,6 +361,9 @@ router.patch('/:userId', function(req, res, next) {
         });
       }
     }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
     user.save(function(err, result) {
       if (err) {
         return res.status(500).json({

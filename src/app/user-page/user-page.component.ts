@@ -33,6 +33,7 @@ export class UserPageComponent implements OnInit {
   oldPassword = new FormControl('', [Validators.required]);
   newPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
   newPasswordConfirm = new FormControl('', [Validators.required])
+  uniqueEmailMessage = false;
 
   constructor(private loginSignupService: LoginSignupService,
               private fb: FormBuilder,
@@ -63,18 +64,18 @@ export class UserPageComponent implements OnInit {
   }
 
   changePassword() {
-    this.loginSignupService.changeUserData(this.userId, this.oldPassword.value, this.newPassword.value).subscribe((response) => {
-      console.log(response);
-      setTimeout(() => {
-        this.snackBar.open('Password changed successfully!', 'Dismiss', {duration: 4000});
-      }, 250);
-    }, (error) => {
-      if (error.title === 'Incorrect password') {
-        setTimeout(() => {
-          this.snackBar.open('Password was incorrect, please try again', 'Dismiss', {duration: 4000});
-        }, 250);
-      }
-    });
+    this.loginSignupService.changeUserData(this.userId, this.oldPassword.value, this.newPassword.value)
+      .subscribe((response) => {
+          setTimeout(() => {
+            this.snackBar.open('Password changed successfully!', 'Dismiss', {duration: 4000});
+          }, 250);
+        }, (error) => {
+          if (error.title === 'Incorrect password') {
+            setTimeout(() => {
+              this.snackBar.open('Password was incorrect, please try again', 'Dismiss', {duration: 4000});
+            }, 250);
+          }
+        });
     this.changePasswordFormGroup.reset();
   }
 
@@ -100,16 +101,25 @@ export class UserPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
         data => {
-          if (data) {
-            if (data.email !== this.user.email) {
-
-                setTimeout(() => {
-                  this.snackBar.open('Successfully saved ', 'Dismiss', {
-                    duration: 7000
-                  });
-                }, 250);
+          if (data && data != this.user.email) {
+              const oldEmail = this.user.email;
+              this.loginSignupService.changeUserData(this.userId, undefined, undefined, data)
+                .subscribe((result) => {
+                  this.uniqueEmailMessage = false;
+                  this.user.email = result.obj.email;
+                  setTimeout(() => {
+                    this.snackBar.open('Successfully changed email from ' + oldEmail + ' to '
+                                        + this.user.email, 'Dismiss', {
+                      duration: 5000
+                    });
+                  }, 250);
+                },
+                (err) => {
+                  if (err.error.message.includes('unique')) {
+                    this.uniqueEmailMessage = true;
+                  }
+                });
             }
-          }
         }
     );
   }

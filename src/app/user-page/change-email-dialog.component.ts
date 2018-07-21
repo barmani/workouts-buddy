@@ -23,7 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
                    name="change-email"
                    type="email"
                    placeholder="Change Email"
-                   formControlName="emailFormControl"
+                   formControlName="email"
                    [errorStateMatcher]="matcher"
                    email>
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -58,14 +58,14 @@ export class ChangeEmailDialogComponent {
 
     ngOnInit() {
         this.form = this.fb.group({
-            emailFormControl: this.emailFormControl
+            email: this.emailFormControl
         });
     }
 
 
     save() {
       if (this.emailFormControl.valid) {
-        this.dialogRef.close(this.form.value);
+        this.dialogRef.close(this.emailFormControl.value);
       }
     }
 
