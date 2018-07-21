@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { CustomWorkoutComponent } from './custom-workout/custom-workout.component';
-import { DashboardComponent } from './dash/dashboard.component';
+import { AboutComponent } from './about/about.component';
 import { LoginSignupComponent } from './login-signup/login-signup/login-signup.component';
 import { NewWorkoutComponent } from './my-workout/new-workout/new-workout.component';
 import { MyWorkoutComponent } from './my-workout/my-workout.component';
@@ -11,7 +11,7 @@ import { UserPageComponent } from './user-page/user-page.component'
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: '/my-workout/current-workout', pathMatch: 'full' },
-  { path: 'dash', component: DashboardComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'my-workout', component: MyWorkoutComponent, children: MY_WORKOUT_ROUTES },
   { path: 'custom-workout', component: CustomWorkoutComponent },
   { path: 'login-signup', component: LoginSignupComponent },

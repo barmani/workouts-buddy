@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var customWorkoutRoutes = require('./routes/custom-workout');
-var dashRoutes = require('./routes/dash');
+var aboutRoutes = require('./routes/about');
 var myWorkoutRoutes = require('./routes/my-workout');
 var savedWorkoutRoutes = require('./routes/saved-workouts');
 var userRoutes = require('./routes/user');
@@ -267,7 +267,7 @@ app.use((req, res, next) => {
 
 
 app.use('/custom-workout', customWorkoutRoutes);
-app.use('/dash', appRoutes);
+app.use('/about', appRoutes);
 app.use('/my-workout', myWorkoutRoutes);
 app.use('/user', userRoutes);
 app.use('/saved-workouts', savedWorkoutRoutes);

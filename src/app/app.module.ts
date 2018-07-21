@@ -26,7 +26,7 @@ import { ChecklistComponent } from './my-workout/checklist/checklist.component';
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
 import { CustomWorkoutService } from "./custom-workout/custom-workout.service";
-import { DashboardComponent } from "./dash/dashboard.component";
+import { AboutComponent } from "./about/about.component";
 import { EqualValidator } from './login-signup/equal-validator.directive';
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
 import { HeaderComponent } from "./header/header.component";
@@ -49,13 +49,13 @@ import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     declarations: [
+      AboutComponent,
       AppComponent,
       ChangeEmailDialogComponent,
       ChangeExerciseDialogComponent,
       ChecklistComponent,
       CurrentWorkoutComponent,
       CustomWorkoutComponent,
-      DashboardComponent,
       EqualValidator,
       ExerciseComponent,
       HeaderComponent,
