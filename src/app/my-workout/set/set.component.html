@@ -1,17 +1,24 @@
 <div class="row">
   <form [formGroup]="setForm">
     <div class="form-group">
-      <label for="weight">Weight: </label>
-        <input id="weight" name="weight" type="text" formControlName="weight">
-      <label for="unitOfMeasure">Unit: </label>
-      <select name="unitOfMeasure" id="unitOfMeasure" formControlName="unitOfMeasure">
-        <option *ngFor="let unitOfMeasure of unitsOfMeasure" [ngValue]="unitOfMeasure">{{ unitOfMeasure }}</option>
-      </select>
-      <label for="reps">Reps: </label>
-      <select name="reps" id="reps" formControlName="reps">
-        <option *ngFor="let repOption of repOptions" [ngValue]="repOption">{{ repOption }}</option>
-      </select>
-      <span *ngIf="setArrayLength !== 7"class="glyphicon glyphicon-plus" id="add-set-icon" (click)="addSet()"></span>
+      <mat-form-field>
+        <input matInput placeholder="Weight" formControlName="weight">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Unit" formControlName="unitOfMeasure">
+          <mat-option *ngFor="let unitOfMeasure of unitsOfMeasure" [value]="unitOfMeasure">
+            {{ unitOfMeasure }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Reps" formControlName="reps">
+          <mat-option *ngFor="let repOption of repOptions" [value]="repOption">
+            {{ repOption }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span *ngIf="setArrayLength !== 7" class="glyphicon glyphicon-plus" id="add-set-icon" (click)="addSet()"></span>
       <span *ngIf="index > 0" class="glyphicon glyphicon-minus" id="remove-set-icon" (click)="removeSet()"></span>
     </div>
   </form>

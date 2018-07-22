@@ -1,0 +1,53 @@
+
+/* .bottom-panel-wrapper {
+  white-space: nowrap;
+  max-width: 99%;
+} */
+/*
+.bottom-panel-item {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+} */
+
+.exercise-info {
+  width: 10%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 3%;
+  white-space: normal;
+}
+
+.youtube-frame {
+  width: 40%;
+  display: inline-block;
+  margin: 0 3%;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.set-container {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 3%;
+  white-space: normal;
+}
+
+@media screen and (max-width: 770px) {
+  h3 {
+    font-size: .8em;
+  }
+
+  h5 {
+    font-size: .5em;
+  }
+
+  iframe {
+    width: 100px;
+    height: 100px;
+  }
+}

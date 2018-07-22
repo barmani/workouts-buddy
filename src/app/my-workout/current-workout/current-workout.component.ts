@@ -13,7 +13,8 @@ import { Workout } from '../../models/workout.model';
 
 @Component({
     selector: 'app-current-workout',
-    templateUrl: './current-workout.component.html'
+    templateUrl: './current-workout.component.html',
+    styleUrls: ['./current-workout.component.css']
 })
 export class CurrentWorkoutComponent implements OnInit {
   workout: Workout;

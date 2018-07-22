@@ -1,14 +1,10 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="exercise-info">
     <h3>{{ exercise.name }}</h3>
     <h5>Muscle: {{ exercise.muscle }}</h5>
     <h5>Equipment: {{ exercise.equipment }}</h5>
-    <p>{{ exercise.description }}</p>
   </div>
-  <div class="col-md-4">
-    <app-set-container [sets]="lastSets" [exerciseId]="exercise._id"></app-set-container>
-  </div>
-  <div class="col-md-4">
+  <div class="youtube-frame">
     <iframe width="300"
             height="200"
             [src]="safeVideo"
@@ -16,5 +12,8 @@
             allow="autoplay; encrypted-media"
             allowfullscreen>
     </iframe>
+  </div>
+  <div class="set-container">
+    <app-set-container [sets]="lastSets" [exerciseId]="exercise._id"></app-set-container>
   </div>
 </div>

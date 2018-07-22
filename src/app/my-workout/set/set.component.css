@@ -1,5 +1,16 @@
-input {
-  width: 4.5rem;
+mat-form-field {
+  width: 7rem;
+}
+
+@media screen and (max-width: 770px) {
+  mat-form-field {
+    width: 3.25rem;
+    font-size: .4em;
+  }
+
+  span {
+    font-size: .5em;
+  }
 }
 
 #add-set-icon {

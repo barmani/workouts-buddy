@@ -2,7 +2,7 @@
   <mat-horizontal-stepper linear>
     <mat-step [stepControl]="levelsFormGroup">
       <form [formGroup]="levelsFormGroup">
-        <ng-template matStepLabel>Choose a Difficulty</ng-template>
+        <ng-template matStepLabel><small>Difficulty</small></ng-template>
         <div class="row align-content-center">
           <mat-radio-group class="levels-radio-group" formControlName="levelsFormControl" required>
             <div class="col-md-1 col-md-offset-2" *ngFor="let level of levels">
@@ -22,7 +22,7 @@
     </mat-step>
     <mat-step [stepControl]="muscleGroupFormGroup">
       <form [formGroup]="muscleGroupFormGroup">
-        <ng-template matStepLabel>Choose Two Muscle Groups</ng-template>
+        <ng-template matStepLabel><small>Two Muscle Groups</small></ng-template>
         <div class="row">
           <div class="col-md-2 col-md-offset-2">
             <div class="row">

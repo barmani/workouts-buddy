@@ -1,29 +1,31 @@
 <div class="row">
-  <div class="col-md-8">
-    <h3>Current Workout</h3>
-  </div>
-  <div class="col-md-1">
-    <button class="btn btn-primary" (click)="openSaveWorkoutDialog()" *ngIf="isLoggedIn">Save Workout</button>
-  </div>
-  <div class="col-md-1">
-    <button class="btn btn-primary" (click)="resetWorkout()">New Workout</button>
-  </div>
-  <div class="col-md-2">
-    <button class="btn btn-primary" (click)="openOrderExerciseDialog()">Change Exercise Order</button>
+  <div class="current-workout-top">
+    <div class="top-item custom-workout-title">
+      <h3>Current Workout</h3>
+    </div>
+    <div class="top-item">
+      <button class="btn btn-sm btn-primary" (click)="resetWorkout()">New Workout</button>
+    </div>
+    <div class="top-item">
+      <button class="btn btn-sm btn-primary" (click)="openOrderExerciseDialog()">Reorder Exercises</button>
+    </div>
+    <div class="top-item save-button">
+      <button class="btn btn-sm btn-success" (click)="openSaveWorkoutDialog()" *ngIf="isLoggedIn">Save Workout</button>
+    </div>
   </div>
 </div>
 <div class="row">
-    <mat-accordion>
+    <mat-accordion class="headers-align">
       <mat-expansion-panel *ngFor="let exercise of workout.exercises; let i = index">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ i + 1 }}. {{ exercise.name }} {{ getNumberOfSets(exercise) }}
+            {{ i + 1 }}. {{ exercise.name }}
           </mat-panel-title>
           <mat-panel-description>
-
+            {{ getNumberOfSets(exercise) }}
           </mat-panel-description>
           <div class="col-md-2">
-            <button class="btn btn-primary" (click)="swapExercise(exercise)">Swap Out</button>
+            <button class="btn btn-primary btn-sm" (click)="swapExercise(exercise)">Swap Out</button>
           </div>
         </mat-expansion-panel-header>
         <app-exercise [exercise]="exercise"
