@@ -1,21 +1,24 @@
-<div class="row">
-  <mat-toolbar color="primary">
+<div class="row position-absolute">
+  <mat-toolbar color="primary" class="toolbar">
     <div class="col-md-2">
       <a class="main-logo" routerLink="/">WorkoutsBuddy</a>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 position-absolute" fxShow="true" fxHide.lt-lg="true">
       <ul>
         <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/my-workout']">Create/View Workout</a></li>
         <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/custom-workout']">Custom Workout</a></li>
-        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/about']">About</a></li>
         <li><a class="menu-option" *ngIf="isLoggedIn" mat-button routerLinkActive="mat-accent" [routerLink]="['/saved-workouts']">My Saved Workouts</a></li>
+        <li><a class="menu-option" mat-button routerLinkActive="mat-accent" [routerLink]="['/about']">About</a></li>
       </ul>
     </div>
-    <div class=".col-md-3">
+    <div class="col-md-1">
+
+    </div>
+    <div class=".col-md-4 text-right">
       <div *ngIf="!isLoggedIn">
         <a routerLink="/login-signup"><button class="btn btn-primary">Login/Signup</button></a>
       </div>
-      <div class="col-md-6" *ngIf="isLoggedIn">
+      <div class="col-md-6" *ngIf="isLoggedIn" fxShow="true" fxHide.lt-lg="true">
         <h5 id="welcome-statement">Welcome, <a id="user-link" [routerLink]="['/user', userId]">{{ username }}</a></h5>
       </div>
       <div class="col-md-6" *ngIf="isLoggedIn">
@@ -24,6 +27,69 @@
     </div>
   </mat-toolbar>
 </div>
-<div class="app-wrapper">
-  <router-outlet></router-outlet>
+<div class="row">
+  <div class="app-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+<mat-toolbar color="primary" class="bottom-toolbar fixed-bottom" fxShow="true" fxHide.gt-md="true">
+  <div class="bottom-panel-wrapper">
+    <div class="bottom-panel-item menu-option btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/my-workout']">
+      <div class="row text-center">
+        <span class="glyphicon glyphicon-sunglasses"></span>
+      </div>
+      <div class="row left-text">
+        <small>Create/View</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item menu-option text-center btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/custom-workout']">
+      <div class="row">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </div>
+      <div class="row">
+        <small>Custom</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item menu-option text-center btn"
+         *ngIf="isLoggedIn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/saved-workouts']">
+      <div class="row">
+        <span class="glyphicon glyphicon-folder-open"></span>
+      </div>
+      <div class="row">
+        <small>Saved</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item menu-option text-center btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/about']">
+      <div class="row">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </div>
+      <div class="row">
+        <small>About</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item menu-option text-center btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/user', userId]"
+         *ngIf="isLoggedIn">
+      <div class="row">
+        <span class="glyphicon glyphicon-user"></span>
+      </div>
+      <div class="row">
+        <small>User</small>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

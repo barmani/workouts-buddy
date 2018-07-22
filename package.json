@@ -17,6 +17,7 @@
     "@angular/common": "^6.0.0",
     "@angular/compiler": "^6.0.0",
     "@angular/core": "^6.0.0",
+    "@angular/flex-layout": "^6.0.0-beta.16",
     "@angular/forms": "^6.0.0",
     "@angular/http": "^6.0.0",
     "@angular/material": "^6.3.2",
@@ -35,6 +36,7 @@
     "ng2-dragula": "^1.5.0",
     "nodemailer": "^4.6.7",
     "rxjs": "^6.0.0",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -46,6 +48,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "igniteui-angular": "^6.1.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^2.0.4",

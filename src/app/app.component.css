@@ -24,6 +24,10 @@ li {
   padding: 2rem;
 }
 
+.toolbar {
+  width: 100%;
+}
+
 .app-wrapper {
   padding: 4rem;
 }
@@ -34,4 +38,39 @@ li {
 
 #user-link:hover {
   color: lightgray;
+}
+
+.bottom-toolbar {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-panel-wrapper {
+  white-space: nowrap;
+  max-width: 99%;
+}
+
+.bottom-panel-item {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+}
+
+@media screen and (max-width: 321px) {
+  .left-text {
+    text-align: left;
+  }
+  .bottom-panel-item {
+    width: 16%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
 }

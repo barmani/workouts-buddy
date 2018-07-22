@@ -14,10 +14,12 @@ import { MatDialogModule,
          MatSlideToggleModule,
          MatStepperModule,
          MatExpansionModule,
+         MatSidenavModule,
          MatSnackBarModule,
          MatSelectModule,
          MatAutocompleteModule,
          MatPaginatorModule } from '@angular/material';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from "./app.component";
 import { ChangeEmailDialogComponent } from './user-page/change-email-dialog.component';
@@ -74,7 +76,7 @@ import { DragulaModule } from 'ng2-dragula';
               BrowserModule,
               BrowserAnimationsModule,
               DragulaModule,
-              routing,
+              FlexLayoutModule,
               FormsModule,
               ReactiveFormsModule,
               HttpClientModule,
@@ -88,11 +90,13 @@ import { DragulaModule } from 'ng2-dragula';
               MatRadioModule,
               MatCheckboxModule,
               MatButtonModule,
+              MatSidenavModule,
               MatSlideToggleModule,
               MatSnackBarModule,
               MatSelectModule,
               MatAutocompleteModule,
-              MatPaginatorModule
+              MatPaginatorModule,
+              routing
              ],
     exports: [
               MatDialogModule,
