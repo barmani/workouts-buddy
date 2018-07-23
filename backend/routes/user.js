@@ -217,18 +217,38 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
         obj: []
       });
     } else {
-      var retExerciseSet = {};
+      // get 5 most recent sets if they exist
+      var retExerciseSets = [];
       user.exerciseSets.forEach((exerciseSetId, index) => {
         ExerciseSet.findById(exerciseSetId)
                    .populate('sets')
                    .exec(function(err, exerciseSet) {
           if (exerciseSet.exercise == req.params.exerciseId) {
-            retExerciseSet = exerciseSet
+            exerciseSet.sets.forEach((set, index) => {
+              if (retExerciseSets.length < 5) {
+                retExerciseSets.push(set);
+              } else {
+                // replace minimum each time
+                let minDate = set.updatedAt;
+                let newIndex = -1;
+                retExerciseSets.forEach((retSet, index) => {
+                  if (retSet.updatedAt.getTime() < minDate.getTime()) {
+                    minDate = retSet.updatedAt;
+                    newIndex = index;
+                  }
+                  if (index === retExerciseSets.length - 1) {
+                    if (newIndex >= 0) {
+                      retExerciseSets.splice(newIndex, 1, set);
+                    }
+                  }
+                });
+              }
+            });
           }
-          if (index === user.exerciseSets.length - 1) {
+          if (index === user.exerciseSets.length - 1 || index === 5) {
             return res.status(200).json({
               message: 'Sets Retrieved',
-              obj: retExerciseSet
+              obj: retExerciseSets
             });
           }
         });
@@ -293,26 +313,54 @@ router.post('/:userId/:exerciseId', function(req, res, next) {
     }
     User.findById(req.params.userId, function(err, user) {
       var found = false;
-      user.exerciseSets.forEach((exerciseSet) => {
-        if (exerciseSet.exercise === req.params.exerciseId) {
-          found = true;
-          // TODO: Here is where to potentially delete old sets
-          exerciseSet.sets.push(set);
-          exerciseSet.save(function(err, result) {
-            if (err) {
-              return res.status(500).json({
-                title: 'An error occurred saving the exercise set',
-                error: err
+      if (user.exerciseSets && user.exerciseSets.length > 0) {
+        user.exerciseSets.forEach((exerciseSet, index) => {
+          ExerciseSet.findById(exerciseSet, function(err, es) {
+            if (es.exercise == req.params.exerciseId) {
+              found = true;
+              es.sets.push(set);
+              es.save(function(err, result) {
+                if (err) {
+                  return res.status(500).json({
+                    title: 'An error occurred saving the exercise set',
+                    error: err
+                  });
+                }
+                return res.status(201).json({
+                  message: 'Exercise Set updated successfully',
+                  obj: set
+                });
+              });
+            } else if (index === user.exerciseSets.length - 1 && !found) {
+              var newExerciseSet = new ExerciseSet({
+                sets: [set._id],
+                exercise: req.params.exerciseId
+              });
+              newExerciseSet.save(function(err, exerciseSet) {
+                if (err) {
+                  return res.status(500).json({
+                    title: 'An error occurred saving the exercise set',
+                    error: err
+                  });
+                }
+                user.exerciseSets.push(newExerciseSet);
+                user.save(function(err, savedUser) {
+                  if (err) {
+                    return res.status(500).json({
+                      title: 'An error occurred saving the exercise set to the user\'s sets',
+                      error: err
+                    });
+                  }
+                  return res.status(201).json({
+                    message: 'Exercise set added to user\'s exercise sets successfully',
+                    obj: set
+                  });
+                });
               });
             }
-            return res.status(201).json({
-              message: 'Exercise Set updated successfully',
-              obj: set
-            });
           });
-        }
-      });
-      if (!found) {
+        });
+      } else {
         var newExerciseSet = new ExerciseSet({
           sets: [set._id],
           exercise: req.params.exerciseId
@@ -390,7 +438,7 @@ router.delete('/:id', function(req, res, next) {
     return res.status(201).json({
       message: 'User updated successfully',
       obj: result
-    }); 
+    });
   });
 });
 
