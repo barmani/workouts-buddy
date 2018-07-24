@@ -34,7 +34,6 @@ export class ExerciseComponent implements OnInit {
       this.myWorkoutService.getUserSets(this.userId, this.exercise._id)
         .subscribe(data => {
           if (data && Object.keys(data.obj).length !== 0) {
-            console.log(data);
             data.obj.forEach((set) => {
               this.lastSets.push(new Set(set.weight, set.unitOfMeasure, set.reps, set._id));
             });

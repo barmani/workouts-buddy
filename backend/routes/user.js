@@ -219,37 +219,49 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
     } else {
       // get 5 most recent sets if they exist
       var retExerciseSets = [];
+      var numProcessed = user.exerciseSets.length;
       user.exerciseSets.forEach((exerciseSetId, index) => {
         ExerciseSet.findById(exerciseSetId)
                    .populate('sets')
                    .exec(function(err, exerciseSet) {
-          if (exerciseSet.exercise == req.params.exerciseId) {
-            exerciseSet.sets.forEach((set, index) => {
-              if (retExerciseSets.length < 5) {
-                retExerciseSets.push(set);
-              } else {
-                // replace minimum each time
-                let minDate = set.updatedAt;
-                let newIndex = -1;
-                retExerciseSets.forEach((retSet, index) => {
-                  if (retSet.updatedAt.getTime() < minDate.getTime()) {
-                    minDate = retSet.updatedAt;
-                    newIndex = index;
-                  }
-                  if (index === retExerciseSets.length - 1) {
-                    if (newIndex >= 0) {
-                      retExerciseSets.splice(newIndex, 1, set);
+          if (exerciseSet.exercise == req.params.exerciseId && exerciseSet.sets.length <= 5) {
+            retExerciseSets = exerciseSet.sets;
+            returnSets(retExerciseSets);
+          } else if (exerciseSet.exercise == req.params.exerciseId && exerciseSet.sets.length > 5) {
+              exerciseSet.sets.forEach((set, setIndex) => {
+                // push the first five into the returning array
+                if (retExerciseSets.length < 5) {
+                  retExerciseSets.push(set);
+                } else {
+                  let minDate = set.updatedAt;
+                  let newIndex = -1;
+                  // replace oldest set each time
+                  retExerciseSets.forEach((retSet, retIndex) => {
+                    if (retSet.updatedAt.getTime() < minDate.getTime()) {
+                      minDate = retSet.updatedAt;
+                      newIndex = retIndex;
                     }
-                  }
-                });
-              }
-            });
+                    if (retIndex === retExerciseSets.length - 1) {
+                      // replace the oldest set in retExerciseSets if it is older than the current set
+                      if (newIndex >= 0) {
+                        retExerciseSets.splice(newIndex, 1, set);
+                      }
+                    }
+                  });
+                }
+              });
+              returnSets(retExerciseSets);
+          } else {
+            returnSets(retExerciseSets);
           }
-          if (index === user.exerciseSets.length - 1 || index === 5) {
-            return res.status(200).json({
-              message: 'Sets Retrieved',
-              obj: retExerciseSets
-            });
+          function returnSets(sets) {
+            numProcessed--;
+            if (numProcessed === 0) {
+              return res.status(200).json({
+                message: 'Sets retrieved successfully',
+                obj: sets
+              });
+            }
           }
         });
       });

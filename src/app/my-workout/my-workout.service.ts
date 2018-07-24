@@ -94,9 +94,7 @@ export class MyWorkoutService {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
     const headers = new Headers({'Content-Type': 'application/json'});
     const body = JSON.stringify(set);
-    console.log(set);
     if (set._id) {
-      console.log('patch');
       return this.http.patch('http://localhost:3000/user/' + userId + '/' + exerciseId + '/' + set._id + token,
                               body, {headers: headers})
         .pipe(
@@ -107,13 +105,11 @@ export class MyWorkoutService {
           catchError((error: Response) => throwError(error.json()))
         );
     } else {
-      console.log('post');
       return this.http.post('http://localhost:3000/user/' + userId + '/' + exerciseId + token,
                               body, {headers: headers})
         .pipe(
           map((response: Response) => {
             const result = response.json();
-            console.log(result);
             return result;
           }),
           catchError((error: Response) => throwError(error.json()))

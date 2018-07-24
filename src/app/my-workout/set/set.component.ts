@@ -50,7 +50,6 @@ export class SetComponent implements OnInit {
       if (localStorage.getItem('userId') && this.isValidEntry(value)) {
         this.myWorkoutService.setEdited(this.set, localStorage.getItem('userId'), this.exerciseId)
           .subscribe((updatedSet) => {
-            console.log(updatedSet);
              if (!this.set._id) {
                this.set._id = updatedSet.obj._id;
              }
