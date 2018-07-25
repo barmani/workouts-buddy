@@ -256,6 +256,7 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
           }
           function returnSets(sets) {
             numProcessed--;
+            // make sure this does not run before the forEach loop finishes
             if (numProcessed === 0) {
               return res.status(200).json({
                 message: 'Sets retrieved successfully',

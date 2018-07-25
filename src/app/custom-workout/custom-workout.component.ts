@@ -12,7 +12,8 @@ import {map, startWith} from 'rxjs/operators';
 
 @Component({
     selector: 'app-custom-workout',
-    templateUrl: './custom-workout.component.html'
+    templateUrl: './custom-workout.component.html',
+    styleUrls: ['./custom-workout.component.css']
 })
 export class CustomWorkoutComponent implements OnInit {
   muscleFields = ['', 'BICEPS', 'BACK', 'TRICEPS', 'CHEST', 'LEGS', 'SHOULDERS', 'ABS', 'FULL_BODY'];

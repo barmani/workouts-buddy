@@ -1,43 +1,41 @@
-<div class="row">
-  <div class="col-md-8">
-    <form [formGroup]="formGroup" (ngSubmit)="search()">
-      <h1>Custom Workout</h1>
-      <div class="col-md-3">
-        <mat-form-field>
-          <mat-select placeholder="Muscle Group" formControlName="muscleGroup">
-            <mat-option *ngFor="let field of muscleFields" [value]="field">
-              {{ field }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field>
-          <mat-select placeholder="Equipment" formControlName="equipment">
-            <mat-option *ngFor="let field of equipmentFields" [value]="field">
-              {{ field }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field>
-          <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName" [matAutocomplete]="auto">
-        </mat-form-field>
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{ option }}
+<form [formGroup]="formGroup" (ngSubmit)="search()">
+  <h3>Custom Workout</h3>
+  <div class="search-content">
+    <div class="muscle-options-container">
+      <mat-form-field class="top-form-field">
+        <mat-select placeholder="Muscle Group" formControlName="muscleGroup">
+          <mat-option *ngFor="let field of muscleFields" [value]="field">
+            {{ field }}
           </mat-option>
-        </mat-autocomplete>
-      </div>
-      <div class="col-md-3">
-        <button class="btn btn-primary" type="submit">Search</button>
-        <button class="btn btn-danger" type="button" (click)="clearSearch()">Clear</button>
-      </div>
-    </form>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="equipment-options-container">
+      <mat-form-field class="top-form-field" id="equipment-form-field">
+        <mat-select placeholder="Equipment" formControlName="equipment">
+          <mat-option *ngFor="let field of equipmentFields" [value]="field">
+            {{ field }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="exercise-name-input-container">
+      <mat-form-field id="exercise-name-input">
+        <input matInput placeholder="Type Exercise Name..." formControlName="exerciseName" [matAutocomplete]="auto">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+    <div class="search-buttons">
+      <button class="btn btn-primary btn-sm" id="search-button" type="submit">Search</button>
+      <button class="btn btn-danger btn-sm" id="clear-button" type="button" (click)="clearSearch()">Clear</button>
+    </div>
   </div>
-</div>
-<div class="col-md-8">
+</form>
+<div class="col-md-9">
   <div class="row" *ngIf="searchResults && searchResults.length > 0; else noResultsTemplate">
       <hr>
       <mat-accordion>
@@ -47,10 +45,12 @@
               {{ exercise.name }}
             </mat-panel-title>
             <mat-panel-description>
-
+              <div class="col-md-2 add-workout-button-description">
+                <button class="btn btn-primary btn-small" (click)="addToWorkout(exercise)">Add To Workout</button>
+              </div>
             </mat-panel-description>
-            <div class="col-md-2">
-              <button class="btn btn-primary" (click)="addToWorkout(exercise)">Add To Workout</button>
+            <div class="col-md-2 add-workout-button">
+              <button class="btn btn-primary btn-small" (click)="addToWorkout(exercise)">Add To Workout</button>
             </div>
           </mat-expansion-panel-header>
           <app-exercise [exercise]="exercise"></app-exercise>
@@ -69,16 +69,19 @@
     </div>
   </ng-template>
 </div>
-<div class="col-md-4" *ngIf="customWorkout.exercises.length > 0">
+<div class="col-md-3" *ngIf="customWorkout.exercises.length > 0">
   <h6>Current Workout</h6>
   <div class="row" *ngFor="let exercise of customWorkout.exercises">
     <div class="col-md-4">
       <p>{{ exercise.name }} ({{ exercise.muscle }})</p>
     </div>
     <div class="col-md-4">
-      <button class="btn btn-primary" (click)="remove(exercise)">Remove</button>
+      <button class="btn btn-primary btn-sm" (click)="remove(exercise)">Remove</button>
     </div>
   </div>
-  <button class="btn btn-success" (click)="saveWorkout()">Save Workout</button>
-  <button class="btn btn-danger" (click)="clearWorkout()">Clear Workout</button>
+  <button class="btn btn-success btn-sm" (click)="saveWorkout()">Save Workout</button>
+  <button class="btn btn-danger btn-sm" (click)="clearWorkout()">Clear Workout</button>
+</div>
+<div class="row">
+  <br><br>
 </div>

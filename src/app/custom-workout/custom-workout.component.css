@@ -1,0 +1,252 @@
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-content {
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.muscle-options-container {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.equipment-options-container {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.exercise-name-input-container {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.search-buttons {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.top-form-field {
+  width: 12rem;
+}
+
+#exercise-name-input {
+  width: 14rem;
+}
+
+.add-workout-button {
+  margin-left: 25%;
+}
+
+.add-workout-button-description {
+  display: none;
+}
+
+@media screen and (max-width: 1147px) {
+
+  .muscle-options-container {
+    width: 14%;
+  }
+
+  .equipment-options-container {
+    width: 14%;
+  }
+
+  .exercise-name-input-container {
+    width: 14%;
+  }
+
+  .search-buttons {
+    width: 14%;
+  }
+
+  .top-form-field {
+    width: 12rem;
+  }
+
+  #exercise-name-input {
+    width: 14rem;
+  }
+
+}
+@media screen and (max-width: 991px) {
+
+  .muscle-options-container {
+    width: 17%;
+  }
+
+  .equipment-options-container {
+    width: 17%;
+  }
+
+  .exercise-name-input-container {
+    width: 17%;
+  }
+
+  .search-buttons {
+    width: 17%;
+  }
+
+}
+
+@media screen and (max-width: 813px) {
+
+  .muscle-options-container {
+    width: 20%;
+  }
+
+  .equipment-options-container {
+    width: 20%;
+  }
+
+  .exercise-name-input-container {
+    width: 20%;
+  }
+
+  .search-buttons {
+    width: 20%;
+  }
+
+}
+
+@media screen and (max-width: 710px) {
+
+  .muscle-options-container {
+    width: 25%;
+  }
+
+  .equipment-options-container {
+    width: 25%;
+  }
+
+  .exercise-name-input-container {
+    width: 25%;
+  }
+
+  .search-buttons {
+    width: 25%;
+  }
+
+}
+@media screen and (max-width: 571px) {
+  h3 {
+    font-size: 1.5em;
+  }
+
+  .muscle-options-container {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  .equipment-options-container {
+    width: 30%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  .top-form-field {
+    width: 12rem;
+  }
+
+  .exercise-name-input-container {
+    width: 40%;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  #exercise-name-input {
+    width: 14rem;
+  }
+
+  .search-buttons {
+    width: 40%;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  .search-content {
+    vertical-align: center;
+  }
+
+  .add-workout-button {
+    display: none;
+  }
+
+  .add-workout-button-description {
+    display: inline;
+  }
+
+}
+
+@media screen and (max-width: 439px) {
+
+  .muscle-options-container {
+    width: 35%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  .equipment-options-container {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
+  .exercise-name-input-container {
+    width: 30%;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: nowrap;
+  }
+
+  #exercise-name-input {
+    width: 14rem;
+  }
+
+  .search-buttons {
+    width: 30%;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: nowrap;
+  }
+
+}
