@@ -9,7 +9,8 @@ import { Exercise } from '../models/exercise.model';
 
 @Component({
   selector: 'app-saved-workout',
-  templateUrl: './saved-workouts.component.html'
+  templateUrl: './saved-workouts.component.html',
+  styleUrls: ['./saved-workouts.component.css']
 })
 export class SavedWorkoutsComponent implements OnInit {
   workouts: Workout[] = [];

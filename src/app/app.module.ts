@@ -46,6 +46,7 @@ import { SavedWorkoutsService } from './saved-workouts/saved-workouts.service';
 import { SetComponent } from './my-workout/set/set.component';
 import { SetContainerComponent } from './my-workout/set-container/set-container.component';
 import { SignupComponent } from './login-signup/signup/signup.component';
+import { TruncatePipe } from './truncate.pipe';
 import { UserPageComponent } from './user-page/user-page.component';
 import { DragulaModule } from 'ng2-dragula';
 
@@ -70,6 +71,7 @@ import { DragulaModule } from 'ng2-dragula';
       SetComponent,
       SetContainerComponent,
       SignupComponent,
+      TruncatePipe,
       UserPageComponent
     ],
     imports: [
