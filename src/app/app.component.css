@@ -27,11 +27,13 @@ ul {
     white-space: normal;
 }
 
-.bottom-toolbar {
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.bottom-panel-item-logged-off {
+  width: 29%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 3%;
+  white-space: normal;
 }
 
 .main-logo {
@@ -53,6 +55,20 @@ ul {
   width: 100%;
 }
 
+#bottom-toolbar  {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#bottom-toolbar-logged-off {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 #welcome-statement {
   font-size: .7em;
 }
@@ -71,7 +87,16 @@ ul {
     margin: 0 3%;
     white-space: normal;
   }
-  
+
+  .bottom-panel-item-logged-off {
+    width: 18%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
+  }
+
   .left-text {
     text-align: left;
   }

@@ -32,7 +32,7 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<mat-toolbar color="primary" class="bottom-toolbar fixed-bottom" fxShow="true" fxHide.gt-md="true">
+<mat-toolbar *ngIf="isLoggedIn" color="primary" id="bottom-toolbar" class="fixed-bottom" fxShow="true" fxHide.gt-md="true">
   <div class="bottom-panel-wrapper">
     <div class="bottom-panel-item menu-option btn"
          mat-button
@@ -57,7 +57,6 @@
       </div>
     </div>
     <div class="bottom-panel-item menu-option text-center btn"
-         *ngIf="isLoggedIn"
          mat-button
          routerLinkActive="mat-accent"
          [routerLink]="['/saved-workouts']">
@@ -82,13 +81,50 @@
     <div class="bottom-panel-item menu-option text-center btn"
          mat-button
          routerLinkActive="mat-accent"
-         [routerLink]="['/user', userId]"
-         *ngIf="isLoggedIn">
+         [routerLink]="['/user', userId]">
       <div class="row">
         <span class="glyphicon glyphicon-user"></span>
       </div>
       <div class="row">
         <small>User</small>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="!isLoggedIn" color="primary" id="bottom-toolbar-logged-off" class="fixed-bottom" fxShow="true" fxHide.gt-md="true">
+  <div class="bottom-panel-wrapper">
+    <div class="bottom-panel-item-logged-off menu-option btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/my-workout']">
+      <div class="row text-center">
+        <span class="glyphicon glyphicon-sunglasses"></span>
+      </div>
+      <div class="row left-text">
+        <small>Create/View</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item-logged-off menu-option text-center btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/custom-workout']">
+      <div class="row">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </div>
+      <div class="row">
+        <small>Custom</small>
+      </div>
+    </div>
+    <div class="bottom-panel-item-logged-off menu-option text-center btn"
+         mat-button
+         routerLinkActive="mat-accent"
+         [routerLink]="['/about']">
+      <div class="row">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </div>
+      <div class="row">
+        <small>About</small>
       </div>
     </div>
   </div>
