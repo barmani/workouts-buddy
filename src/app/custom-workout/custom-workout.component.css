@@ -1,24 +1,9 @@
-.headers-align .mat-expansion-panel-header-title,
-.headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
+.add-workout-button {
+  margin-left: 25%;
 }
 
-.headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.search-content {
-  justify-content: space-between;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.muscle-options-container {
-  width: 12%;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
+.add-workout-button-description {
+  display: none;
 }
 
 .equipment-options-container {
@@ -33,6 +18,29 @@
   display: inline-block;
   text-align: center;
   vertical-align: middle;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.muscle-options-container {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.search-content {
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .search-buttons {
@@ -50,25 +58,16 @@
   width: 14rem;
 }
 
-.add-workout-button {
-  margin-left: 25%;
-}
-
-.add-workout-button-description {
-  display: none;
-}
-
 @media screen and (max-width: 1147px) {
-
-  .muscle-options-container {
-    width: 14%;
-  }
-
   .equipment-options-container {
     width: 14%;
   }
 
   .exercise-name-input-container {
+    width: 14%;
+  }
+
+  .muscle-options-container {
     width: 14%;
   }
 
@@ -87,15 +86,15 @@
 }
 @media screen and (max-width: 991px) {
 
-  .muscle-options-container {
-    width: 17%;
-  }
-
   .equipment-options-container {
     width: 17%;
   }
 
   .exercise-name-input-container {
+    width: 17%;
+  }
+
+  .muscle-options-container {
     width: 17%;
   }
 
@@ -107,15 +106,15 @@
 
 @media screen and (max-width: 813px) {
 
-  .muscle-options-container {
-    width: 20%;
-  }
-
   .equipment-options-container {
     width: 20%;
   }
 
   .exercise-name-input-container {
+    width: 20%;
+  }
+
+  .muscle-options-container {
     width: 20%;
   }
 
@@ -127,15 +126,15 @@
 
 @media screen and (max-width: 710px) {
 
-  .muscle-options-container {
-    width: 25%;
-  }
-
   .equipment-options-container {
     width: 25%;
   }
 
   .exercise-name-input-container {
+    width: 25%;
+  }
+
+  .muscle-options-container {
     width: 25%;
   }
 
@@ -149,13 +148,12 @@
     font-size: 1.5em;
   }
 
-  .muscle-options-container {
-    width: 25%;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    margin: 0 3%;
-    white-space: normal;
+  .add-workout-button {
+    display: none;
+  }
+
+  .add-workout-button-description {
+    display: inline;
   }
 
   .equipment-options-container {
@@ -167,10 +165,6 @@
     white-space: normal;
   }
 
-  .top-form-field {
-    width: 12rem;
-  }
-
   .exercise-name-input-container {
     width: 40%;
     display: block;
@@ -180,8 +174,13 @@
     white-space: normal;
   }
 
-  #exercise-name-input {
-    width: 14rem;
+  .muscle-options-container {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
   }
 
   .search-buttons {
@@ -197,26 +196,17 @@
     vertical-align: center;
   }
 
-  .add-workout-button {
-    display: none;
+  .top-form-field {
+    width: 12rem;
   }
 
-  .add-workout-button-description {
-    display: inline;
+  #exercise-name-input {
+    width: 14rem;
   }
 
 }
 
 @media screen and (max-width: 439px) {
-
-  .muscle-options-container {
-    width: 35%;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    margin: 0 3%;
-    white-space: normal;
-  }
 
   .equipment-options-container {
     width: 50%;
@@ -236,8 +226,13 @@
     white-space: nowrap;
   }
 
-  #exercise-name-input {
-    width: 14rem;
+  .muscle-options-container {
+    width: 35%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 3%;
+    white-space: normal;
   }
 
   .search-buttons {
@@ -247,6 +242,10 @@
     vertical-align: middle;
     margin: 0 3%;
     white-space: nowrap;
+  }
+
+  #exercise-name-input {
+    width: 14rem;
   }
 
 }

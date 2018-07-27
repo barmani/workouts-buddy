@@ -7,7 +7,12 @@
   <mat-expansion-panel *ngFor="let workout of displayedWorkouts">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ workout.name | truncate:[15, '...'] }}
+        <div id="full-length-title">
+          {{ workout.name }}
+        </div>
+        <div id="truncated-title">
+          {{ workout.name | truncate:[15, '...'] }}
+        </div>
       </mat-panel-title>
       <mat-panel-description class="mat-expansion-panel-header-description">
         <div id="description-items">

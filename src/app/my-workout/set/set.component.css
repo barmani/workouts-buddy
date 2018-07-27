@@ -2,17 +2,6 @@ mat-form-field {
   width: 7rem;
 }
 
-@media screen and (max-width: 770px) {
-  mat-form-field {
-    width: 3.25rem;
-    font-size: .4em;
-  }
-
-  span {
-    font-size: .5em;
-  }
-}
-
 #add-set-icon {
   color: #33CC33;
   padding-left: 4px;
@@ -33,4 +22,15 @@ mat-form-field {
 #remove-set-icon:hover {
   color: darkred;
   cursor: pointer;
+}
+
+@media screen and (max-width: 770px) {
+  mat-form-field {
+    width: 3.25rem;
+    font-size: .4em;
+  }
+
+  span {
+    font-size: .5em;
+  }
 }
