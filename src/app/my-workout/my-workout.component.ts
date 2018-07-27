@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MyWorkoutService } from './my-workout.service';
+import { MyWorkoutService } from '../services/my-workout.service';
 import { Workout } from '../models/workout.model';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { LoginSignupService } from '../login-signup.service';
+import { LoginSignupService } from '../../services/login-signup.service';
 import { NgForm } from '@angular/forms';
 import { User } from '../../models/user.model';
 

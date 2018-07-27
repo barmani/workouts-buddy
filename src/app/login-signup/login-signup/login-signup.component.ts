@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { LoginSignupService } from '../login-signup.service';
+import { LoginSignupService } from '../../services/login-signup.service';
 
 @Component({
     selector: 'app-login-signup',

@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, FormControl, FormArray, Valida
 import { MatSnackBar } from '@angular/material';
 
 import { NgForm } from "@angular/forms";
-import { MyWorkoutService } from "../my-workout.service";
+import { MyWorkoutService } from "../../services/my-workout.service";
 import { RequestedWorkout } from "../../models/requested-workout.model";
 
 @Component({

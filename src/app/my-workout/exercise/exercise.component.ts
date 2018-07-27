@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Exercise } from '../../models/exercise.model';
 import { Set } from '../../models/set.model';
-import { MyWorkoutService } from '../my-workout.service';
+import { MyWorkoutService } from '../../services/my-workout.service';
 import { Subscription } from 'rxjs';
 
 @Component({

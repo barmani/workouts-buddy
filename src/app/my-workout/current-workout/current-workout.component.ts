@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig, MatSnackBar } from "@angular/material";
 
 import { ChangeExerciseDialogComponent } from "../change-exercise-dialog/change-exercise-dialog.component";
-import { MyWorkoutService } from '../my-workout.service';
+import { MyWorkoutService } from '../../services/my-workout.service';
 import { Exercise } from '../../models/exercise.model';
-import { LoginSignupService } from '../../login-signup/login-signup.service';
+import { LoginSignupService } from '../../services/login-signup.service';
 import { SaveWorkoutDialogComponent } from '../save-workout-dialog.component';
-import { SavedWorkoutsService } from '../../saved-workouts/saved-workouts.service';
+import { SavedWorkoutsService } from '../../services/saved-workouts.service';
 import { Workout } from '../../models/workout.model';
 
 @Component({

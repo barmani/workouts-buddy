@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Exercise } from '../../models/exercise.model';
-import { MyWorkoutService } from '../my-workout.service';
+import { MyWorkoutService } from '../../services/my-workout.service';
 
 @Component({
     selector: 'app-checklist',

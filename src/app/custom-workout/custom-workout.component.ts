@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CustomWorkoutService } from './custom-workout.service';
+import { CustomWorkoutService } from '../services/custom-workout.service';
 import { Exercise } from '../models/exercise.model';
-import { MyWorkoutService } from '../my-workout/my-workout.service';
+import { MyWorkoutService } from '../services/my-workout.service';
 import { Router } from '@angular/router';
 import { Workout } from '../models/workout.model';
 

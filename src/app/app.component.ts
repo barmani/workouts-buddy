@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { User } from './models/user.model';
-import { LoginSignupService } from './login-signup/login-signup.service';
+import { LoginSignupService } from './services/login-signup.service';
 
 @Component({
     selector: 'my-app',

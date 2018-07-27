@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
-import { MyWorkoutService } from '../my-workout/my-workout.service';
-import { SavedWorkoutsService } from './saved-workouts.service';
+import { MyWorkoutService } from '../services/my-workout.service';
+import { SavedWorkoutsService } from '../services/saved-workouts.service';
 import { Workout } from '../models/workout.model';
 import { Exercise } from '../models/exercise.model';
 

@@ -6,7 +6,7 @@ import { PasswordValidation } from './password-validation';
 import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 
 import { ChangeEmailDialogComponent } from './change-email-dialog.component';
-import { LoginSignupService } from '../login-signup/login-signup.service';
+import { LoginSignupService } from '../services/login-signup.service';
 import { Workout } from '../models/workout.model';
 import { Exercise } from '../models/exercise.model';
 import { Subscription } from 'rxjs';

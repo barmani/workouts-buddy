@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { MyWorkoutService } from './my-workout.service';
+import { MyWorkoutService } from '../services/my-workout.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
