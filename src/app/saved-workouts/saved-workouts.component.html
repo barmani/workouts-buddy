@@ -3,13 +3,13 @@
       <h2>Saved Workouts</h2>
   </div>
 </div>
-<mat-accordion>
+<mat-accordion class="headers-align">
   <mat-expansion-panel *ngFor="let workout of displayedWorkouts">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ workout.name | truncate:[15, '...'] }}
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description class="mat-expansion-panel-header-description">
         <div id="description-items">
           <p><small>date: {{ workout.createdAt | date }}</small> &nbsp;&nbsp; | &nbsp;&nbsp;
           <small>muscles: {{ getExerciseMuscleGroups(workout) }} </small></p>
@@ -36,9 +36,23 @@
         </button>
       </div>
     </mat-expansion-panel-header>
-    <span class="row" *ngFor="let exercise of workout.exercises">
-      {{ exercise.name }}
-    </span>
+    <div class="exercise-names">
+      <span class="row" *ngFor="let exercise of workout.exercises">
+        {{ exercise.name }}
+      </span>
+    </div>
+    <div id="date-muscles-information">
+      <p><small>date: {{ workout.createdAt | date }}</small> &nbsp;&nbsp; | &nbsp;&nbsp;
+      <small>muscles: {{ getExerciseMuscleGroups(workout) }} </small></p>
+      <button class="btn btn-danger btn-sm"
+              id="remove-workout-button-panel"
+              (click)="removeWorkout(workout)">Remove
+      </button>
+      <button class="btn btn-primary btn-sm"
+              id="current-workout-button-panel"
+              (click)="makeCurrentWorkout(workout)">Make Current Workout
+      </button>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>
 <mat-paginator [length]="length"

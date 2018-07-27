@@ -1,5 +1,27 @@
+#current-workout-button-panel {
+  display: none;
+}
+
 #description-buttons {
   display: none;
+}
+
+#date-muscle-information {
+  display: none;
+}
+
+#remove-workout-button-panel {
+  display: none;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (max-width: 661px) {
@@ -16,12 +38,36 @@
     display: none;
   }
 
+  #date-muscle-information {
+    display: block;
+  }
+
 }
 
 @media screen and (max-width: 475px) {
 
   mat-panel-title {
     font-size: .8em;
+  }
+
+  #remove-workout-button-description {
+    display: none;
+  }
+
+  #remove-workout-button-panel {
+    display: block;
+  }
+
+}
+
+@media screen and (max-width: 370px) {
+
+  #current-workout-button-panel {
+    display: block;
+  }
+
+  #current-workout-button-description {
+    display: none;
   }
 
 }

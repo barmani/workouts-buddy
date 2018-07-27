@@ -21,7 +21,7 @@
           <mat-panel-title>
             {{ i + 1 }}. {{ exercise.name }}
           </mat-panel-title>
-          <mat-panel-description>
+          <mat-panel-description class="mat-expansion-panel-header-description">
             {{ getNumberOfSets(exercise) }}
           </mat-panel-description>
           <div class="col-md-2">
@@ -35,9 +35,4 @@
       </mat-expansion-panel>
     </mat-accordion>
     <hr>
-  <!-- <div>
-    <app-checklist [title]="workout.name" [items]="getWorkoutExerciseNames()">
-        Loading checklist
-    </app-checklist>
-  </div> -->
 </div>
