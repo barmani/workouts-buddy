@@ -21,7 +21,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 @Component({
   selector: 'app-user-page',
-  templateUrl: './user-page.component.html'
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
   username: string = localStorage.getItem('username');
