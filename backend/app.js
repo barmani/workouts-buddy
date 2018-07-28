@@ -23,9 +23,7 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //
 // // bicep exercises
 // var exercise = new Exercise({
-//   name: 'Bicep Curls',
-//   description: 'Grab dumbells, stand with legs shoulder width apart and arms resting by side,'
-//                   + 'and curl moving only the elbow upwards then back down.',
+//   name: 'Bicep Curls',,
 //   muscle: 'BICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/ykJmrZ5v0Oo'
@@ -33,7 +31,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Cable Curls',
-//   description: 'Move cable to bottom, attach bar, and curl.',
 //   muscle: 'BICEPS',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/AsAVbj7puKo'
@@ -41,7 +38,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Barbell Curls',
-//   description: 'Put weights on side of barbell and curl.',
 //   muscle: 'BICEPS',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/LY1V6UbRHFM'
@@ -49,11 +45,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Concentration Curls',
-//   description: 'Sit on a bench with a dumbell between your feet. With your legs'
-//                 + 'shoulder width apart, reach down for the dumbell with your dominant'
-//                 + 'arm, resting your elbow on your knee with your arm straight.'
-//                 + 'Using your knee as leverage, curl the dumbbell toward you using'
-//                 + 'nothing but your bicep. Do both arms.',
 //   muscle: 'BICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/Jvj2wV0vOYU'
@@ -61,8 +52,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Hammer Curls',
-//   description: 'Hold a pair of dumbbells at your side so that they are pointing'
-//                 + 'forward. Curl at the same time toward your shoulders.',
 //   muscle: 'BICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/zC3nLlEvin4'
@@ -72,7 +61,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // //back exercises
 // var exercise = new Exercise({
 //   name: 'Chin up',
-//   description: 'Grab bar, pull chin up over the bar',
 //   muscle: 'BACK',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/_71FpEaq-fQ'
@@ -80,7 +68,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Cable Row',
-//   description: 'Back straight, pull cable toward you',
 //   muscle: 'BACK',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/GZbfZ033f74'
@@ -88,8 +75,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Lat Pulldown',
-//   description: 'Adjust chair properly, grab either side of the bar, and pull bar'
-//                   + 'toward chest.',
 //   muscle: 'BACK',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/JEb-dwU3VF4'
@@ -97,8 +82,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Dumbbell Row',
-//   description: 'Put hand and knee on flat bench with a straight back and let dumbbell hang. Pull'
-//                 + 'dumbell staight up to just below your armpit.',
 //   muscle: 'BACK',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/-koP10y1qZI'
@@ -106,9 +89,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Barbell Row',
-//   description: 'Put weight on either side of barbell, bend knees, and lean forward'
-//                   + 'so your body is close to parallel to the ground. Grab barbell at'
-//                   + 'shoulder width, look up, and lift toward your upper stomach area.',
 //   muscle: 'BACK',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/9efgcAjQe7E'
@@ -116,10 +96,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'T-Bar Row',
-//   description: 'Put barbell in corner with weight on the top end. Squat over the bar'
-//                 + 'so your back becomes close to parallel with the ground, look up,'
-//                 + 'grab the bar a few inches down from the weights with both hands'
-//                 + 'and lift toward your chest.',
 //   muscle: 'BACK',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/j3Igk5nyZE4'
@@ -129,38 +105,149 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // // chest exercises
 // var exercise = new Exercise({
 //   name: 'Bench Press',
-//   description: 'Press weighted bar off your chest.',
 //   muscle: 'CHEST',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/rT7DgCr-3pg'
 // });
 // var exercise = new Exercise({
 //   name: 'Incline Bench Press',
-//   description: 'Bench on an incline',
 //   muscle: 'CHEST',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/DbFgADa2PL8'
 // });
 // exercise.save();
 // var exercise = new Exercise({
+//   name: 'Decline Bench Press',
+//   muscle: 'CHEST',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/LfyQBUKR8SE'
+// });
+// var exercise = new Exercise({
+//   name: 'Wide Grip Bench Press',
+//   muscle: 'CHEST',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/jHoTF0kpkhQ'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Press',
+//   muscle: 'CHEST',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/SHsUIZiNdeY'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Incline Dumbbell Press',
+//   muscle: 'CHEST',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/8iPEnn-ltC8'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Decline Dumbbell Press',
+//   muscle: 'CHEST',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/0xRvl4Qv3ZY'
+// });
+// var exercise = new Exercise({
+//   name: 'Dumbbell Fly',
+//   muscle: 'CHEST',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/eozdVDA78K0'
+// });
+// var exercise = new Exercise({
+//   name: 'Incline Dumbbell Fly',
+//   muscle: 'CHEST',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/bDaIL_zKbGs'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Cable Flys',
+//   muscle: 'CHEST',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/Iwe6AmxVf7o'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Low Cable Flys',
+//   muscle: 'CHEST',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/M1N804yWA-8'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Chest Press',
+//   muscle: 'CHEST',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/xUm0BiZCWlQ'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Chest Fly',
+//   muscle: 'CHEST',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/Z57CtFmRMxA'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Pushup',
+//   muscle: 'CHEST',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/Eh00_rniF8E'
+// });
+// exercise.save();
+//
+//leg exercises
+// var exercise = new Exercise({
 //   name: 'Squat',
-//   description: 'Put bar over shoulders, squat down, press up.',
 //   muscle: 'LEGS',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/SW_C1A-rejs'
 // });
 // exercise.save();
+//
+// tricep exercises
 // var exercise = new Exercise({
 //   name: 'Cable Pushdown',
-//   description: 'Place something on cable, press down.',
 //   muscle: 'TRICEPS',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/2-LAMcpzODU'
 // });
+// var exercise = new Exercise({
+//   name: 'Rope Pushdown',
+//   muscle: 'TRICEPS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/vB5OHsJ3EME'
+// });
+// var exercise = new Exercise({
+//   name: 'Rope Pushdown',
+//   muscle: 'TRICEPS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/vB5OHsJ3EME'
+// });
+// var exercise = new Exercise({
+//   name: 'Reverse Grip Pushdown',
+//   muscle: 'TRICEPS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/jJ5Q9fL-xdk'
+// });
+// var exercise = new Exercise({
+//   name: 'Overhead Extension',
+//   muscle: 'TRICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/YbX7Wd8jQ-Q'
+// });
+// var exercise = new Exercise({
+//   name: 'Tricep Kickback',
+//   muscle: 'TRICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/6SS6K3lAwZ8'
+// });
+//
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Shoulder Press',
-//   description: 'Put dumbells over head, press up, go down.',
 //   muscle: 'SHOULDERS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/qEwKCR5JCog'
@@ -168,16 +255,13 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Crunch',
-//   description: 'Lie on back, lift chin toward stomach',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/MKmrqcoCZ-M'
 // });
 // exercise.save();
 // var exercise = new Exercise({
-//   name: 'Leg Raise',
-//   description: 'Lie on back with your legs straight out. Put your hands under your'
-//             +  'butt and lift your legs up to a 90 degree angle, keeping them straight.',
+//   name: 'Leg Raise',,
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/JB2oyawG9KI'
@@ -185,9 +269,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Russian Twist',
-//   description: 'Sit so that your back and legs are at a 45 degree angle from the'
-//             +  ' ground with your knees bent. Put your hands together and twist to'
-//             +  ' each side.',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/wkD8rjkodUI'
@@ -195,8 +276,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Sit-up',
-//   description: 'Lie on your back with your knees bent, feet flat on the floor.'
-//             +  ' Using your abs, bring your body up so you are sitting straight up.',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/jDwoBqPH0jk'
@@ -204,8 +283,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Double Crunch',
-//   description: 'Lie on your back with your legs out straight and slightly raised.'
-//               + ' Perform a crunch, pulling your legs in at the same time.',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/otOKB-iZ548'
@@ -213,9 +290,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Bicycle',
-//   description: 'Lie on your back with your hands behind your head, legs raised with '
-//              + 'your knees at a 90 degree angle. Move each elbow toward your knee by twisting your body, '
-//              + 'one after the other, simultaneously bringing the corresponding knee toward your elbow.',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/9FGilxCbdz8'
@@ -223,8 +297,6 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // exercise.save();
 // var exercise = new Exercise({
 //   name: 'Plank',
-//   description: 'Get in push up position. Bring your elbows down so that they are '
-//             +  'flat on the ground. Hold for as long as you can (or want).',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/pSHjTRCQxIw'
