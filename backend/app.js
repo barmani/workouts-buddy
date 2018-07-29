@@ -206,6 +206,69 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   video: 'https://www.youtube.com/embed/SW_C1A-rejs'
 // });
 // exercise.save();
+// var exercise = new Exercise({
+//   name: 'Barbell Lunge',
+//   muscle: 'LEGS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/0_9sJd9P8M0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Lunge',
+//   muscle: 'LEGS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/D7KaRcUTQeE'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Goblet Squat',
+//   muscle: 'LEGS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/MeIiIdhvXT4'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Leg Press',
+//   muscle: 'LEGS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/IZxyjW7MPJQ'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Leg Extension',
+//   muscle: 'LEGS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/YyvSfVjQeL0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Hamstring Extension',
+//   muscle: 'LEGS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/F488k67BTNo'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Deadlift',
+//   muscle: 'LEGS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/UyRiw2b8yI4'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Straight Leg Deadlift',
+//   muscle: 'LEGS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/1uDiW5--rAE'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Front Squat',
+//   muscle: 'LEGS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/VfBOBhwXbro'
+// });
+// exercise.save();
 //
 // tricep exercises
 // var exercise = new Exercise({
@@ -214,38 +277,85 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/2-LAMcpzODU'
 // });
+// exercise.save();
 // var exercise = new Exercise({
 //   name: 'Rope Pushdown',
 //   muscle: 'TRICEPS',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/vB5OHsJ3EME'
 // });
-// var exercise = new Exercise({
-//   name: 'Rope Pushdown',
-//   muscle: 'TRICEPS',
-//   equipment: 'CABLE',
-//   video: 'https://www.youtube.com/embed/vB5OHsJ3EME'
-// });
+// exercise.save();
 // var exercise = new Exercise({
 //   name: 'Reverse Grip Pushdown',
 //   muscle: 'TRICEPS',
 //   equipment: 'CABLE',
 //   video: 'https://www.youtube.com/embed/jJ5Q9fL-xdk'
 // });
+// exercise.save();
 // var exercise = new Exercise({
 //   name: 'Overhead Extension',
 //   muscle: 'TRICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/YbX7Wd8jQ-Q'
 // });
+// exercise.save();
 // var exercise = new Exercise({
 //   name: 'Tricep Kickback',
 //   muscle: 'TRICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/6SS6K3lAwZ8'
 // });
-//
 // exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dips',
+//   muscle: 'TRICEPS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/wjUmnZH528Y'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Bench Dips',
+//   muscle: 'TRICEPS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/0326dy_-CzM'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Skull Crushers',
+//   muscle: 'TRICEPS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/d_KZxkY_0cM'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Skull Crushers',
+//   muscle: 'TRICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/ir5PsbniVSc'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Diamond Pushups',
+//   muscle: 'TRICEPS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/J0DnG1_S92I'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Tricep Extension Machine',
+//   muscle: 'TRICEPS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/qCF_hG27jVU'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Tricep Press Machine',
+//   muscle: 'TRICEPS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/4W31U8tTVAg'
+// });
+// exercise.save();
+//
 // var exercise = new Exercise({
 //   name: 'Shoulder Press',
 //   muscle: 'SHOULDERS',
@@ -253,6 +363,78 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   video: 'https://www.youtube.com/embed/qEwKCR5JCog'
 // });
 // exercise.save();
+// var exercise = new Exercise({
+//   name: 'Barbell Shoulder Press',
+//   muscle: 'SHOULDERS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/2yjwXTZQDDI'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Rear Delt Flyes',
+//   muscle: 'SHOULDERS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/EA7u4Q_8HQ0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Front Raise',
+//   muscle: 'SHOULDERS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/-t7fuZ0KhDA'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Side Raise',
+//   muscle: 'SHOULDERS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/3VcKaXpzqRo'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Arnold Press',
+//   muscle: 'SHOULDERS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/6Z15_WdXmVw'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Front Delt Raise',
+//   muscle: 'SHOULDERS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/PmXz2Ik-On4'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Rear Delt Cable Fly',
+//   muscle: 'SHOULDERS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/DAC4qmKv5o0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Cable Lateral Raise',
+//   muscle: 'SHOULDERS',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/PPrzBWZDOhA'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Machine Overhead Press',
+//   muscle: 'SHOULDERS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/Wqq43dKW1TU'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Rear Delt Machine',
+//   muscle: 'SHOULDERS',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/K-ilBw_D1a4'
+// });
+// exercise.save();
+//
+// ab exercises
 // var exercise = new Exercise({
 //   name: 'Crunch',
 //   muscle: 'ABS',
