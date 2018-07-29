@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //
 // // bicep exercises
 // var exercise = new Exercise({
-//   name: 'Bicep Curls',,
+//   name: 'Bicep Curls',
 //   muscle: 'BICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/ykJmrZ5v0Oo'
@@ -55,6 +55,34 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   muscle: 'BICEPS',
 //   equipment: 'DUMBBELL',
 //   video: 'https://www.youtube.com/embed/zC3nLlEvin4'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Preacher Curls',
+//   muscle: 'BICEPS',
+//   equipment: 'BARBELL',
+//   video: 'https://www.youtube.com/embed/fIWP-FRFNU0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Dumbbell Preacher Curls',
+//   muscle: 'BICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/vngli9UR6Hw'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Seated Incline Curls',
+//   muscle: 'BICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/soxrZlIl35U'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Machine Curls',
+//   muscle: 'BICEPS',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/M_uPvGrMx_o'
 // });
 // exercise.save();
 //
@@ -99,6 +127,41 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   muscle: 'BACK',
 //   equipment: 'BARBELL',
 //   video: 'https://www.youtube.com/embed/j3Igk5nyZE4'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Wide Grip Pull Up',
+//   muscle: 'BACK',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/iywjqUo5nmU'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Row Machine',
+//   muscle: 'BACK',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/8MKGArS7w7c'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Single Arm Cable Row',
+//   muscle: 'BACK',
+//   equipment: 'CABLE',
+//   video: 'https://www.youtube.com/embed/_z5NMUxkxxw'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Lat Pulldown Machine',
+//   muscle: 'BACK',
+//   equipment: 'MACHINE',
+//   video: 'https://www.youtube.com/embed/kwJeh3QyhVE'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Standing Dumbbell Row',
+//   muscle: 'BACK',
+//   equipment: 'DUMBBELL',
+//   video: 'https://www.youtube.com/embed/pTT_MCK0L90'
 // });
 // exercise.save();
 //
