@@ -27,6 +27,7 @@ export class CustomWorkoutComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   currentOptions: string[] = [];
 
+  // pagination settings
   length = 0;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -114,7 +115,9 @@ export class CustomWorkoutComponent implements OnInit {
   }
 
   search() {
+    this.searchResults = [];
     let usedExerciseNames = [];
+    // if any exercises are in current workout, do not include them in search results
     this.customWorkout.exercises.forEach((exercise) => {
       usedExerciseNames.push(exercise.name);
     });
@@ -129,6 +132,7 @@ export class CustomWorkoutComponent implements OnInit {
     this.customWorkoutService.exerciseSearch(searchParams)
       .subscribe((exercises: Exercise[]) => {
         this.searchResults = exercises;
+        // the search results displayed in pagination
         this.displayedSearchResults = [];
         this.noResults = !exercises || exercises.length === 0;
 
