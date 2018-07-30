@@ -506,7 +506,7 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 // });
 // exercise.save();
 // var exercise = new Exercise({
-//   name: 'Leg Raise',,
+//   name: 'Leg Raise',
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/JB2oyawG9KI'
@@ -545,6 +545,48 @@ mongoose.connect('mongodb://localhost:27017/workouts-buddy');
 //   muscle: 'ABS',
 //   equipment: 'BODYWEIGHT',
 //   video: 'https://www.youtube.com/embed/pSHjTRCQxIw'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Jackknife',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/CWOZyf8kaH0'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: '6 Inches',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/1CpgAh7wdDk'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Crossover Crunches',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/6DPxlHmMfGs'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'V-Sit Crunches',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/MzV6G47VL10'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Toe Touches',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/y6Bv_0Shhc8'
+// });
+// exercise.save();
+// var exercise = new Exercise({
+//   name: 'Oblique Crunch',
+//   muscle: 'ABS',
+//   equipment: 'BODYWEIGHT',
+//   video: 'https://www.youtube.com/embed/QxaKQG-gmPY'
 // });
 // exercise.save();
 //
