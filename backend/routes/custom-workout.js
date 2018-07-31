@@ -6,7 +6,7 @@ var Workout = require('../models/workout');
 
 /**
  * Get the names of exercises for autocomplete in name search field.
- **/
+ */
 router.get('/', function(req, res, next) {
   Exercise.find().sort('name').exec((err, exercises) => {
     if (err) {
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 
 /**
  * Search for exercises in the database.
- **/
+ */
 router.post('/', function(req, res, next) {
   Exercise.find({
     muscle: { $regex: req.body.muscle, $options: "i" },
