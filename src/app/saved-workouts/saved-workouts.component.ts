@@ -28,7 +28,6 @@ export class SavedWorkoutsComponent implements OnInit {
       workouts.forEach((workout) => {
         let exercises: Exercise[] = [];
         workout.exercises.forEach((exercise) => {
-          console.log(exercise);
           exercises.push(new Exercise(exercise.name, exercise.description, exercise.muscle,
                                       exercise.equipment, exercise._id, exercise.video));
         });
