@@ -106,6 +106,9 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+/**
+ * Log a user in if they provide the correct credentials.
+ */
 router.patch('/login', function(req, res, next) {
   User.findOne({
     username: req.body.username
@@ -177,6 +180,9 @@ router.use('/', function(req, res, next) {
   });
 });
 
+/**
+ * Get user data for the user page.
+ */
 router.get('/:id', function(req, res, next) {
   User.findById(req.params.id, function(err, user) {
       if (err) {
@@ -198,6 +204,9 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
+/**
+ * Get the sets previously made for a certain exercise if they exist.
+ */
 router.get('/:id/:exerciseId/', function(req, res, next) {
   User.findById(req.params.id, function onUserFound(err, user) {
     if (err) {
@@ -429,6 +438,9 @@ router.post('/:userId/:exerciseId', function(req, res, next) {
   }
 });
 
+/**
+ * Update a users information (change password, change email, etc).
+ */
 router.patch('/:userId', function(req, res, next) {
   User.findById(req.params.userId, function(err, user) {
     if (err) {
@@ -465,6 +477,9 @@ router.patch('/:userId', function(req, res, next) {
   });
 });
 
+/**
+ * Delete an account.
+ */
 router.delete('/:id', function(req, res, next) {
   User.findByIdAndRemove(req.params.id, function(err, result) {
     if (err) {
