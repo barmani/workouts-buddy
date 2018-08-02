@@ -154,35 +154,38 @@ router.patch('/', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
   var decoded = jwt.decode(req.query.token);
-  if (decoded) {
-    User.findById(decoded.user._id, function(err, user) {
+  if (!decoded) {
+    return res.status(500).json({
+      title: 'Invalid token',
+    });
+  }
+  User.findById(decoded.user._id, function onUserFound(err, user) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occurred',
+        error: err
+      });
+    }
+    if (!user) {
+      return res.status(401).json({
+        title: 'User not found',
+        error: {message: 'User not found'}
+      });
+    }
+    user.workouts.splice(user.workouts.indexOf(req.params.id), 1);
+    user.save(function saveUser(err, result) {
       if (err) {
         return res.status(500).json({
-          title: 'An error occurred',
+          title: "Error saving user",
           error: err
         });
       }
-      if (!user) {
-        return res.status(401).json({
-          title: 'User not found',
-          error: {message: 'User not found'}
-        });
-      }
-      user.workouts.splice(user.workouts.indexOf(req.params.id), 1);
-      user.save(function(err, result) {
-        if (err) {
-          return res.status(500).json({
-            title: "Error saving user",
-            error: err
-          });
-        }
-        return res.status(202).json({
-          title: "Workout successfully removed",
-          obj: result
-        });
-      })
+      return res.status(202).json({
+        title: "Workout successfully removed",
+        obj: result
+      });
     });
-  }
+  });
 });
 
 module.exports = router;

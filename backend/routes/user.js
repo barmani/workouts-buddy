@@ -17,7 +17,7 @@ router.post('', function(req, res, next) {
     password: bcrypt.hashSync(req.body.password, 10),
     email: req.body.email
   });
-  user.save(function(err, result) {
+  user.save(function saveUser(err, result) {
     if (err) {
       return res.status(500).json({
         title: 'An error occurred',
@@ -26,7 +26,8 @@ router.post('', function(req, res, next) {
     }
     result.activationToken = jwt.sign({user: result}, config.AWT_KEY);
     result.save();
-    const activationLink = 'http://localhost:4200/login-signup' + '?token=' + result.activationToken + '&username=' + result.username;
+    const activationLink = 'http://localhost:4200/login-signup' + '?token='
+      + result.activationToken + '&username=' + result.username;
     // configure and send email
     var smtpTransport = nodemailer.createTransport({
       service: "gmail",
@@ -58,7 +59,7 @@ router.post('', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   User.findOne({
     username: req.body.username
-  }, function(err, user) {
+  }, function onUserFound(err, user) {
     if (err) {
       return res.status(500).json({
         title: 'An error occurred',
@@ -198,7 +199,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/:id/:exerciseId/', function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
+  User.findById(req.params.id, function onUserFound(err, user) {
     if (err) {
       return res.status(500).json({
         title: 'An error occurred',
@@ -217,55 +218,72 @@ router.get('/:id/:exerciseId/', function(req, res, next) {
         obj: []
       });
     } else {
-      // get 5 most recent sets if they exist
-      var retExerciseSets = [];
-      var numProcessed = user.exerciseSets.length;
+      findExerciseSet();
+    }
+    /**
+     * Find the exercise sets for the requested exercise if they exist.
+     */
+    function findExerciseSet() {
       user.exerciseSets.forEach((exerciseSetId, index) => {
         ExerciseSet.findById(exerciseSetId)
                    .populate('sets')
-                   .exec(function(err, exerciseSet) {
-          if (exerciseSet.exercise == req.params.exerciseId && exerciseSet.sets.length <= 5) {
-            retExerciseSets = exerciseSet.sets;
-            returnSets(retExerciseSets);
-          } else if (exerciseSet.exercise == req.params.exerciseId && exerciseSet.sets.length > 5) {
-              exerciseSet.sets.forEach((set, setIndex) => {
-                // push the first five into the returning array
-                if (retExerciseSets.length < 5) {
-                  retExerciseSets.push(set);
-                } else {
-                  let minDate = set.updatedAt;
-                  let newIndex = -1;
-                  // replace oldest set each time
-                  retExerciseSets.forEach((retSet, retIndex) => {
-                    if (retSet.updatedAt.getTime() < minDate.getTime()) {
-                      minDate = retSet.updatedAt;
-                      newIndex = retIndex;
-                    }
-                    if (retIndex === retExerciseSets.length - 1) {
-                      // replace the oldest set in retExerciseSets if it is older than the current set
-                      if (newIndex >= 0) {
-                        retExerciseSets.splice(newIndex, 1, set);
-                      }
-                    }
-                  });
-                }
-              });
-              returnSets(retExerciseSets);
-          } else {
-            returnSets(retExerciseSets);
-          }
-          function returnSets(sets) {
-            numProcessed--;
-            // make sure this does not run before the forEach loop finishes
-            if (numProcessed === 0) {
-              return res.status(200).json({
-                message: 'Sets retrieved successfully',
-                obj: sets
-              });
-            }
+                   .exec(function (err, exerciseSet) {
+          if (exerciseSet.exercise == req.params.exerciseId) {
+            getUserSets(exerciseSet);
+          } else if (index === user.exerciseSets.length - 1) {
+            getUserSets(undefined);
           }
         });
       });
+    }
+
+    /**
+     * Retrieve the 5 newest sets recorded by the user for this exercise.
+     */
+    function getUserSets(exerciseSet) {
+      var retExerciseSets = [];
+      // No sets saved, return empty array
+      if (!exerciseSet) {
+        returnSets(retExerciseSets);
+      // User has less than 5 sets saved so just return them
+      } else if (exerciseSet.sets.length <= 5) {
+        retExerciseSets = exerciseSet.sets;
+        returnSets(retExerciseSets);
+      } else {
+          exerciseSet.sets.forEach((set, setIndex) => {
+            // push the first five into the returning array
+            if (retExerciseSets.length < 5) {
+              retExerciseSets.push(set);
+            } else {
+              let minDate = set.updatedAt;
+              let newIndex = -1;
+              // replace oldest set each time
+              retExerciseSets.forEach(function replaceOldestSet(retSet, retIndex) {
+                if (retSet.updatedAt.getTime() < minDate.getTime()) {
+                  minDate = retSet.updatedAt;
+                  newIndex = retIndex;
+                }
+                if (retIndex === retExerciseSets.length - 1) {
+                  // replace the oldest set in retExerciseSets if it is older than the current set
+                  if (newIndex >= 0) {
+                    retExerciseSets.splice(newIndex, 1, set);
+                  }
+                }
+              });
+            }
+          });
+          returnSets(retExerciseSets);
+      }
+
+      /**
+       * Return the 5 most current sets.
+       */
+      function returnSets(sets) {
+        return res.status(200).json({
+          message: 'Sets retrieved successfully',
+          obj: sets
+        });
+      }
     }
   });
 });
