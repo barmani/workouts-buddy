@@ -1,0 +1,24 @@
+.signup-input {
+  width: 30%;
+  padding: 1rem;
+  display: inline-block;
+}
+
+.signup-label {
+  width: 20%;
+  padding: 1rem;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 620px) {
+  .signup-input {
+    width: 50%;
+    display: block;
+  }
+
+  .signup-label {
+    width: 50%;
+    display: block;
+  }
+}

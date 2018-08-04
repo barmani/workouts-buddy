@@ -1,11 +1,18 @@
 <h3>Signup</h3>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
   <div class="row">
-    <div class="col-md-4">
+    <div class="signup-label">
       <label for="username-signup">Username:</label>
     </div>
-    <div class="col-md-4">
-      <input type="text" [ngModel]="user.username" name="username-signup" minlength="5" required #username="ngModel">
+    <div class="signup-input">
+      <input type="text"
+             [ngModel]="user.username"
+             class="form-control"
+             placeholder="username"
+             name="username-signup"
+             minlength="5"
+             required
+             #username="ngModel">
       <div class="row">
         <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
           Username is required (minimum 5 characters)
@@ -17,11 +24,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="signup-label">
       <label for="password">Password:</label>
     </div>
-    <div class="col-md-4">
-      <input type="password" name="password" [ngModel]="user.password" required validateEqual="retypePasswordInput" reverse="true" #password="ngModel">
+    <div class="signup-input">
+      <input type="password"
+             class="form-control"
+             placeholder="password"
+             name="password"
+             [ngModel]="user.password"
+             required
+             validateEqual="retypePasswordInput"
+             reverse="true"
+             #password="ngModel">
       <div class="row">
         <small [hidden]="(password.pristine &&
           !f.submitted) || password.valid" class="text-danger">
@@ -31,11 +46,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="signup-label">
       <label for="retypePassword">Re-enter Password:</label>
     </div>
-    <div class="col-md-4">
-      <input type="password" name="retypePassword" [ngModel]="retypePassword" required validateEqual="password" #retypePasswordInput="ngModel">
+    <div class="signup-input">
+      <input type="password"
+             class="form-control"
+             placeholder="confirm-password"
+             name="retypePassword"
+             [ngModel]="retypePassword"
+             required
+             validateEqual="password"
+             #retypePasswordInput="ngModel">
       <div class="row">
         <small [hidden]="retypePasswordInput.valid || (retypePasswordInput.pristine && !f.submitted)" class="text-danger">
             Password mismatch
@@ -44,12 +66,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="signup-label">
       <label for="email-signup">Email:</label>
     </div>
-    <div class="col-md-4">
-      <input type="email" [ngModel]="user.email" name="email-signup" required
-       pattern="^([A-Za-z0-9_\-\.])+\@[A-Za-z0-9_\-\.]+\.[A-Za-z0-9_\-\.]+$" #email="ngModel">
+    <div class="signup-input">
+      <input type="email"
+             class="form-control"
+             placeholder="email"
+             [ngModel]="user.email"
+             name="email-signup"
+             required
+             pattern="^([A-Za-z0-9_\-\.])+\@[A-Za-z0-9_\-\.]+\.[A-Za-z0-9_\-\.]+$"
+             #email="ngModel">
        <div class="row">
          <small [hidden]="email.valid || (email.pristine && !f.submitted)" class="text-danger">
            Email is required and format should be <i>john@doe.com</i>.

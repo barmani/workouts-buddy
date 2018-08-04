@@ -1,0 +1,24 @@
+.login-input {
+  width: 30%;
+  padding: 1rem;
+  display: inline-block;
+}
+
+.login-label {
+  width: 20%;
+  padding: 1rem;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 620px) {
+  .login-input {
+    width: 50%;
+    display: block;
+  }
+
+  .login-label {
+    width: 50%;
+    display: block;
+  }
+}

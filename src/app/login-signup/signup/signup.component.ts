@@ -6,7 +6,8 @@ import { User } from '../../models/user.model';
 
 @Component({
     selector: 'app-signup',
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
   user: User;
@@ -29,8 +30,7 @@ export class SignupComponent implements OnInit {
     this.user.password = form.value.password;
     this.user.email = form.value['email-signup'];
     this.loginSignupService.signup(this.user)
-      .subscribe(
-        (data) => {
+      .subscribe((data) => {
           this.usernameTaken = false;
           this.emailTaken = false;
           setTimeout(() => {
@@ -48,8 +48,7 @@ export class SignupComponent implements OnInit {
               this.usernameTaken = false;
             }
           }
-        }
-      );
-  }
+        });
+    }
 
 }
