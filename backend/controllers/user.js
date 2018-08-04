@@ -1,6 +1,5 @@
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-var config = require('../../config.json');
 const nodemailer = require('nodemailer');
 
 var User = require('../models/user');
@@ -23,7 +22,7 @@ exports.newUser = function(req, res, next) {
         error: err
       });
     }
-    result.activationToken = jwt.sign({user: result}, config.AWT_KEY);
+    result.activationToken = jwt.sign({user: result}, process.env.JWT_KEY);
     result.save();
     const activationLink = 'http://localhost:4200/login-signup' + '?token='
       + result.activationToken + '&username=' + result.username;
@@ -31,12 +30,12 @@ exports.newUser = function(req, res, next) {
     var smtpTransport = nodemailer.createTransport({
       service: "gmail",
       auth: {
-          user: config.EMAIL_USERNAME,
-          pass: config.EMAIL_PASSWORD
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD
       }
     });
     const mailOptions = {
-      from: config.EMAIL_USERNAME,
+      from: process.env.EMAIL_USERNAME,
       to: result.email,
       subject: 'WorkoutsBuddy Verification',
       html: '<h3>Hello ' + result.username + ', </h3><br><p>Thank you for joining WorkoutsBuddy!'
@@ -80,7 +79,7 @@ exports.login = function(req, res, next) {
       if (req.query.token === user.activationToken) {
         user.active = true;
         user.save();
-        var token = jwt.sign({user: user}, config.AWT_KEY);
+        var token = jwt.sign({user: user}, process.env.JWT_KEY);
         return res.status(200).json({
             message: 'Successfully logged in',
             token: token,
@@ -99,7 +98,7 @@ exports.login = function(req, res, next) {
         error: {message: 'Incorrect password'}
       });
     }
-    var token = jwt.sign({user: user}, config.AWT_KEY);
+    var token = jwt.sign({user: user}, process.env.JWT_KEY);
      res.status(200).json({
          message: 'Successfully logged in',
          token: token,
@@ -143,12 +142,12 @@ exports.forgotPassword = function(req, res, next) {
       var smtpTransport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: config.EMAIL_USERNAME,
-            pass: config.EMAIL_PASSWORD
+            user: process.env.EMAIL_USERNAME,
+            pass: process.env.EMAIL_PASSWORD
         }
       });
       const mailOptions = {
-        from: config.EMAIL_USERNAME,
+        from: process.env.EMAIL_USERNAME,
         to: result.email,
         subject: 'WorkoutsBuddy Password Change',
         html: '<h3>Hello ' + result.username + ', </h3><br><p>Your new password is:</p><br><p>' + randomPassword

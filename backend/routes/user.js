@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-var config = require('../../config.json');
 
 var checkAuth = require('../middleware/check-auth');
 var UserController = require('../controllers/user');
