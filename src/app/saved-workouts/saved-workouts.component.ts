@@ -70,6 +70,7 @@ export class SavedWorkoutsComponent implements OnInit {
   removeWorkout(workout: Workout) {
     this.savedWorkoutsService.removeWorkout(workout._id).subscribe((result) => {
       this.workouts.splice(this.workouts.indexOf(workout), 1);
+      this.displayedWorkouts.splice(this.displayedWorkouts.indexOf(workout), 1);
       this.length--;
       setTimeout(() => {
         this.snackBar.open('Successfully deleted ' + workout.name, 'Dismiss', {
