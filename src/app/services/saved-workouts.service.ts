@@ -4,8 +4,11 @@ import { Router } from "@angular/router";
 import { Exercise } from "../models/exercise.model";
 import { Workout } from "../models/workout.model";
 
+import { environment } from '../../environments/environment';
 import { map, catchError } from "rxjs/operators";
 import { Observable, throwError } from 'rxjs';
+
+const BACKEND_URL = environment.backendUrl;
 
 @Injectable()
 export class SavedWorkoutsService {
@@ -14,7 +17,7 @@ export class SavedWorkoutsService {
 
   getWorkouts() {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/saved-workouts/' + token)
+    return this.http.get(BACKEND_URL + 'saved-workouts/' + token)
     .pipe(
       map((response: Response) => {
         const result = response.json();
@@ -33,7 +36,7 @@ export class SavedWorkoutsService {
     const body = JSON.stringify(workout);
     const headers = new Headers({'Content-Type': 'application/json'});
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.patch('http://localhost:3000/saved-workouts/' + token, body, {headers: headers})
+    return this.http.patch(BACKEND_URL + 'saved-workouts/' + token, body, {headers: headers})
       .pipe(
         map((response: Response) => {
           const result = response.json();
@@ -50,7 +53,7 @@ export class SavedWorkoutsService {
   removeWorkout(_id: string) {
     const headers = new Headers({'Content-Type': 'application/json'});
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.delete('http://localhost:3000/saved-workouts/' + _id + token, {headers: headers})
+    return this.http.delete(BACKEND_URL + 'saved-workouts/' + _id + token, {headers: headers})
     .pipe(
       map((response: Response) => {
         const result = response.json();

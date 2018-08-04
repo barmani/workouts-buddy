@@ -4,34 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
-import { MatDialogModule,
-         MatFormFieldModule,
-         MatInputModule,
-         MatToolbarModule,
-         MatRadioModule,
-         MatCheckboxModule,
-         MatButtonModule,
-         MatSlideToggleModule,
-         MatStepperModule,
-         MatExpansionModule,
-         MatSidenavModule,
-         MatSnackBarModule,
-         MatSelectModule,
-         MatAutocompleteModule,
-         MatPaginatorModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { AngularMaterialModule } from './angular-material.module';
 
 import { AppComponent } from "./app.component";
 import { ChangeEmailDialogComponent } from './user-page/change-email-dialog.component';
 import { ChangeExerciseDialogComponent } from "./my-workout/change-exercise-dialog/change-exercise-dialog.component";
-import { ChecklistComponent } from './my-workout/checklist/checklist.component';
 import { CurrentWorkoutComponent } from "./my-workout/current-workout/current-workout.component";
 import { CustomWorkoutComponent } from "./custom-workout/custom-workout.component";
 import { CustomWorkoutService } from "./services/custom-workout.service";
 import { AboutComponent } from "./about/about.component";
 import { EqualValidator } from './login-signup/equal-validator.directive';
 import { ExerciseComponent } from "./my-workout/exercise/exercise.component";
-import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from './login-signup/login/login.component';
 import { LoginSignupComponent } from './login-signup/login-signup/login-signup.component';
 import { LoginSignupService } from './services/login-signup.service';
@@ -56,12 +40,10 @@ import { DragulaModule } from 'ng2-dragula';
       AppComponent,
       ChangeEmailDialogComponent,
       ChangeExerciseDialogComponent,
-      ChecklistComponent,
       CurrentWorkoutComponent,
       CustomWorkoutComponent,
       EqualValidator,
       ExerciseComponent,
-      HeaderComponent,
       LoginComponent,
       LoginSignupComponent,
       MyWorkoutComponent,
@@ -75,6 +57,7 @@ import { DragulaModule } from 'ng2-dragula';
       UserPageComponent
     ],
     imports: [
+              AngularMaterialModule,
               BrowserModule,
               BrowserAnimationsModule,
               DragulaModule,
@@ -83,27 +66,7 @@ import { DragulaModule } from 'ng2-dragula';
               ReactiveFormsModule,
               HttpClientModule,
               HttpModule,
-              MatDialogModule,
-              MatExpansionModule,
-              MatFormFieldModule,
-              MatInputModule,
-              MatToolbarModule,
-              MatStepperModule,
-              MatRadioModule,
-              MatCheckboxModule,
-              MatButtonModule,
-              MatSidenavModule,
-              MatSlideToggleModule,
-              MatSnackBarModule,
-              MatSelectModule,
-              MatAutocompleteModule,
-              MatPaginatorModule,
               routing
-             ],
-    exports: [
-              MatDialogModule,
-              MatFormFieldModule,
-              MatInputModule
              ],
     providers: [MyWorkoutGuard, MyWorkoutService, CustomWorkoutService, LoginSignupService, SavedWorkoutsService],
     entryComponents: [SaveWorkoutDialogComponent, ChangeExerciseDialogComponent, ChangeEmailDialogComponent],

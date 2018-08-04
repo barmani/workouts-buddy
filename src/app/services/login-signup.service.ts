@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
+import { environment } from '../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError, Subject } from 'rxjs';
 import { User } from '../models/user.model';
+
+const BACKEND_URL = environment.backendUrl;
 
 @Injectable()
 export class LoginSignupService {
@@ -15,7 +18,7 @@ export class LoginSignupService {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.post('http://localhost:3000/user', body, {headers: headers})
+    return this.http.post(BACKEND_URL + 'user', body, {headers: headers})
       .pipe(
         map((response: Response) => response.json()),
         catchError((error: Response) => throwError(error.json()))
@@ -28,7 +31,7 @@ export class LoginSignupService {
       'Content-Type': 'application/json'
     });
     let paramToken = token ? '?token=' + token : '';
-    return this.http.post('http://localhost:3000/user/login' + paramToken, body, {headers: headers})
+    return this.http.post(BACKEND_URL + 'user/login' + paramToken, body, {headers: headers})
       .pipe(
         map((response: Response) => response.json()),
         catchError((error: Response) => throwError(error.json()))
@@ -40,7 +43,7 @@ export class LoginSignupService {
     const headers = new Headers({
       'Content-Type': 'application/json'
     });
-    return this.http.patch('http://localhost:3000/user/login', body, {headers: headers})
+    return this.http.patch(BACKEND_URL + 'user/login', body, {headers: headers})
       .pipe(
         map((response: Response) => response.json()),
         catchError((error: Response) => throwError(error.json()))
@@ -72,7 +75,7 @@ export class LoginSignupService {
 
   getUserPage(userId: string) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.get('http://localhost:3000/user/' + userId + token)
+    return this.http.get(BACKEND_URL + 'user/' + userId + token)
       .pipe(
         map((response: Response) => {
           const result = response.json();
@@ -88,7 +91,7 @@ export class LoginSignupService {
       'Content-Type': 'application/json'
     });
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.patch('http://localhost:3000/user/' + userId + token, body, {headers: headers})
+    return this.http.patch(BACKEND_URL + 'user/' + userId + token, body, {headers: headers})
       .pipe(
         map((response: Response) => {
           const result = response.json();
@@ -100,7 +103,7 @@ export class LoginSignupService {
 
   deleteAccount(userId: string) {
     const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-    return this.http.delete('http://localhost:3000/user/' + userId + token)
+    return this.http.delete(BACKEND_URL + 'user/' + userId + token)
       .pipe(
         map((response: Response) => {
           const result = response.json();
