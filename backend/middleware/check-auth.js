@@ -1,11 +1,14 @@
-const jwt = require("jsonwebtoken");
+var jwt = require('jsonwebtoken');
+var config = require('../../config.json');
 
 module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    jwt.verify(token, "secret_this_should_be_longer");
+  jwt.verify(req.query.token, config.AWT_KEY, function(err, decoded) {
+    if (err) {
+      return res.status(401).json({
+        title: 'User not authenticated',
+        error: err
+      });
+    }
     next();
-  } catch (error) {
-    res.status(401).json({ message: "Auth failed!" });
-  }
+  });
 };

@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var config = require('../../config.json');
 
+var checkAuth = require('../middleware/check-auth');
 var UserController = require('../controllers/user');
 
 
@@ -16,35 +17,22 @@ router.post('/login', UserController.login);
 /* PATCH password reset */
 router.patch('/login', UserController.forgotPassword);
 
-/* verify token before user specific requests */
-router.use('/', function(req, res, next) {
-  jwt.verify(req.query.token, config.AWT_KEY, function(err, decoded) {
-    if (err) {
-      return res.status(401).json({
-        title: 'User not authenticated',
-        error: err
-      });
-    }
-    next();
-  });
-});
-
 /* GET get user data */
-router.get('/:id', UserController.getUserData);
+router.get('/:id', checkAuth, UserController.getUserData);
 
 /* GET get previous sets for some exercise */
-router.get('/:id/:exerciseId/', UserController.getPreviousSets);
+router.get('/:id/:exerciseId/', checkAuth, UserController.getPreviousSets);
 
 /* PATCH update an existing set for some exercise */
-router.patch('/:userId/:exerciseId/:setId', UserController.updateSet);
+router.patch('/:userId/:exerciseId/:setId', checkAuth, UserController.updateSet);
 
 /* POST add a new set for some exercise */
-router.post('/:userId/:exerciseId', UserController.addSet);
+router.post('/:userId/:exerciseId', checkAuth, UserController.addSet);
 
 /* PATCH update some user information */
-router.patch('/:userId', UserController.updateUserInfo);
+router.patch('/:userId', checkAuth, UserController.updateUserInfo);
 
 /* DELETE delete a user account */
-router.delete('/:id', UserController.removeAccount);
+router.delete('/:id', checkAuth, UserController.removeAccount);
 
 module.exports = router;
