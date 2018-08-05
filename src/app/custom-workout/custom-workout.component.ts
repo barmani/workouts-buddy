@@ -86,6 +86,13 @@ export class CustomWorkoutComponent implements OnInit {
       );
   }
 
+  private resetDisplayedSearchResults(removedIndex) {
+    if (removedIndex != this.searchResults.length - 1) {
+      //  add the first result on the next page to this page
+      this.displayedSearchResults.push(this.searchResults[(Math.floor(removedIndex / 10)) * 10 + 9]);
+    }
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -97,9 +104,11 @@ export class CustomWorkoutComponent implements OnInit {
       this.customWorkout.exercises.push(exercise);
       this.searchResults.forEach((result) => {
         if (exercise.name === result.name && exercise.muscle === result.muscle) {
-          this.searchResults.splice(this.searchResults.indexOf(result), 1);
+          const searchResultIndex = this.searchResults.indexOf(result);
+          this.searchResults.splice(searchResultIndex, 1);
           this.displayedSearchResults.splice(this.displayedSearchResults.indexOf(result), 1);
           this.reEvaluateOptions(); // make sure this exercise is not included in autocomplete suggestions
+          this.resetDisplayedSearchResults(searchResultIndex);
         }
       });
     }
